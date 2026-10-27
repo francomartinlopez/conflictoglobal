@@ -87,6 +87,7 @@
     const first = current === null;
     if (h.startsWith("c-") && byId[h.slice(2)]) { renderConflict(byId[h.slice(2)]); current = "conflict"; }
     else if (h === "metodologia") { renderMethod(); current = "method"; }
+    else if (h === "geopolitica" && window.GEO) { renderGeo(); current = "geo"; }
     else { renderHome(); current = "home"; }
     if (current === "home") { window.scrollTo(0, first ? 0 : homeScroll); return; }
     const top = document.querySelector(".topbar"), off = top ? top.getBoundingClientRect().height : 0;
@@ -621,7 +622,7 @@
     const rows = O.countries.map(c => `<tr><td>${esc(c.n)}${c.est ? ` <small class="est">estim.</small>` : ""}</td>
       <td class="barc"><i style="width:${c.mb / cmax * 100}%"${c.n === "Estados Unidos" ? ' class="us"' : ""}></i></td>
       <td class="num">${num(c.mb)}</td><td class="num">${c.days ? c.days + " días" : "—"}</td><td class="rk-s">${esc(c.s)} · ${esc(dfmt(c.d))}</td></tr>`).join("");
-    return `<div class="section-title"><h2>Indicadores de riesgo global</h2><span>Termómetros que no dependen de un solo conflicto</span></div>
+    return `<div class="section-title"><h2>Indicadores de riesgo global</h2><span>Termómetros que no dependen de un solo conflicto · <a href="#geopolitica">Ver el globo con bloques y riesgo por país →</a></span></div>
       <div class="rk-grid">
         <div class="panel rk"><h3>Reloj del Apocalipsis</h3>
           <div class="rk-row">${clock}<div><b class="rk-big">${C.seconds} <small>segundos</small></b><span class="rk-sub">para la medianoche</span>
@@ -873,6 +874,112 @@
       timer = setInterval(() => { if (+sl.value >= FR.length - 1) return this.stop(); go(+sl.value + 1); }, 2600);
     });
     draw(FR.length - 1);
+  }
+
+
+  /* ============================== GEOPOLÍTICA (globo) ============================== */
+  function renderGeo() {
+    const G = window.GEO, BL = G.blocs, SUB = G.subs;
+    const MODES = [["bloques", "Bloques geopolíticos"], ["mil", "Riesgo militar"], ["int", "Riesgo interno"], ["eco", "Riesgo económico"]];
+    const MODE_TXT = {
+      bloques: "Dos grandes bloques, Occidente y Eurasia, con sus divisiones internas, y los países no alineados. La línea gruesa marca el borde de cada bloque.",
+      mil: G.idx.mil.desc, int: G.idx.int.desc, eco: G.idx.eco.desc };
+    app.innerHTML = `
+      <div class="home-head"><div><h1>Mapa geopolítico</h1>
+      <p>Arrastrá el globo para girarlo. Tocá un país para ver su bloque y sus tres índices de riesgo.</p></div></div>
+      <div class="geo-bar"><div class="chips" role="group" aria-label="Capa">${MODES.map(([k, l], i) => `<button type="button" class="chip${i ? "" : " on"}" data-mode="${k}">${l}</button>`).join("")}</div>
+        <label class="check"><input type="checkbox" id="gLines" checked> Límites de bloques</label>
+        <label class="check"><input type="checkbox" id="gSpin" checked> Girar solo</label></div>
+      <div class="panel geomod">
+        <div class="geo-stage"><svg id="gSvg" viewBox="0 0 800 800" role="img" aria-label="Globo terráqueo con bloques y riesgos"></svg>
+          <div class="geo-zoom"><button type="button" class="btn" id="gIn" aria-label="Acercar">+</button><button type="button" class="btn" id="gOut" aria-label="Alejar">−</button>
+          <button type="button" class="btn" id="gReset" title="Volver a la vista inicial">⟲</button></div></div>
+        <div class="geo-side"><p class="geo-mtxt" id="gMtxt"></p><div id="gLeg"></div><div id="gInfo" class="geo-info"><p class="muted">Tocá un país en el globo.</p></div></div>
+      </div>
+      <div class="section-title"><h2>Ranking</h2><span id="gRankT"></span></div>
+      <div class="panel gp" id="gRank"></div>
+      <div class="meth-note prose">${G.method}</div>`;
+    const svg = document.getElementById("gSvg"), S = 800;
+    const proj = d3.geoOrthographic().scale(370).translate([S / 2, S / 2]).clipAngle(90).rotate([-20, -25]).precision(0.6);
+    const path = d3.geoPath(proj), grat = d3.geoGraticule10();
+    const obj = window.WORLD.objects.countries;
+    const geoms = obj.geometries;
+    const feats = FEATURES;
+    const info = n => G.c[n] || { b: "na" };
+    const subOf = n => (G.c[n] && G.c[n].b) || "na";
+    const blocOf = n => SUB[subOf(n)][0];
+    const mesh = k => topojson.merge(window.WORLD, geoms.filter(g => (k.length === 2 ? subOf(g.properties.name) === k : blocOf(g.properties.name) === k)));
+    const subMesh = Object.keys(SUB).filter(k => k !== "na").map(k => [k, mesh(k)]);
+    const blocMesh = ["occ", "eur"].map(k => [k, mesh(k)]);
+    let mode = "bloques", sel = null;
+    const STOPS = [[47, 58, 51], [111, 106, 58], [201, 138, 58], [217, 96, 79], [143, 31, 31]];
+    const ramp = v => { if (v == null) return "#2a2c2f"; const x = Math.max(0, Math.min(1, v / 100)) * (STOPS.length - 1), i = Math.min(STOPS.length - 2, Math.floor(x)), f = x - i; return "rgb(" + STOPS[i].map((c, k) => Math.round(c + (STOPS[i + 1][k] - c) * f)).join(",") + ")"; };
+    const fillOf = n => mode === "bloques" ? SUB[subOf(n)][2] : ramp((G.idx[mode].v[n] || {}).s);
+    svg.innerHTML = `<defs><radialGradient id="gSea" cx="45%" cy="40%"><stop offset="0" stop-color="#1c2328"/><stop offset="1" stop-color="#101315"/></radialGradient></defs>
+      <path id="gSphere" fill="url(#gSea)" stroke="#2a3036"/><path id="gGrat" fill="none" stroke="#1f272c" stroke-width=".6"/>
+      <g id="gCountries">${feats.map((f, i) => `<path data-i="${i}" stroke="#121416" stroke-width=".5"/>`).join("")}</g>
+      <g id="gSub">${subMesh.map(([k]) => `<path data-k="${k}" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="1" stroke-dasharray="3 2"/>`).join("")}</g>
+      <g id="gBloc">${blocMesh.map(([k]) => `<path data-k="${k}" fill="none" stroke="${BL[k][1]}" stroke-width="3.2" stroke-linejoin="round"/>`).join("")}</g>
+      <path id="gSel" fill="none" stroke="#fff" stroke-width="2"/>`;
+    const cps = [...svg.querySelectorAll("#gCountries path")];
+    const recolor = () => cps.forEach((p, i) => p.setAttribute("fill", fillOf(feats[i].properties.name)));
+    const redraw = () => {
+      svg.querySelector("#gSphere").setAttribute("d", path({ type: "Sphere" }));
+      svg.querySelector("#gGrat").setAttribute("d", path(grat));
+      cps.forEach((p, i) => p.setAttribute("d", path(feats[i]) || ""));
+      const lines = document.getElementById("gLines").checked;
+      svg.querySelectorAll("#gSub path").forEach((p, j) => p.setAttribute("d", lines ? path(subMesh[j][1]) || "" : ""));
+      svg.querySelectorAll("#gBloc path").forEach((p, j) => p.setAttribute("d", lines ? path(blocMesh[j][1]) || "" : ""));
+      svg.querySelector("#gSel").setAttribute("d", sel != null ? path(feats[sel]) || "" : "");
+    };
+    // leyenda
+    const legend = () => {
+      document.getElementById("gMtxt").textContent = MODE_TXT[mode];
+      let h = "";
+      if (mode === "bloques") {
+        for (const b of ["occ", "eur", "na"]) h += `<div class="geo-lg-b"><b><i class="sw" style="background:${BL[b][1]}"></i>${BL[b][0]}</b>${Object.entries(SUB).filter(([, v]) => v[0] === b).map(([, v]) => `<span><i class="sw" style="background:${v[2]}"></i>${v[1]}</span>`).join("")}</div>`;
+        h += `<p class="fnote">${esc(G.blocNote)}</p>`;
+      } else {
+        h += `<div class="geo-ramp"><span style="background:linear-gradient(90deg,${[0, 25, 50, 75, 100].map(ramp).join(",")})"></span><div><em>0 · bajo</em><em>100 · extremo</em></div></div><p class="fnote">${G.idx[mode].src}</p>`;
+      }
+      document.getElementById("gLeg").innerHTML = h;
+      const rows = Object.entries(G.idx[mode === "bloques" ? "mil" : mode].v).filter(([, v]) => v.s != null).sort((a, b) => b[1].s - a[1].s).slice(0, 25);
+      const lab = mode === "bloques" ? "mil" : mode;
+      document.getElementById("gRankT").textContent = `Los 25 países con mayor ${G.idx[lab].name.toLowerCase()}`;
+      document.getElementById("gRank").innerHTML = `<table class="gp-t"><thead><tr><th>#</th><th>País</th><th>Bloque</th><th>Índice</th><th></th><th>Base</th></tr></thead><tbody>${rows.map(([n, v], i) => `<tr data-n="${esc(n)}"><td class="num">${i + 1}</td><td>${esc(G.es[n] || n)}</td><td>${esc(SUB[subOf(n)][1])}</td><td class="num">${v.s}</td><td class="barc"><i style="width:${v.s}%;background:${ramp(v.s)}"></i></td><td class="rk-s">${esc(v.why || "")}</td></tr>`).join("")}</tbody></table>`;
+    };
+    const showInfo = i => {
+      sel = i; const n = feats[i].properties.name, c = info(n), sb = SUB[subOf(n)];
+      const row = k => { const v = G.idx[k].v[n] || {}; return `<div class="geo-ix"><span>${G.idx[k].name}</span><b style="color:${ramp(v.s)}">${v.s != null ? v.s : "s/d"}</b><div class="geo-bar-i"><i style="width:${v.s || 0}%;background:${ramp(v.s)}"></i></div><small>${esc(v.why || "Sin dato")}</small></div>`; };
+      const conf = CONFLICTS.filter(cf => cf.roles.some(r => r.c === n && (!r.to || r.to >= META.updated))).map(cf => `<a href="#c-${cf.id}">${esc(cf.name)}</a>`);
+      document.getElementById("gInfo").innerHTML = `<h3>${esc(G.es[n] || n)}</h3><p class="geo-bl"><i class="sw" style="background:${sb[2]}"></i>${esc(BL[sb[0]][0])} · ${esc(sb[1])}</p>${c.n ? `<p class="geo-note">${esc(c.n)}</p>` : ""}${row("mil")}${row("int")}${row("eco")}${conf.length ? `<p class="geo-conf">En el monitor: ${conf.join(", ")}</p>` : ""}`;
+      redraw();
+    };
+    // interacción
+    let spin = true, last = null, raf = null;
+    const loop = t => { if (spin && document.getElementById("gSpin").checked) { const r = proj.rotate(); proj.rotate([r[0] + 0.12, r[1]]); redraw(); } raf = requestAnimationFrame(loop); };
+    raf = requestAnimationFrame(loop);
+    const pt = e => { const r = svg.getBoundingClientRect(); return [(e.clientX - r.left) / r.width * S, (e.clientY - r.top) / r.height * S]; };
+    let down = null, moved = false;
+    svg.addEventListener("pointerdown", e => { down = { p: pt(e), r: proj.rotate() }; moved = false; spin = false; svg.setPointerCapture(e.pointerId); });
+    svg.addEventListener("pointermove", e => {
+      if (down) { const p = pt(e), k = 75 / proj.scale() * 2.2; const dx = p[0] - down.p[0], dy = p[1] - down.p[1]; if (Math.abs(dx) + Math.abs(dy) > 3) moved = true; proj.rotate([down.r[0] + dx * k, Math.max(-80, Math.min(80, down.r[1] - dy * k)), down.r[2]]); redraw(); hideTip(); return; }
+      const t = e.target.closest("#gCountries path"); if (!t) return hideTip();
+      const n = feats[+t.dataset.i].properties.name, v = mode === "bloques" ? SUB[subOf(n)][1] : `${G.idx[mode].name}: ${(G.idx[mode].v[n] || {}).s ?? "s/d"}`;
+      showTip(e, `<b>${esc(G.es[n] || n)}</b><span class="d">${esc(v)}</span>`);
+    });
+    svg.addEventListener("pointerup", e => { const t = !moved && e.target.closest("#gCountries path"); down = null; if (t) showInfo(+t.dataset.i); });
+    svg.addEventListener("pointerleave", hideTip);
+    svg.addEventListener("wheel", e => { e.preventDefault(); proj.scale(Math.max(250, Math.min(2400, proj.scale() * (e.deltaY < 0 ? 1.12 : 0.89)))); redraw(); }, { passive: false });
+    document.getElementById("gIn").onclick = () => { proj.scale(Math.min(2400, proj.scale() * 1.3)); redraw(); };
+    document.getElementById("gOut").onclick = () => { proj.scale(Math.max(250, proj.scale() / 1.3)); redraw(); };
+    document.getElementById("gReset").onclick = () => { proj.scale(370).rotate([-20, -25]); redraw(); };
+    document.getElementById("gLines").onchange = redraw;
+    document.getElementById("gSpin").onchange = e => { spin = e.target.checked; };
+    app.querySelectorAll("[data-mode]").forEach(b => b.onclick = () => { mode = b.dataset.mode; app.querySelectorAll("[data-mode]").forEach(x => x.classList.toggle("on", x === b)); recolor(); legend(); if (sel != null) showInfo(sel); });
+    document.getElementById("gRank").addEventListener("click", e => { const tr = e.target.closest("tr[data-n]"); if (!tr) return; const i = feats.findIndex(f => f.properties.name === tr.dataset.n); if (i < 0) return; const c = d3.geoCentroid(feats[i]); spin = false; document.getElementById("gSpin").checked = false; proj.rotate([-c[0], -c[1]]); showInfo(i); svg.scrollIntoView({ block: "center", behavior: "smooth" }); });
+    recolor(); legend(); redraw();
+    activeMap = { destroy: () => { cancelAnimationFrame(raf); } };
   }
 
   /* ============================== METODOLOGÍA ============================== */

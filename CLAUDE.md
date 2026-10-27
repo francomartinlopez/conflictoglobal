@@ -9,6 +9,7 @@ Responsable editorial: Franco Martín López.
 - `data/analysis.js` y `data/analysis-2.js`: **capa editorial** (tesis, historia, lecturas alternativas). **No la toca la actualización automática.**
 - `data/toll.js` (víctimas y daños), `data/series.js` (series y `HEADLINE` del panel global), `data/control.js`, `data/front-ua.js`, `data/extra.js` (`EVENT_SOURCES` por índice y `OVERLAYS`).
 - `data/global.js`: indicadores de riesgo global de la portada (Reloj del Apocalipsis, DEFCON estimado, reservas estratégicas de petróleo).
+- `data/geo.js`: globo geopolítico (bloques y tres índices de riesgo por país). Se regenera a mano; la actualización diaria no lo toca.
 - `scripts/validate.js`: validador. `node scripts/validate.js --browser` además abre todas las fichas en Chromium.
 
 ## Actualización diaria (tarea programada)
