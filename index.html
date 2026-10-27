@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Monitor de Conflictos</title>
+<meta name="description" content="Seguimiento diario de los conflictos militares de relevancia global: mapa con línea de tiempo, cronología histórica y análisis.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="wrap topbar-in">
+    <a class="brand" href="#inicio" aria-label="Monitor de Conflictos, inicio">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-txt"><strong>Monitor de Conflictos</strong><small>Conflictos militares de relevancia global</small></span>
+    </a>
+    <nav class="mainnav" aria-label="Secciones">
+      <a href="#inicio" data-nav="inicio">Panorama</a>
+      <div class="navdrop">
+        <button type="button" id="navConflictsBtn" aria-expanded="false" aria-controls="navConflicts">Conflictos <span aria-hidden="true">▾</span></button>
+        <div class="navdrop-menu" id="navConflicts" hidden></div>
+      </div>
+      <a href="#metodologia" data-nav="metodologia">Metodología</a>
+    </nav>
+    <div class="stamp" id="stamp"></div>
+  </div>
+</header>
+
+<section class="alerts" id="alerts" aria-label="Alertas activas"></section>
+
+<main id="app" class="wrap"></main>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <span id="footEdition"></span>
+    <span>Datos: prensa internacional, ISW, ACLED/ONU (a integrar) · Cartografía: Natural Earth</span>
+  </div>
+</footer>
+
+<div class="tip" id="tip" role="tooltip" hidden></div>
+
+<script src="vendor/d3-array.min.js"></script>
+<script src="vendor/d3-geo.min.js"></script>
+<script src="vendor/topojson-client.min.js"></script>
+<script src="data/world.js"></script>
+<script src="data/conflicts.js"></script>
+<script src="data/conflicts-2.js"></script>
+<script src="data/conflicts-3.js"></script>
+<script src="data/analysis.js"></script>
+<script src="data/analysis-2.js"></script>
+<script src="data/control.js"></script>
+<script src="data/toll.js"></script>
+<script src="data/series.js"></script>
+<script src="data/extra.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
