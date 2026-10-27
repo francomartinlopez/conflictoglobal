@@ -71,14 +71,21 @@
   /* ---------- router ---------- */
   const app = document.getElementById("app");
   let activeMap = null;
+  // Al abrir un conflicto se va directo a su contenido (debajo de las alertas);
+  // al volver al panorama se recupera la posición en la que estaba el lector.
+  let current = null, homeScroll = 0;
   function route() {
     const h = (location.hash || "#inicio").slice(1);
+    if (current === "home") homeScroll = window.scrollY;
     if (activeMap) { activeMap.destroy(); activeMap = null; }
     document.querySelectorAll(".mainnav > a").forEach(a => a.classList.toggle("on", a.dataset.nav === h));
-    if (h.startsWith("c-") && byId[h.slice(2)]) renderConflict(byId[h.slice(2)]);
-    else if (h === "metodologia") renderMethod();
-    else renderHome();
-    window.scrollTo(0, 0);
+    const first = current === null;
+    if (h.startsWith("c-") && byId[h.slice(2)]) { renderConflict(byId[h.slice(2)]); current = "conflict"; }
+    else if (h === "metodologia") { renderMethod(); current = "method"; }
+    else { renderHome(); current = "home"; }
+    if (current === "home") { window.scrollTo(0, first ? 0 : homeScroll); return; }
+    const top = document.querySelector(".topbar"), off = top ? top.getBoundingClientRect().height : 0;
+    window.scrollTo(0, Math.max(0, app.getBoundingClientRect().top + window.scrollY - off - 4));
   }
   window.addEventListener("hashchange", route);
 
