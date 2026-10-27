@@ -43,6 +43,10 @@
   function showTip(e, html) { tip.innerHTML = html; tip.hidden = false; moveTip(e); }
   function moveTip(e) { const x = Math.min(e.clientX + 14, innerWidth - 300), y = e.clientY + 14; tip.style.left = x + "px"; tip.style.top = y + "px"; }
   function hideTip() { tip.hidden = true; }
+  // El cartel se oculta también al hacer scroll o al tocar fuera de un elemento con cartel,
+  // porque si el elemento desaparece (cambio de página) nunca recibe el "mouseleave".
+  window.addEventListener("scroll", hideTip, { passive: true });
+  document.addEventListener("pointerdown", e => { if (!e.target.closest("[data-id],[data-cand],svg")) hideTip(); });
 
   /* ---------- chrome ---------- */
   document.getElementById("stamp").innerHTML = `<span class="live"></span>Actualizado <b>${esc(META.updatedLabel)}</b><br>Próxima actualización: diaria, 06:00 ART`;
@@ -77,6 +81,7 @@
   function route() {
     const h = (location.hash || "#inicio").slice(1);
     if (current === "home") homeScroll = window.scrollY;
+    hideTip();
     if (activeMap) { activeMap.destroy(); activeMap = null; }
     document.querySelectorAll(".mainnav > a").forEach(a => a.classList.toggle("on", a.dataset.nav === h));
     const first = current === null;
