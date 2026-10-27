@@ -305,9 +305,11 @@ window.CONFLICTS = [
   timeline: [
     { d: "882–1240", era: "Raíces", h: "Rus de Kiev", x: "Estado medieval que tanto Rusia como Ucrania reclaman como origen." },
     { d: "1654", era: "Raíces", h: "Pereyáslav", x: "Los cosacos del Dniéper se someten al zar; inicio de la incorporación de Ucrania al imperio ruso." },
-    { d: "1783", era: "Raíces", h: "Anexión de Crimea por Catalina II", x: "" },
+    { d: "1783", era: "Raíces", h: "Anexión de Crimea por Catalina II", x: "Fundación de Sebastopol como base de la flota del mar Negro." },
+    { d: "1853–1856", era: "Raíces", h: "Guerra de Crimea", x: "Gran Bretaña, Francia, Cerdeña y el Imperio otomano contra Rusia. Cae Sebastopol; el Tratado de París prohíbe a Rusia tener flota en el mar Negro." },
     { d: "1917–1921", era: "Siglo XX", h: "Independencia efímera y guerra civil", x: "Ucrania termina como república soviética." },
     { d: "1932–1933", era: "Siglo XX", h: "Holodomor", x: "Hambruna provocada por la colectivización; millones de muertos." },
+    { d: "1944", era: "Siglo XX", h: "Deportación de los tártaros de Crimea", x: "Stalin deporta a unos 190.000 a Asia Central; miles mueren en el traslado y los primeros años." },
     { d: "1954", era: "Siglo XX", h: "Crimea pasa a la RSS de Ucrania", x: "Decisión administrativa de Jruschov." },
     { d: "1991", era: "Independencia", h: "Independencia de Ucrania", x: "Más del 90% vota por la independencia, incluida una mayoría en Crimea (54%)." },
     { d: "1994", era: "Independencia", h: "Memorándum de Budapest", x: "Ucrania entrega su arsenal nuclear a cambio de garantías de integridad territorial." },
