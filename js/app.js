@@ -63,7 +63,7 @@
             <span class="meta">${lvPill(a.level, "Nivel " + a.level)}<span>${esc(a.tag)}</span><span>· ${fmt(a.date)}</span></span>
             <h3>${esc(a.title)}</h3>
             <p>${esc(a.text)}</p>
-            <span class="go">Ver conflicto →</span>
+            <span class="go btn-go">Ver el conflicto <b>→</b></span>
           </span>
         </a>`).join("")}</div></div>`;
   }
@@ -103,6 +103,7 @@
       ${riskPanel()}
       ${globalPanel()}
       <div class="section-title"><h2>Conflictos monitoreados</h2><span id="cardCount">Ordenados por nivel de alerta</span></div>
+      <p class="hint"><span class="hint-ic" aria-hidden="true">☞</span>Hacé clic o tocá un conflicto para ver su mapa con línea de tiempo, víctimas y daños, cronología e historia.</p>
       <div class="filters">
         <label class="search"><span class="sr">Buscar conflicto</span><input type="search" id="q" placeholder="Buscar país, actor o conflicto…" autocomplete="off"></label>
         <div class="chips" role="group" aria-label="Filtrar por región">${["Todas", ...MACROS].map((m, i) => `<button type="button" class="chip${i ? "" : " on"}" data-m="${m}">${m}</button>`).join("")}</div>
@@ -138,7 +139,8 @@
       <p class="sub">${esc(c.sub)}</p>
       <div class="vs"><span class="s sa">${esc(c.sides.A.name)}</span><em>VS</em><span class="s sb">${esc(c.sides.B.name)}</span></div>
       <div class="last"><span class="mono">${fmt(le.d, le.p)}</span><span>${esc(le.h)}</span></div>
-      <div class="card-top">${meter(c.level)}<span class="cta">Abrir monitor →</span></div>
+      <div class="card-lv">${meter(c.level)}<span>Nivel ${c.level} · ${LV_LABEL[c.level]}</span></div>
+      <span class="btn-go">Ver análisis completo <b>→</b></span>
     </a>`;
   }
 
@@ -168,12 +170,13 @@
     host.innerHTML = s + `<div class="map-legend">
       ${[5, 4, 3, 2].map(l => `<span><i class="sw" style="background:var(--lv${l})"></i>${LV_LABEL[l]}</span>`).join("")}
       ${CANDIDATES.length ? `<span><i class="sw" style="border:1.5px dashed var(--muted)"></i>Candidato a incorporar</span>` : ""}
-      <span><i class="sw sq" style="background:#3a2b2a"></i>País beligerante o teatro de guerra</span></div>`;
+      <span><i class="sw sq" style="background:#3a2b2a"></i>País beligerante o teatro de guerra</span>
+      <span class="map-hint">☞ Hacé clic en un punto para abrir el conflicto</span></div>`;
     host.querySelectorAll("[data-id]").forEach(g => {
       const c = byId[g.dataset.id];
       g.addEventListener("click", () => location.hash = "c-" + c.id);
       g.addEventListener("keydown", e => { if (e.key === "Enter") location.hash = "c-" + c.id; });
-      g.addEventListener("mousemove", e => showTip(e, `<b>${esc(c.name)}</b><span class="d">${esc(c.status)} · nivel ${c.level}</span>`));
+      g.addEventListener("mousemove", e => showTip(e, `<b>${esc(c.name)}</b><span class="d">${esc(c.status)} · nivel ${c.level}</span><span class="tip-go">Clic para ver el conflicto →</span>`));
       g.addEventListener("mouseleave", hideTip);
     });
     host.querySelectorAll("[data-cand]").forEach(g => {
@@ -187,7 +190,7 @@
   function renderConflict(c) {
     const sideActors = side => c.nonState.filter(n => n.side.startsWith(side)).map(n => `<span class="pill" title="${esc(n.where)}">${esc(n.name)}</span>`).join("");
     app.innerHTML = `
-      <div class="crumbs"><a href="#inicio">Panorama</a> / ${esc(c.region)}</div>
+      <div class="crumbs"><a class="back" href="#inicio">← Volver al panorama</a><span>${esc(c.region)}</span></div>
       <div class="c-head">
         <div>
           <h1>${esc(c.fullName)}</h1>
@@ -199,7 +202,7 @@
           <span class="since">En seguimiento desde ${fmt(c.since, c.since.length === 4 ? "y" : "d")}</span>
         </div>
       </div>
-      <nav class="subnav" aria-label="Secciones del conflicto">
+      <nav class="subnav" aria-label="Secciones del conflicto"><span class="subnav-l">Ir a</span>
         <button type="button" data-go="sec-resumen" class="on">Resumen</button>
         <button type="button" data-go="sec-mapa">Mapa</button>
         ${c.id === "rusia-ucrania" ? `<button type="button" data-go="sec-frente">Frente</button>` : ""}
