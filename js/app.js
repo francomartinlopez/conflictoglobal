@@ -218,6 +218,7 @@
         <button type="button" data-go="sec-resumen" class="on">Resumen</button>
         <button type="button" data-go="sec-mapa">Mapa</button>
         ${c.id === "rusia-ucrania" ? `<button type="button" data-go="sec-frente">Frente</button>` : ""}
+        ${c.id === "medio-oriente" && window.HIST_IL ? `<button type="button" data-go="sec-territorio">Territorio 1882–hoy</button>` : ""}
         ${(window.CONTROL || {})[c.id] ? `<button type="button" data-go="sec-control">Control territorial</button>` : ""}
         <button type="button" data-go="sec-bajas">Víctimas y daños</button>
         <button type="button" data-go="sec-crono">Cronología</button>
@@ -249,6 +250,11 @@
       ${c.id === "rusia-ucrania" ? `<section class="block" id="sec-frente">
         <h2>Evolución del frente <small>Territorio ucraniano ocupado por Rusia, semana a semana</small></h2>
         <div class="panel" id="frontmod"></div>
+      </section>` : ""}
+
+      ${c.id === "medio-oriente" && window.HIST_IL ? `<section class="block" id="sec-territorio">
+        <h2>Israel y Palestina, 1882–hoy <small>Cómo cambió el territorio y dónde ocurrieron los principales hechos de violencia, de ambos lados</small></h2>
+        <div class="panel" id="histmod"></div>
       </section>` : ""}
 
       ${(window.CONTROL || {})[c.id] ? `<section class="block" id="sec-control">
@@ -309,8 +315,10 @@
         document.head.appendChild(s);
       }
     }
+    let hm = null;
+    if (c.id === "medio-oriente" && window.HIST_IL) hm = new HistMap(document.getElementById("histmod"));
     const prevDestroy = activeMap.destroy.bind(activeMap);
-    activeMap.destroy = () => { io.disconnect(); if (fm) fm.stop(); prevDestroy(); };
+    activeMap.destroy = () => { io.disconnect(); if (fm) fm.stop(); if (hm) hm.stop(); prevDestroy(); };
   }
 
   function timeline(c) {
@@ -742,6 +750,129 @@
       timer = setInterval(tick, 900);
     });
     draw(frames.length - 1);
+  }
+
+
+  /* ---------- mapa histórico Israel–Palestina ---------- */
+  function HistMap(host) {
+    const D = window.HIST_IL, G = D.geo, FR = D.frames;
+    const W = 470, H = 900;
+    const bb = G.bbox, box = { type: "Polygon", coordinates: [[[bb[0][0], bb[0][1]], [bb[0][0], bb[1][1]], [bb[1][0], bb[1][1]], [bb[1][0], bb[0][1]], [bb[0][0], bb[0][1]]]] };
+    const proj = d3.geoMercator().fitExtent([[0, 0], [W, H]], box), path = d3.geoPath(proj);
+    const P = g => g ? path(g) : "";
+    const mandate = P(G.mandate);
+    let base = `<defs>
+      <pattern id="hOcc" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(45)"><rect width="7" height="7" fill="rgba(194,82,71,.30)"/><line x1="0" y1="0" x2="0" y2="7" stroke="#e06a5e" stroke-width="2.2"/></pattern>
+      <pattern id="hBlq" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-45)"><rect width="7" height="7" fill="rgba(140,140,140,.18)"/><line x1="0" y1="0" x2="0" y2="7" stroke="#b9645c" stroke-width="1.4"/></pattern>
+      <pattern id="hSch" patternUnits="userSpaceOnUse" width="6" height="6" patternTransform="rotate(45)"><rect width="6" height="6" fill="rgba(217,74,63,.25)"/><line x1="0" y1="0" x2="0" y2="6" stroke="#ff8a7f" stroke-width="1.6"/></pattern>
+    </defs><rect width="${W}" height="${H}" fill="var(--sea)"/>`;
+    for (const c of G.ctx) base += `<path d="${P(c.g)}" fill="var(--land)" stroke="var(--land-line)" stroke-width=".7"/>`;
+    base += `<path d="${P(G.golan)}" fill="var(--land)" stroke="var(--land-line)" stroke-width=".7"/>`;
+    const lab = [["Egipto", 34.25, 30.75], ["Jordania", 35.95, 31.0], ["Siria", 36.1, 33.25], ["Líbano", 35.45, 33.5], ["Mediterráneo", 34.45, 32.6]];
+    let labels = lab.map(([n, lo, la]) => { const [x, y] = proj([lo, la]); return `<text class="hl-ctx" x="${x}" y="${y}" text-anchor="middle">${n}</text>`; }).join("");
+    const cities = [["Jerusalén", 35.214, 31.778], ["Tel Aviv–Jaffa", 34.78, 32.07], ["Haifa", 34.99, 32.79], ["Gaza", 34.45, 31.51], ["Hebrón", 35.1, 31.53], ["Nablus", 35.26, 32.22], ["Beerseba", 34.79, 31.25], ["Eilat", 34.95, 29.56], ["Ammán", 35.93, 31.95], ["Damasco", 36.29, 33.51], ["Beirut", 35.5, 33.89]];
+    labels += cities.map(([n, lo, la]) => { const p = proj([lo, la]); if (!p || p[1] < 4 || p[1] > H - 4) return ""; return `<circle cx="${p[0]}" cy="${p[1]}" r="2.6" fill="#ece9e6"/><text class="clabel" x="${p[0] + 5}" y="${p[1] - 5}">${n}</text>`; }).join("");
+    const sideCol = { is: "#e2584b", ar: "#5b93c7", ot: "#c9a34a" };
+    const sideLab = { is: "Milicias sionistas / Israel", ar: "Árabes / palestinos", ot: "Otros (milicias libanesas)" };
+    const EV = D.events.map((e, i) => Object.assign({ i }, e));
+    const ticks = FR.map((f, i) => `<span style="left:${i / (FR.length - 1) * 100}%">${f.y}</span>`).join("");
+    host.innerHTML = `<div class="frontmod histmod">
+      <div class="map-stage"><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Mapa histórico de Israel y Palestina">${base}
+        <path id="hmMand" fill="#2b2626" stroke="#8a807a" stroke-width="1.2"/>
+        <path id="hmIsr" fill="rgba(194,82,71,.62)" stroke="#e06a5e" stroke-width=".9"/>
+        <path id="hmWb" stroke-width=".9"/><path id="hmGaza" stroke-width=".9"/><path id="hmGolan" stroke-width=".9"/><path id="hmSinai" stroke-width=".9"/>
+        <path id="hmSyr" fill="url(#hSch)" stroke="#ff8a7f" stroke-width=".8" stroke-dasharray="3 2"/><path id="hmLeb" fill="url(#hSch)" stroke="#ff8a7f" stroke-width=".8" stroke-dasharray="3 2"/>
+        <g id="hmLab"></g>${labels}<g id="hmPts"></g><g id="hmEv"></g></svg>
+        <div class="map-date" id="hmDate"></div></div>
+      <div class="map-side hm-side">
+        <h3 id="hmTitle"></h3><p id="hmText"></p><p id="hmLink" class="fnote"></p>
+        <div class="hm-stats" id="hmStats"></div>
+        <div class="hm-evh"><b>Hechos de violencia</b><label class="check"><input type="checkbox" id="hmAll"> Acumular desde 1920</label></div>
+        <div class="evlist hm-list" id="hmList"></div>
+      </div>
+      <div class="controls">
+        <div class="btns"><button type="button" class="btn primary" id="hmPlay">▶ Reproducir</button></div>
+        <div class="slider-wrap"><input type="range" id="hmSl" min="0" max="${FR.length - 1}" step="1" value="${FR.length - 1}" aria-label="Año del mapa"><div class="ticks">${ticks}</div></div>
+        <div class="btns"><button type="button" class="btn" id="hmPrev">◀</button><button type="button" class="btn" id="hmNext">▶</button></div>
+      </div>
+      <div class="mapleg"><div class="g"><b>Territorio</b>
+        <span><i class="sw" style="background:#2b2626;border:1px solid #8a807a"></i>Palestina (Mandato británico, 1922–48)</span>
+        <span><i class="sw" style="background:rgba(194,82,71,.62)"></i>Israel (Línea Verde de 1949)</span>
+        <span><i class="sw" style="background:repeating-linear-gradient(45deg,rgba(194,82,71,.3) 0 3px,#e06a5e 3px 5px)"></i>Ocupado por Israel</span>
+        <span><i class="sw" style="background:rgba(194,82,71,.42);border:1px solid #e06a5e"></i>Anexado por Israel (sin reconocimiento internacional)</span>
+        <span><i class="sw" style="background:rgba(79,132,176,.55)"></i>Jordania / Egipto (1949–67)</span>
+        <span><i class="sw" style="background:repeating-linear-gradient(-45deg,rgba(140,140,140,.18) 0 3px,#b9645c 3px 5px)"></i>Gaza bajo bloqueo</span>
+        <span><i class="sw" style="background:repeating-linear-gradient(45deg,rgba(217,74,63,.25) 0 3px,#ff8a7f 3px 5px)"></i>Zona ocupada, trazado esquemático</span></div>
+        <div class="g"><b>Puntos</b><span><i class="sw c" style="background:#f2e3c8"></i>Colonia judía anterior a 1948</span><span><i class="sw c" style="background:#ff6b5f"></i>Asentamiento israelí</span><span><i class="sw c" style="background:transparent;border:1.5px solid #ff6b5f"></i>Puesto avanzado (ilegal también para Israel)</span></div>
+        <div class="g"><b>Hechos</b>${Object.keys(sideLab).map(k => `<span><i class="sw c" style="background:${sideCol[k]}"></i>Atacante: ${sideLab[k]}</span>`).join("")}<span>Tamaño según cantidad de muertos</span></div>
+        <p class="fnote" style="margin:6px 0 0">${esc(D.note)}</p></div>
+    </div>`;
+    const $ = id => host.querySelector("#" + id), sl = $("hmSl");
+    const yr = s => +String(s).slice(0, 4);
+    const deadN = s => { const m = String(s || "").replace(/\./g, "").match(/\d+/g); return m ? Math.max(...m.map(Number)) : 1; };
+    const setG = (id, g, fill, stroke, dash) => { const el = $(id); el.setAttribute("d", g ? P(g) : ""); if (fill) el.setAttribute("fill", fill); el.setAttribute("stroke", stroke || "none"); if (dash) el.setAttribute("stroke-dasharray", dash); else el.removeAttribute("stroke-dasharray"); };
+    const ST = { occ: ["url(#hOcc)", "#e06a5e"], ann: ["rgba(194,82,71,.42)", "#e06a5e"], jor: ["rgba(79,132,176,.55)", "#6f9fca"], egy: ["rgba(79,132,176,.55)", "#6f9fca"], blq: ["url(#hBlq)", "#b9645c"], occ2: ["url(#hOcc)", "#e06a5e"] };
+    const all = () => $("hmAll").checked;
+    const draw = i => {
+      const f = FR[i], y = f.y, y0 = i ? FR[i - 1].y : 1919, t = f.d;
+      $("hmMand").setAttribute("d", f.mandate && f.mandate !== "none" ? mandate : "");
+      $("hmMand").setAttribute("stroke-dasharray", f.mandate === "dash" ? "4 3" : "");
+      $("hmMand").setAttribute("fill", f.mandate === "dash" ? "#262323" : "#2b2626");
+      setG("hmIsr", f.isr ? G.israel49 : null, "rgba(194,82,71,.62)", "#e06a5e");
+      for (const [id, k, g] of [["hmWb", "wb", G.wb], ["hmGaza", "gaza", G.gaza], ["hmGolan", "golan", G.golan], ["hmSinai", "sinai", G.sinai]]) {
+        const s = f[k]; setG(id, s ? g : null, s ? ST[s][0] : "none", s ? ST[s][1] : null);
+      }
+      setG("hmSyr", f.syrbuf ? G.syrbuf : null, "url(#hSch)", "#ff8a7f", "3 2");
+      setG("hmLeb", f.leb ? G.leb : null, "url(#hSch)", "#ff8a7f", "3 2");
+      // etiquetas de zona
+      const zl = [];
+      if (f.wb) zl.push(["Cisjordania", 35.3, 31.95, f.wb === "jor" ? "Jordania" : "ocupada desde 1967"]);
+      if (f.gaza) zl.push(["Gaza", 34.03, 31.68, f.gaza === "egy" ? "Egipto" : f.gaza === "blq" ? "bloqueo" : f.gaza === "occ2" ? "≥60% control israelí" : "ocupada", "start"]);
+      if (f.golan) zl.push(["Golán", 35.95, 32.95, f.golan === "ann" ? "anexado 1981" : "ocupado"]);
+      if (f.sinai) zl.push(["Sinaí", 34.45, 30.25, "ocupado 1967–82"]);
+      if (f.mandate && f.mandate !== "none") zl.push(["Palestina", 34.95, 31.05, f.mandate === "dash" ? "otomana" : "Mandato británico"]);
+      if (f.isr) zl.push(["Israel", 34.83, 30.55, ""]);
+      $("hmLab").innerHTML = zl.filter((z, k, a) => a.findIndex(q => q[0] === z[0]) === k).map(([n, lo, la, s, an]) => { const [x, yy] = proj([lo, la]); return `<text class="hl-zone" x="${x}" y="${yy}" text-anchor="${an || "middle"}">${n}${s ? `<tspan x="${x}" dy="13" class="hl-zs">${s}</tspan>` : ""}</text>`; }).join("");
+      // puntos
+      let pts = "";
+      if (y <= 1947) for (const c of D.pre48) if (c.y <= y) { const p = proj([c.lon, c.lat]); pts += `<circle cx="${p[0]}" cy="${p[1]}" r="3" fill="#f2e3c8" stroke="#111" stroke-width=".6"><title>${esc(c.n)} (${c.y})</title></circle>`; }
+      let nS = 0, nO = 0;
+      if (y >= 1967) for (const s of D.settlements) if (s.y <= y && !(s.ev && s.ev <= y)) {
+        const p = proj([s.lon, s.lat]); if (!p) continue; const o = s.t === "outpost"; o ? nO++ : nS++;
+        pts += `<circle cx="${p[0]}" cy="${p[1]}" r="${o ? 2.6 : 3.2}" fill="${o ? "none" : "#ff6b5f"}" stroke="${o ? "#ff6b5f" : "#111"}" stroke-width="${o ? 1.3 : .6}"><title>${esc(s.n)} · ${o ? "puesto avanzado" : "asentamiento"} desde ${s.y}${s.ev ? ", evacuado en " + s.ev : ""}</title></circle>`;
+      }
+      $("hmPts").innerHTML = pts;
+      // hechos
+      const evs = EV.filter(e => yr(e.d) <= y && (all() ? true : yr(e.d) > y0) && e.d <= t);
+      $("hmEv").innerHTML = evs.filter(e => !e.nomap).map(e => { const p = proj([e.lon, e.lat]); if (!p || p[0] < 0 || p[0] > W || p[1] < 0 || p[1] > H) return ""; const r = 4 + Math.min(16, Math.sqrt(deadN(e.dead)) * 1.1); return `<circle class="hm-ev" data-i="${e.i}" cx="${p[0]}" cy="${p[1]}" r="${r.toFixed(1)}" fill="${sideCol[e.s]}" fill-opacity=".55" stroke="${sideCol[e.s]}" stroke-width="1.4"/>`; }).join("");
+      $("hmList").innerHTML = evs.length ? evs.slice().reverse().map(e => `<div class="ev" data-i="${e.i}"><span class="dot" style="background:${sideCol[e.s]}"></span><div><div class="d">${fmt(e.d)} · ${esc(e.dead)} ${e.dead === "1" ? "muerto" : "muertos"}</div><div class="t">${esc(e.h)}</div><div class="x">${esc(e.x)}</div><a class="evsrc" href="${esc(e.u)}" target="_blank" rel="noopener">Fuente ↗</a></div></div>`).join("") : `<p class="muted" style="font-size:13px">Sin hechos registrados en este período.</p>`;
+      $("hmDate").innerHTML = `${f.y}<small>${i === FR.length - 1 ? "Situación actual" : i ? "Período " + (FR[i - 1].y + 1) + "–" + f.y : "Antes del Mandato"}</small>`;
+      $("hmTitle").textContent = f.t; $("hmText").textContent = f.x;
+      $("hmLink").innerHTML = f.link ? `<a href="${esc(f.link[1])}" target="_blank" rel="noopener">${esc(f.link[0])} ↗</a>` : "";
+      const pop = (D.pop || []).filter(p => p.y <= y).pop();
+      const st = [];
+      if (f.jp) st.push(["Población judía", f.jp]);
+      if (y <= 1947) st.push(["Colonias judías en el mapa", String(D.pre48.filter(c => c.y <= y).length)]);
+      if (y >= 1967) { st.push(["Asentamientos en el mapa", String(nS)]); if (nO) st.push(["Puestos avanzados en el mapa", String(nO)]); }
+      if (y >= 1967 && pop) st.push(["Colonos (Cisj. + Jerusalén Este)", pop.v + (pop.y !== y ? ` (${pop.y})` : "")]);
+      $("hmStats").innerHTML = st.map(([k, v]) => `<div class="fstat${v.length > 12 ? " wide" : ""}"><span>${k}</span><b>${esc(v)}</b></div>`).join("");
+    };
+    host.querySelector("#hmEv").addEventListener("mousemove", e => { const c = e.target.closest(".hm-ev"); if (!c) return hideTip(); const v = EV[+c.dataset.i]; showTip(e, `<b>${esc(v.h)}</b><span class="d">${fmt(v.d)} · ${esc(v.dead)} ${v.dead === "1" ? "muerto" : "muertos"}</span><span class="d">${esc(sideLab[v.s])}</span>`); });
+    host.querySelector("#hmEv").addEventListener("mouseleave", hideTip);
+    let timer = null;
+    this.stop = () => { if (timer) clearInterval(timer); timer = null; $("hmPlay").textContent = "▶ Reproducir"; };
+    const go = i => { i = Math.max(0, Math.min(FR.length - 1, i)); sl.value = i; draw(i); };
+    sl.addEventListener("input", () => { this.stop(); draw(+sl.value); });
+    $("hmAll").addEventListener("change", () => draw(+sl.value));
+    $("hmPrev").addEventListener("click", () => { this.stop(); go(+sl.value - 1); });
+    $("hmNext").addEventListener("click", () => { this.stop(); go(+sl.value + 1); });
+    $("hmPlay").addEventListener("click", () => {
+      if (timer) return this.stop();
+      if (+sl.value >= FR.length - 1) go(0);
+      $("hmPlay").textContent = "❚❚ Pausa";
+      timer = setInterval(() => { if (+sl.value >= FR.length - 1) return this.stop(); go(+sl.value + 1); }, 2600);
+    });
+    draw(FR.length - 1);
   }
 
   /* ============================== METODOLOGÍA ============================== */

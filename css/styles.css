@@ -501,3 +501,27 @@ pre.tree { background: var(--surface); border: 1px solid var(--line); border-rad
   .brand-txt strong { font-size: clamp(19px, 6vw, 24px); white-space: nowrap; }
   .mainnav > a, .navdrop > button { font-size: 15px; padding: 8px 10px; }
 }
+
+/* mapa histórico Israel–Palestina */
+.histmod { grid-template-columns: minmax(0, 1fr) 380px; }
+.histmod .map-stage { display: flex; justify-content: center; }
+.histmod .map-stage svg { max-height: 900px; width: auto; max-width: 100%; }
+.hl-ctx { font: 600 12px/1 var(--f-display); letter-spacing: .18em; text-transform: uppercase; fill: #6d6863; }
+.hl-zone { font: 700 14px/1 var(--f-display); letter-spacing: .06em; text-transform: uppercase; fill: #f3ece6; paint-order: stroke; stroke: #0d0d0e; stroke-width: 3px; }
+.hl-zs { font: 500 10.5px/1 var(--f-mono); letter-spacing: 0; text-transform: none; fill: #e9c3be; }
+.hm-side { padding: 16px; display: flex; flex-direction: column; gap: 10px; max-height: 960px; }
+.hm-side h3 { font: 700 22px/1.1 var(--f-display); text-transform: uppercase; letter-spacing: .03em; color: #f0a59c; margin: 0; }
+.hm-side > p { margin: 0; font-size: 14px; color: #d7d1cb; line-height: 1.5; }
+.hm-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.hm-stats .fstat b { font-size: 21px; }
+.hm-evh { display: flex; justify-content: space-between; align-items: center; gap: 8px; border-top: 1px solid var(--line); padding-top: 10px; font-size: 13px; flex-wrap: wrap; }
+.hm-list { overflow-y: auto; min-height: 120px; flex: 1; }
+.hm-ev { cursor: pointer; }
+@media (max-width: 1020px) { .histmod { grid-template-columns: 1fr; } .hm-side { max-height: none; } .hm-list { max-height: 420px; } }
+.hm-stats .fstat.wide { grid-column: 1 / -1; }
+.hm-stats .fstat.wide b { font-size: 18px; }
+@media (max-width: 1020px) {
+  .histmod { display: flex; flex-direction: column; }
+  .histmod .map-stage { order: 1; } .histmod .controls { order: 2; } .histmod .hm-side { order: 3; } .histmod .mapleg { order: 4; }
+}
+@media (max-width: 640px) { .histmod .ticks span:nth-child(even) { display: none; } }
