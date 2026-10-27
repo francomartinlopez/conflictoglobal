@@ -100,6 +100,7 @@
         </div>
       </div>
       <div class="panel worldmap" id="worldmap"></div>
+      ${riskPanel()}
       ${globalPanel()}
       <div class="section-title"><h2>Conflictos monitoreados</h2><span id="cardCount">Ordenados por nivel de alerta</span></div>
       <div class="filters">
@@ -569,6 +570,57 @@
   }
 
   /* ---------- panel global ---------- */
+
+  /* ---------- indicadores globales de riesgo ---------- */
+  function riskPanel() {
+    const G = window.GLOBAL_RISK; if (!G) return "";
+    const dfmt = s => /^\d{4}-\d{2}-\d{2}$/.test(s) ? fmt(s) : /^\d{4}-\d{2}$/.test(s) ? fmt(s, "m") : s.replace("-T", " T");
+    const num = v => v.toLocaleString("es-AR", { maximumFractionDigits: 1 });
+    const src = (s, u) => u ? `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(s)} ↗</a>` : esc(s);
+    // Reloj: últimos 15 minutos de la esfera; 1 seg = 0,1°
+    const C = G.clock, R = 62, cx = 80, cy = 80;
+    const pt = (deg, r) => [cx + r * Math.sin(deg * Math.PI / 180), cy - r * Math.cos(deg * Math.PI / 180)];
+    let ticks = ""; for (let m = 0; m < 60; m += 5) { const a = pt(m * 6, R - 2), b = pt(m * 6, R - (m % 15 ? 7 : 11)); ticks += `<line x1="${a[0]}" y1="${a[1]}" x2="${b[0]}" y2="${b[1]}" stroke="#55595e" stroke-width="${m % 15 ? 1.2 : 2}"/>`; }
+    const ang = -C.seconds * 0.1, [mx, my] = pt(ang, R - 10), [hx, hy] = pt(-1 * 30 / 60 * 0 - 0.5, R - 26);
+    const [ax, ay] = pt(ang, R + 6), [bx, by] = pt(0, R + 6);
+    const clock = `<svg viewBox="0 0 160 160" class="rk-clock" role="img" aria-label="${C.seconds} segundos para la medianoche">
+      <circle cx="${cx}" cy="${cy}" r="${R}" fill="#16181a" stroke="#2e3134" stroke-width="2"/>${ticks}
+      <path d="M${cx},${cy} L${pt(-90, R)[0]},${pt(-90, R)[1]} A${R},${R} 0 0 1 ${cx},${cy - R} Z" fill="var(--accent-soft)"/>
+      <path d="M${ax},${ay} A${R + 6},${R + 6} 0 0 1 ${bx},${by}" fill="none" stroke="var(--accent)" stroke-width="3"/>
+      <line x1="${cx}" y1="${cy}" x2="${hx}" y2="${hy}" stroke="#ece9e6" stroke-width="4" stroke-linecap="round"/>
+      <line x1="${cx}" y1="${cy}" x2="${mx}" y2="${my}" stroke="var(--accent-ink)" stroke-width="2.5" stroke-linecap="round"/>
+      <circle cx="${cx}" cy="${cy}" r="4" fill="#ece9e6"/></svg>`;
+    const hmax = Math.max(...C.hist.map(h => h[1])), hmin = Math.min(...C.hist.map(h => h[1])) * 0.6, hl = v => (Math.log(v) - Math.log(hmin)) / (Math.log(hmax) - Math.log(hmin));
+    const hist = C.hist.map(h => `<span title="${h[0]}: ${h[1] >= 120 ? Math.round(h[1] / 60) + " min" : h[1] + " s"}"><i style="height:${Math.max(6, hl(h[1]) * 100)}%"></i><em>${String(h[0]).slice(2)}</em></span>`).join("");
+    const D = G.defcon;
+    const scale = [5, 4, 3, 2, 1].map(l => `<span class="dc${l === D.level ? " on" : ""}${l < D.level ? " up" : ""}" data-l="${l}">${l}</span>`).join("");
+    const O = G.oil, U = O.us, I = O.iea, cmax = Math.max(...O.countries.map(c => c.mb));
+    const rows = O.countries.map(c => `<tr><td>${esc(c.n)}${c.est ? ` <small class="est">estim.</small>` : ""}</td>
+      <td class="barc"><i style="width:${c.mb / cmax * 100}%"${c.n === "Estados Unidos" ? ' class="us"' : ""}></i></td>
+      <td class="num">${num(c.mb)}</td><td class="num">${c.days ? c.days + " días" : "—"}</td><td class="rk-s">${esc(c.s)} · ${esc(dfmt(c.d))}</td></tr>`).join("");
+    return `<div class="section-title"><h2>Indicadores de riesgo global</h2><span>Termómetros que no dependen de un solo conflicto</span></div>
+      <div class="rk-grid">
+        <div class="panel rk"><h3>Reloj del Apocalipsis</h3>
+          <div class="rk-row">${clock}<div><b class="rk-big">${C.seconds} <small>segundos</small></b><span class="rk-sub">para la medianoche</span>
+          <div class="rk-hist" aria-label="Evolución desde 1991">${hist}</div><div class="rk-hist-l">1991: 17 min · 2026: 85 s</div></div></div>
+          <p>${esc(C.note)}</p><p class="rk-src">${src(C.src, C.u)} · fijado el ${fmt(C.set)}</p></div>
+        <div class="panel rk"><h3>DEFCON de EE.UU. <span class="pill">No oficial</span></h3>
+          <div class="rk-row"><div><b class="rk-big">${D.level} <small>estimado</small></b><span class="rk-sub">desde el ${fmt(D.since)}</span></div></div>
+          <div class="dc-scale" aria-label="Escala DEFCON de 5 (paz) a 1 (guerra nuclear)">${scale}</div>
+          <div class="dc-lab"><span>5 · paz</span><span>1 · guerra nuclear inminente</span></div>
+          <p>${esc(D.note)}</p><p class="rk-src">${src(D.src, D.u)}</p></div>
+        <div class="panel rk"><h3>Reserva estratégica de EE.UU.</h3>
+          <div class="rk-row"><div><b class="rk-big">${num(U.mb)} <small>M barriles</small></b><span class="rk-sub">${Math.round(U.mb / U.cap * 100)}% de su capacidad (${U.cap} M) · al ${fmt(U.date)}</span></div></div>
+          <div class="rk-fill"><i style="width:${U.mb / U.cap * 100}%"></i><b style="left:${U.peak2026 / U.cap * 100}%" title="${num(U.peak2026)} M el ${fmt(U.peakDate)}"></b></div>
+          <div class="dc-lab"><span>0</span><span>▏ ${num(U.peak2026)} M en ${fmt(U.peakDate, "m")}</span><span>${U.cap} M</span></div>
+          <p>${esc(U.note)}</p><p class="rk-src">${src(U.src, U.u)}</p>
+          <p class="rk-iea"><b>${I.released} de ${I.pledged} M</b> barriles ya liberados por la AIE al ${fmt(I.date)}. ${esc(I.note)} <span class="rk-src">${src(I.src, I.u)}</span></p></div>
+      </div>
+      <div class="panel gp rk-oil"><h3>Reservas estratégicas de petróleo por país <small>millones de barriles · días de importaciones netas que cubren</small></h3>
+        <table class="gp-t"><thead><tr><th>País</th><th></th><th>M barriles</th><th>Cobertura</th><th>Fuente y fecha</th></tr></thead><tbody>${rows}</tbody></table>
+        <p class="gp-note">No existe un inventario mundial homogéneo: cada país informa con otra fecha y otro criterio, y varias cifras ya incluyen lo liberado desde marzo. China no publica su reserva y la cifra es una estimación. La AIE exige a sus miembros 90 días de importaciones netas; EE.UU. es exportador neto y no aplica. ${src(O.cSrc, O.cU)}.</p></div>`;
+  }
+
   function globalPanel() {
     const H = window.HEADLINE || {};
     const rows = CONFLICTS.map(c => ({ c, h: H[c.id] || {}, d: ((window.SERIES || {})[c.id] || {}).displaced })).filter(r => r.h.deaths || r.d);

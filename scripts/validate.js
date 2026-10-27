@@ -39,6 +39,13 @@ for (const c of C) {
     const k = e.d + "|" + e.h; if (seen.has(k)) errs.push(`${w}: duplicado`); seen.add(k);
   });
 }
+const G = W.GLOBAL_RISK;
+if (!G) errs.push("Falta GLOBAL_RISK (data/global.js)");
+else {
+  if (!(G.clock.seconds > 0)) errs.push("GLOBAL_RISK.clock.seconds inválido");
+  if (!(G.defcon.level >= 1 && G.defcon.level <= 5)) errs.push("GLOBAL_RISK.defcon.level inválido");
+  if (!(G.oil.us.mb > 0 && G.oil.us.mb <= G.oil.us.cap) || !okDate(G.oil.us.date)) errs.push("GLOBAL_RISK.oil.us inválido");
+}
 for (const s of W.EVENT_SOURCES || []) if (!ids.has(s.c) || !C.find(c => c.id === s.c).events[s.i]) errs.push(`EVENT_SOURCES apunta a un evento inexistente: ${s.c} #${s.i}`);
 
 async function browser() {
