@@ -7,15 +7,15 @@
    Nivel de evidencia (lecturas alternativas): doc = documentado · ind = indicios sólidos · hip = hipótesis */
 
 window.MONITOR_META = {
-  updated: "2026-10-27",
-  updatedLabel: "27 oct 2026 · 12:00 ART",
+  updated: "2026-10-28",
+  updatedLabel: "28 oct 2026 · 06:00 ART",
   edition: "Maqueta v0.5"
 };
 
 window.ALERTS = [
-  { id: "medio-oriente", level: 5, tag: "Escalada", date: "2026-10-26",
-    title: "Medio Oriente: el frente saudí–hutí y el estrecho de Ormuz",
-    text: "Los hutíes mantienen ataques casi diarios sobre Arabia Saudita tras el golpe al aeropuerto de Riad (10-oct, 13 muertos). Irán declaró Ormuz cerrado a buques fuera de sus reglas y el Brent cerró a US$115,81. Washington evalúa reanudar los ataques a Irán después de las elecciones de medio término del 3 de noviembre." },
+  { id: "medio-oriente", level: 5, tag: "Escalada", date: "2026-10-27",
+    title: "Medio Oriente: Teherán sin tregua, misiles sobre Riad y minas en Ormuz",
+    text: "La ronda de Teherán con Arabia Saudita, Turquía y Pakistán terminó el 26-oct sin alto el fuego ni comunicado. Horas después los hutíes volvieron a disparar misiles sobre Riad, y un petrolero se incendió tras chocar con minas al este de Ormuz, que Irán mantiene cerrado a buques sin su permiso. Washington evalúa reanudar los ataques a Irán después de las elecciones de medio término del 3 de noviembre; Israel votó el 27-oct sin mayoría clara en boca de urna." },
   { id: "rusia-ucrania", level: 4, tag: "Ventana diplomática", date: "2026-10-27",
     title: "Rusia–Ucrania: tregua local en Oleshky y negociación trilateral en noviembre",
     text: "Desde hoy rige un alto el fuego humanitario en Oleshky (Jersón). Rusia aceptó \"en principio\" retomar las conversaciones con Ucrania y EE.UU. después del 10 de noviembre, posiblemente en Abu Dabi. La disputa de fondo sigue siendo el Donbás." },
@@ -60,7 +60,7 @@ window.CONFLICTS = [
     B: { name: "Irán y el \"Eje de la Resistencia\"", desc: "Irán y sus aliados armados: Hezbolá (Líbano), Hamás y la Yihad Islámica (Gaza), los hutíes (Yemen) y milicias chiíes iraquíes." }
   },
   keyFacts: [
-    { k: "Día de guerra con Irán", v: "242", n: "desde el 28-feb-2026" },
+    { k: "Día de guerra con Irán", v: "243", n: "desde el 28-feb-2026" },
     { k: "Brent (26-oct)", v: "US$ 115,81", n: "Ormuz bajo control iraní" },
     { k: "Muertos en Gaza", v: "≥ 74.540", n: "Min. de Salud de Gaza, 24-oct-2026" },
     { k: "Desplazados en Líbano", v: "> 1 millón", n: "guerra desde el 2-mar-2026" }
@@ -139,7 +139,10 @@ window.CONFLICTS = [
     { d: "2026-10-05", lat: 13.32, lon: 43.25, t: "terrestre", h: "Contraofensiva saudí en la costa de Moca", x: "Unos 100 cazas apoyan a fuerzas yemeníes tras la toma hutí de Moca.", p: "m" },
     { d: "2026-10-10", lat: 24.96, lon: 46.70, t: "aereo", h: "Ataque hutí al aeropuerto de Riad", x: "13 muertos y más de 300 heridos: el ataque más letal contra Arabia Saudita en más de una década." },
     { d: "2026-10-11", lat: 25.2, lon: 57.6, t: "naval", h: "EE.UU. inutiliza un buque que intentaba romper el bloqueo", x: "La noche anterior, un superpetrolero había chocado con una mina en una ruta no autorizada de Ormuz." },
-    { d: "2026-10-26", lat: 35.70, lon: 51.40, t: "diplomacia", h: "Saudíes, turcos y pakistaníes en Teherán", x: "Reunión con Pezeshkian para evitar la reanudación de la guerra; Irán fija siete condiciones para negociar." }
+    { d: "2026-10-26", lat: 35.70, lon: 51.40, t: "diplomacia", h: "Saudíes, turcos y pakistaníes en Teherán", x: "Reunión con Pezeshkian para evitar la reanudación de la guerra; Irán fija siete condiciones para negociar." },
+    { d: "2026-10-27", lat: 24.71, lon: 46.68, t: "aereo", h: "Nueva salva hutí sobre Riad", x: "Horas después de que la ronda de Teherán terminara sin tregua, Arabia Saudita informó la intercepción de misiles balísticos sobre la capital y sobre la región oriental. Los hutíes reivindicaron objetivos en Riad, Najrán y Ras Tanura.", u: "https://www.wsbtv.com/news/world/houthis-say-2-dead/5ZXMA66CIYYI5KENJ7M4FH5FZY/", st: "AP" },
+    { d: "2026-10-27", lat: 26.30, lon: 56.90, t: "naval", h: "Petrolero en llamas tras chocar con minas al este de Ormuz", x: "Según el ejército iraní, el buque había apagado su sistema de rastreo y entró en una zona restringida; no se informaron víctimas. Teherán insiste en que el estrecho sigue cerrado a buques sin su autorización.", u: "https://www.aa.com.tr/en/middle-east/iran-says-oil-tanker-catches-fire-after-hitting-naval-mine-east-of-strait-of-hormuz/4102560", st: "Anadolu" },
+    { d: "2026-10-27", lat: 31.77, lon: 35.21, t: "politico", h: "Elecciones en Israel: ningún bloque llega a 61 bancas", x: "Las encuestas de boca de urna dan al Likud como primera fuerza pero sin mayoría para Netanyahu, con el bloque de Eisenkot cerca o por delante según el canal. Los resultados oficiales se esperan para el 4 de noviembre.", u: "https://www.israelhayom.com/2026/10/27/israel-election-2026-exit-polls-full-results/", st: "Israel Hayom" }
   ],
   timeline: [
     { d: "1916", era: "Orígenes", h: "Acuerdo Sykes–Picot", x: "Francia y Gran Bretaña se reparten las provincias árabes del Imperio otomano." },
@@ -237,7 +240,7 @@ window.CONFLICTS = [
     { n: "Donetsk (Pokrovsk – Dobropillia – Kostiantynivka)", s: "Desgaste", l: 4, t: "Eje principal del esfuerzo ruso." },
     { n: "Járkov (Kupiansk – Borova – Vovchansk)", s: "Activo", l: 4, t: "Avances ucranianos locales en Kupiansk y Borova (ISW, ago-2026)." },
     { n: "Zaporiyia – Dnipropetrovsk", s: "Activo", l: 3, t: "Rusia busca ampliar la ofensiva; Ucrania recuperó terreno." },
-    { n: "Jersón / Dniéper", s: "Tregua local", l: 2, t: "Alto el fuego humanitario en Oleshky desde el 27-oct." },
+    { n: "Jersón / Dniéper", s: "Tregua local", l: 2, t: "Alto el fuego humanitario en Oleshky desde el 27-oct (previsto hasta el domingo); la evacuación se postergó por el desminado de la ruta." },
     { n: "Retaguardia profunda", s: "Ataques de largo alcance", l: 4, t: "Drones y misiles sobre energía, refinerías y logística en ambos países." }
   ],
   nonState: [
@@ -315,7 +318,8 @@ window.CONFLICTS = [
     { d: "2026-08-11", lat: 47.84, lon: 35.14, t: "aereo", h: "Ataque ruso sobre Zaporiyia y Kiev", x: "Misiles, bombas guiadas y drones; impacto en Zaporizhstal." },
     { d: "2026-08-19", lat: 44.87, lon: 13.85, t: "politico", h: "Croacia detiene a Volodímir Z. (Nord Stream)", x: "Buzo ucraniano que Polonia se había negado a extraditar a Alemania." },
     { d: "2026-10-21", lat: 59.94, lon: 30.31, t: "diplomacia", h: "Witkoff con Putin en San Petersburgo", x: "Rusia acepta \"en principio\" retomar la negociación después del 10-nov." },
-    { d: "2026-10-27", lat: 46.62, lon: 32.72, t: "diplomacia", h: "Alto el fuego humanitario en Oleshky", x: "Primera tregua local; corredores para ayuda y evacuación." }
+    { d: "2026-10-27", lat: 46.62, lon: 32.72, t: "diplomacia", h: "Alto el fuego humanitario en Oleshky", x: "Primera tregua local; corredores para ayuda y evacuación." },
+    { d: "2026-10-27", lat: 50.45, lon: 30.52, t: "aereo", h: "Ataque con misiles balísticos sobre Kiev mientras rige la tregua local", x: "Dos oleadas alcanzaron el puente del Sur sobre el Dniéper, estaciones de metro y una residencia universitaria. La evacuación de Oleshky se postergó porque hay que desminar la ruta de acceso.", u: "https://kyivindependent.com/local-ceasefire-in-besieged-oleshky-begins-ukrainian-russian-officials-say/", st: "The Kyiv Independent" }
   ],
   timeline: [
     { d: "882–1240", era: "Raíces", h: "Rus de Kiev", x: "Estado medieval que tanto Rusia como Ucrania reclaman como origen." },
@@ -693,7 +697,8 @@ window.CONFLICTS = [
     { d: "2026-04-25", lat: 2.45, lon: -76.6, t: "aereo", h: "Ataque con drones a un radar en Cauca", x: "Queda fuera de servicio un radar aéreo." },
     { d: "2026-05-19", lat: 8.3, lon: -73.0, t: "atentado", h: "Masacre en Norte de Santander", x: "Atribuida por el gobierno al ELN; al día siguiente el ELN anuncia cese al fuego electoral." },
     { d: "2026-06-21", lat: 4.6, lon: -74.08, t: "politico", h: "De la Espriella gana la presidencia", x: "49,7% contra 48,7% de Cepeda." },
-    { d: "2026-07-09", lat: 4.62, lon: -74.06, t: "politico", h: "Ultimátum al ELN y a las disidencias", x: "Un mes para entregarse o serán \"objetivos militares\"." }
+    { d: "2026-07-09", lat: 4.62, lon: -74.06, t: "politico", h: "Ultimátum al ELN y a las disidencias", x: "Un mes para entregarse o serán \"objetivos militares\"." },
+    { d: "2026-10-26", lat: 8.64, lon: -72.73, t: "terrestre", h: "Se entrega alias \"Flecha\", del frente 33 de las disidencias", x: "El presidente informó que el número dos de la subestructura que opera en el Catatumbo se sometió a la justicia; enfrenta cargos por terrorismo y rebelión.", u: "https://www.infobae.com/colombia/2026/10/26/alias-flecha-segundo-cabecilla-del-frente-33-de-las-disidencias-de-las-farc-se-sometio-a-la-justicia-en-el-catatumbo/", st: "Infobae" }
   ],
   timeline: [
     { d: "1948", era: "Orígenes", h: "Bogotazo y La Violencia", x: "Asesinato de Gaitán; guerra entre liberales y conservadores." },
@@ -740,7 +745,7 @@ window.CONFLICTS = [
   keyFacts: [
     { k: "Captura de Maduro", v: "3-ene-2026", n: "trasladado a Nueva York" },
     { k: "Presidenta encargada", v: "Delcy Rodríguez", n: "con aval de Washington" },
-    { k: "Ataques a lanchas", v: "70", n: "≥ 235 muertos (AP, 5-oct-2026)" },
+    { k: "Ataques a lanchas", v: "≈ 72", n: "≈ 240 muertos (recuento de Infobae, 27-oct-2026)" },
     { k: "Riesgo de guerra civil", v: "Bajo", n: "pero sin elecciones convocadas" }
   ],
   summary: "<p>Entre agosto de 2025 y enero de 2026 EE.UU. desplegó la mayor fuerza naval en el Caribe en décadas, incluido el portaaviones Gerald R. Ford, y atacó embarcaciones que acusó de transportar droga: hasta fines de 2025 fueron más de veinte, y para octubre de 2026 la cuenta llegaba a 70 ataques y al menos 235 muertos. Declaró al \"Cártel de los Soles\" organización terrorista e impuso un bloqueo petrolero. El 3 de enero de 2026 fuerzas especiales capturaron a Maduro y a Cilia Flores en Caracas.</p><p>Lo que siguió no fue un cambio de régimen completo: la vicepresidenta Delcy Rodríguez asumió como presidenta encargada y negoció con Washington acceso al petróleo, liberación de presos y reapertura de embajadas. EE.UU. le levantó las sanciones personales. María Corina Machado quedó fuera del proceso y su vínculo con Trump se resintió. El conflicto armado está en pausa; la incógnita es la transición política.</p>",
@@ -773,7 +778,8 @@ window.CONFLICTS = [
     { d: "2026-01-03", lat: 10.48, lon: -66.90, t: "terrestre", h: "Operación de captura de Maduro", x: "Fuerzas de EE.UU. lo trasladan con Cilia Flores a Nueva York." },
     { d: "2026-01-06", lat: 10.50, lon: -66.92, t: "politico", h: "Delcy Rodríguez asume como presidenta encargada", x: "Trump dice que \"coopera\"." },
     { d: "2026-04-15", lat: 10.5, lon: -66.95, t: "diplomacia", h: "EE.UU. levanta sanciones a Delcy Rodríguez", x: "Deshielo y traspaso de la embajada en Washington (fecha aproximada).", p: "m" },
-    { d: "2026-09-27", lat: 10.49, lon: -66.88, t: "diplomacia", h: "Delcy Rodríguez se reúne con Trump en EE.UU.", x: "Gira iniciada el 21-sep; se quiebra el vínculo entre Machado y Trump." }
+    { d: "2026-09-27", lat: 10.49, lon: -66.88, t: "diplomacia", h: "Delcy Rodríguez se reúne con Trump en EE.UU.", x: "Gira iniciada el 21-sep; se quiebra el vínculo entre Machado y Trump." },
+    { d: "2026-10-27", lat: 0, lon: 0, nomap: true, t: "naval", h: "Nuevo ataque de EE.UU. contra una lancha: cinco muertos", x: "El Comando Sur informó el golpe en el Pacífico oriental sin dar ubicación ni nacionalidades. La campaña iniciada en septiembre de 2025 suma unas 70 embarcaciones atacadas y alrededor de 240 muertos.", u: "https://infobae.com/estados-unidos/2026/10/27/el-ejercito-de-estados-unidos-bombardeo-una-lancha-en-el-pacifico-oriental-cinco-muertos", st: "Infobae" }
   ],
   timeline: [
     { d: "1998", era: "Chavismo", h: "Chávez gana la presidencia", x: "" },
@@ -846,7 +852,8 @@ window.CONFLICTS = [
     { d: "2026-05-20", lat: 38.9, lon: -77.03, t: "politico", h: "Causa penal contra Raúl Castro", x: "", nomap: true },
     { d: "2026-07-06", lat: 23.12, lon: -82.37, t: "politico", h: "Nuevo apagón nacional", x: "" },
     { d: "2026-09-25", lat: 25.8, lon: -80.3, t: "politico", h: "Reporte sobre planes del Comando Sur", x: "CBS: la Reserva evalúa refuerzos para una posible acción en torno a Cuba." },
-    { d: "2026-09-26", lat: 23.13, lon: -82.38, t: "diplomacia", h: "Trump: \"Cuba y nosotros haremos un acuerdo\"", x: "La Habana ofrece en la ONU relaciones comerciales con empresas de EE.UU." }
+    { d: "2026-09-26", lat: 23.13, lon: -82.38, t: "diplomacia", h: "Trump: \"Cuba y nosotros haremos un acuerdo\"", x: "La Habana ofrece en la ONU relaciones comerciales con empresas de EE.UU." },
+    { d: "2026-10-27", lat: 40.75, lon: -73.97, t: "diplomacia", h: "Cruce a los gritos en la ONU por el embargo", x: "En el debate anual de la Asamblea General, el embajador estadounidense pidió rechazar la resolución cubana y chocó con el canciller Bruno Rodríguez; la votación queda para la segunda sesión.", u: "https://www.infobae.com/estados-unidos/2026/10/28/el-embajador-de-eeuu-y-el-canciller-de-cuba-protagonizaron-un-tenso-cruce-a-los-gritos-en-la-onu-por-el-embargo-economico-contra-el-regimen/", st: "Infobae" }
   ],
   timeline: [
     { d: "1898", era: "Orígenes", h: "Guerra hispano-estadounidense", x: "Enmienda Platt y base de Guantánamo." },

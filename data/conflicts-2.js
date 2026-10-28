@@ -73,7 +73,8 @@ window.CONFLICTS.push(
     { d: "2026-09-30", lat: 34.85, lon: 71.10, t: "aereo", h: "Bombardeo pakistaní en Kunar", x: "Tercera ronda desde el 18-sep, junto con Helmand." },
     { d: "2026-09-30", lat: 31.6, lon: 64.4, t: "aereo", h: "Ataque pakistaní en Helmand", x: "" },
     { d: "2026-10-05", lat: 55.75, lon: 37.62, t: "diplomacia", h: "Formato Moscú sin declaración conjunta", x: "Lavrov elogia al gobierno talibán.", nomap: true },
-    { d: "2026-10-10", lat: 33.85, lon: 70.15, t: "terrestre", h: "Combates en Kurram y Dand Patan", x: "12 milicianos y un soldado pakistaní muertos según el ejército." }
+    { d: "2026-10-10", lat: 33.85, lon: 70.15, t: "terrestre", h: "Combates en Kurram y Dand Patan", x: "12 milicianos y un soldado pakistaní muertos según el ejército." },
+    { d: "2026-10-27", lat: 32.60, lon: 69.62, t: "terrestre", h: "Fuego cruzado en Angoor Adda (Waziristán del Sur)", x: "Un civil muerto y cinco heridos por un mortero disparado desde Afganistán, según Pakistán, que respondió con artillería contra puestos talibanes.", u: "https://www.dawn.com/news/2040360/one-killed-five-injured-by-afghan-firing-near-angoor-adda", st: "Dawn / Reuters" }
   ],
   timeline: [
     { d: "1893", era: "Orígenes", h: "Línea Durand", x: "Frontera trazada por el Raj británico; parte en dos a los pastunes. Ningún gobierno afgano la reconoció." },
@@ -162,7 +163,9 @@ window.CONFLICTS.push(
     { d: "2025-10-28", lat: 13.70, lon: 30.37, t: "terrestre", h: "Las RSF toman Bara (Kordofán del Norte)", x: "" },
     { d: "2026-02-15", lat: 13.63, lon: 25.35, t: "politico", h: "Misión de la ONU: \"rasgos de genocidio\" en El Fasher", x: "", p: "m" },
     { d: "2026-07-26", lat: 13.6, lon: 31.0, t: "terrestre", h: "El ejército recupera la ruta El Obeid–Jartum", x: "Hemedti \"suelta las riendas\" de sus combatientes." },
-    { d: "2026-08-12", lat: 13.18, lon: 30.22, t: "aereo", h: "Las RSF reanudan el ataque sobre El Obeid", x: "Drones también sobre Jartum y Atbara." }
+    { d: "2026-08-12", lat: 13.18, lon: 30.22, t: "aereo", h: "Las RSF reanudan el ataque sobre El Obeid", x: "Drones también sobre Jartum y Atbara." },
+    { d: "2026-10-26", lat: 12.05, lon: 24.88, t: "aereo", h: "Bombardeos intensos del ejército sobre Nyala", x: "Ataques contra mandos y defensas antiaéreas de las RSF en la capital de Darfur del Sur; una fuente local habla de al menos 20 muertos, entre ellos civiles en un mercado nocturno.", u: "https://sudantribune.com/article/320509", st: "Sudan Tribune" },
+    { d: "2026-10-27", lat: 15.60, lon: 32.53, t: "aereo", h: "Drones de las RSF contra la red eléctrica", x: "Tras golpear seis centrales el día anterior en el este, un ataque a la subestación de Al-Markhiyat dejó sin luz a gran parte de Jartum y Al-Yazira.", u: "https://www.arabnews.pk/middle-east/sudan-rsf-drones-hit-khartoum-power-station-govt-source-3005367", st: "AFP" }
   ],
   timeline: [
     { d: "1956", era: "Orígenes", h: "Independencia", x: "Un Estado dominado por las élites del valle del Nilo." },
@@ -343,7 +346,8 @@ window.CONFLICTS.push(
     { d: "2026-06-20", lat: -3.50, lon: 28.40, t: "terrestre", h: "Escalada en Minembwe (Kivu del Sur)", x: "Drones y brote de ébola.", p: "m" },
     { d: "2026-03-02", lat: -1.95, lon: 30.06, t: "politico", h: "EE.UU. sanciona al ejército de Ruanda", x: "Por su apoyo al M23." },
     { d: "2026-08-25", lat: -1.68, lon: 29.22, t: "diplomacia", h: "Hoja de ruta para negociar", x: "Con EE.UU., Catar, Suiza, la UA y Togo.", p: "m" },
-    { d: "2026-10-12", lat: -1.67, lon: 29.23, t: "politico", h: "Kabila lanza en Goma el Frente para la Refundación de la Nación", x: "El expresidente, condenado en ausencia por traición, encabeza una nueva coalición que reemplaza a la AFC/M23." }
+    { d: "2026-10-12", lat: -1.67, lon: 29.23, t: "politico", h: "Kabila lanza en Goma el Frente para la Refundación de la Nación", x: "El expresidente, condenado en ausencia por traición, encabeza una nueva coalición que reemplaza a la AFC/M23." },
+    { d: "2026-10-27", lat: -1.10, lon: 27.95, t: "terrestre", h: "Se reanudan los combates en Walikale", x: "El FRN atacó posiciones del ejército y de los wazalendo en Luola y la colina Tchad; también se oyeron armas pesadas en Pinga. Sin balance de víctimas.", u: "https://www.congoquotidien.com/2026/10/27/nord-kivu-reprise-combats-luola-colline-tchad/", st: "Congo Quotidien" }
   ],
   timeline: [
     { d: "1885–1960", era: "Orígenes", h: "Estado Libre del Congo y colonia belga", x: "" },
