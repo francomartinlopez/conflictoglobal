@@ -567,3 +567,12 @@ pre.tree { background: var(--surface); border: 1px solid var(--line); border-rad
 @media (max-width: 760px) {
   .navdrop-menu { position: fixed; left: 12px; right: 12px; top: calc(var(--topH, 110px) + 4px); min-width: 0; max-height: 70vh; overflow-y: auto; z-index: 40; }
 }
+
+.geo-org { display: flex; flex-direction: column; gap: 2px; padding: 6px 8px; border-radius: var(--r); cursor: pointer; border: 1px solid transparent; }
+.geo-org:hover { background: var(--surface-2); border-color: var(--line-2); }
+.geo-org b { display: flex; align-items: center; gap: 6px; font-size: 14px; }
+.geo-org b small { font: 400 11px var(--f-mono); color: var(--faint); }
+.geo-org span { font-size: 12px; color: var(--faint); padding-left: 18px; }
+.geo-org.dim { opacity: .4; }
+.geo-mem { display: flex; flex-wrap: wrap; gap: 5px; margin: 0 0 10px; }
+.geo-mem span { font-size: 11.5px; padding: 2px 8px; border: 1px solid; border-radius: 99px; color: #ddd6cf; }
