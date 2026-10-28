@@ -881,10 +881,20 @@
   function renderGeo() {
     const G = window.GEO, BL = G.blocs, SUB = G.subs;
     const OR = G.orgs || {};
-    const MODES = [["bloques", "Bloques geopolíticos"], ["o_mil", "Alianzas militares"], ["o_eco", "Bloques económicos"], ["o_pol", "Bloques políticos"], ["mil", "Riesgo militar"], ["int", "Riesgo interno"], ["eco", "Riesgo económico"]];
+    const MODES = [["bloques", "Bloques geopolíticos"], ["o_mil", "Alianzas militares"], ["o_eco", "Bloques económicos"], ["o_pol", "Bloques políticos"], ["mil", "Riesgo militar"], ["int", "Riesgo interno"], ["eco", "Riesgo económico"]].concat(G.mx ? [["sol", "Soldados"], ["gasto", "Gasto en defensa"], ["nuk", "Armas nucleares"]] : []);
+    const MX = G.mx || {}, TR = MX.tr || {};
+    if (G.mx) {
+      const nf = v => Math.round(v).toLocaleString("es-AR");
+      MX.sol.fmt = nf; MX.nuk.fmt = nf;
+      MX.gasto.fmt = v => v >= 1000 ? `US$ ${(v / 1000).toLocaleString("es-AR", { maximumFractionDigits: v < 10000 ? 1 : 0 })} mil M` : `US$ ${nf(v)} M`;
+      MX.sol.det = n => { const x = MX.sol.v[n] || {}; return [x.r ? "reservistas " + nf(x.r) : "", x.p ? "paramilitares " + nf(x.p) : ""].filter(Boolean).join(" · "); };
+      MX.gasto.det = n => { const x = MX.gasto.v[n] || {}; return x.p != null ? String(x.p).replace(".", ",") + "% del PIB" : ""; };
+      MX.nuk.det = n => { const x = (MX.nuk.tx || {})[n]; return x ? x.l : ""; };
+    }
+    let nsub = "ojivas";
     const MODE_TXT = {
       bloques: "Dos grandes bloques, Occidente y Eurasia, con sus divisiones internas, y los países no alineados. La línea gruesa marca el borde de cada bloque.",
-      mil: G.idx.mil.desc, int: G.idx.int.desc, eco: G.idx.eco.desc, o_mil: (OR.mil || {}).desc, o_eco: (OR.eco || {}).desc, o_pol: (OR.pol || {}).desc };
+      mil: G.idx.mil.desc, int: G.idx.int.desc, eco: G.idx.eco.desc, o_mil: (OR.mil || {}).desc, o_eco: (OR.eco || {}).desc, o_pol: (OR.pol || {}).desc, sol: (MX.sol || {}).desc, gasto: (MX.gasto || {}).desc, nuk: (MX.nuk || {}).desc };
     const memb = {}; for (const cat in OR) for (const [id, nm, col, ms] of OR[cat].o) for (const m of ms) (memb[m] = memb[m] || []).push([cat, id, nm, col]);
     let org = null;
     app.innerHTML = `
@@ -920,24 +930,40 @@
     const ramp = v => { if (v == null) return "#2a2c2f"; const x = Math.max(0, Math.min(1, v / 100)) * (STOPS.length - 1), i = Math.min(STOPS.length - 2, Math.floor(x)), f = x - i; return "rgb(" + STOPS[i].map((c, k) => Math.round(c + (STOPS[i + 1][k] - c) * f)).join(",") + ")"; };
     const fillOf = n => {
       if (mode === "bloques") return SUB[subOf(n)][2];
+      if (mode === "sol" || mode === "gasto") return logc(mxVal(mode, n), MX[mode].min, MX[mode].max);
+      if (mode === "nuk") return nukFill(n);
       if (mode.startsWith("o_")) { const cat = mode.slice(2), ms = (memb[n] || []).filter(x => x[0] === cat && (!org || x[1] === org)); return ms.length ? ms[0][3] : "#26282b"; }
       return ramp((G.idx[mode].v[n] || {}).s);
     };
     const orgMesh = () => { if (!mode.startsWith("o_")) return null; const cat = mode.slice(2); const ids = org ? [org] : OR[cat].o.map(o => o[0]); return ids.map(id => { const o = OR[cat].o.find(x => x[0] === id); const set = new Set(o[3]); return [o[2], topojson.merge(window.WORLD, geoms.filter(g => set.has(g.properties.name)))]; }); };
     let oMesh = null;
+    const mxVal = (k, n) => { const v = (MX[k] || {}).v && MX[k].v[n]; return v == null ? null : (typeof v === "object" ? v.a : v); };
+    const LS = [[38, 42, 48], [64, 74, 92], [120, 96, 70], [201, 120, 58], [217, 70, 55], [255, 140, 120]];
+    const logc = (v, lo, hi) => { if (v == null || v <= 0) return "#26282b"; const x = Math.max(0, Math.min(1, (Math.log10(v) - Math.log10(lo)) / (Math.log10(hi) - Math.log10(lo)))) * (LS.length - 1), i = Math.min(LS.length - 2, Math.floor(x)), f = x - i; return "rgb(" + LS[i].map((c, k) => Math.round(c + (LS[i + 1][k] - c) * f)).join(",") + ")"; };
+    const NSUB = { ojivas: "Ojivas", npt: "TNP", ctbt: "Prohibición de ensayos (CTBT)", tpnw: "Prohibición de armas nucleares (TPAN)", iaea: "Inspecciones del OIEA" };
+    const NCAT = {
+      npt: { parte: ["Parte del TNP", "#4f8f6a"], fuera: ["Nunca lo firmó", "#d0574a"], retirado: ["Se retiró", "#8f1f1f"] },
+      ctbt: { ratifico: ["Firmó y ratificó", "#4f8f6a"], firmo: ["Firmó, sin ratificar", "#c9a34a"], desratifico: ["Retiró la ratificación", "#8f1f1f"], no: ["No firmó", "#d0574a"] },
+      tpnw: { parte: ["Estado parte", "#4f8f6a"], firmo: ["Firmó, sin ratificar", "#c9a34a"], no: ["No adhirió", "#3a3d42"] },
+      iaea: { ap: ["Salvaguardias amplias + Protocolo Adicional", "#4f8f6a"], csa: ["Salvaguardias amplias, sin Protocolo Adicional", "#9fb36a"], voa: ["Acuerdo voluntario (potencias nucleares del TNP)", "#c9a34a"], item: ["Sólo instalaciones puntuales", "#e0814d"], susp: ["Cooperación suspendida", "#d0574a"], none: ["Sin inspecciones", "#8f1f1f"] } };
+    const nukFill = n => {
+      if (nsub === "ojivas") { const v = mxVal("nuk", n); return v ? logc(v, 30, 6000) : "#26282b"; }
+      const s = (TR[n] || {})[nsub]; return s && NCAT[nsub][s] ? NCAT[nsub][s][1] : "#26282b";
+    };
     svg.innerHTML = `<defs><radialGradient id="gSea" cx="45%" cy="40%"><stop offset="0" stop-color="#1c2328"/><stop offset="1" stop-color="#101315"/></radialGradient></defs>
       <path id="gSphere" fill="url(#gSea)" stroke="#2a3036"/><path id="gGrat" fill="none" stroke="#1f272c" stroke-width=".6"/>
       <g id="gCountries">${feats.map((f, i) => `<path data-i="${i}" stroke="#121416" stroke-width=".5"/>`).join("")}</g>
       <g id="gSub">${subMesh.map(([k]) => `<path data-k="${k}" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="1" stroke-dasharray="3 2"/>`).join("")}</g>
       <g id="gBloc">${blocMesh.map(([k]) => `<path data-k="${k}" fill="none" stroke="${BL[k][1]}" stroke-width="3.2" stroke-linejoin="round"/>`).join("")}</g>
-      <g id="gOrgL"></g><path id="gSel" fill="none" stroke="#fff" stroke-width="2"/>`;
+      <g id="gOrgL"></g><g id="gNukL"></g><path id="gSel" fill="none" stroke="#fff" stroke-width="2"/>`;
     const cps = [...svg.querySelectorAll("#gCountries path")];
     const recolor = () => cps.forEach((p, i) => p.setAttribute("fill", fillOf(feats[i].properties.name)));
     const redraw = () => {
       svg.querySelector("#gSphere").setAttribute("d", path({ type: "Sphere" }));
       svg.querySelector("#gGrat").setAttribute("d", path(grat));
       cps.forEach((p, i) => p.setAttribute("d", path(feats[i]) || ""));
-      const lines = document.getElementById("gLines").checked && !mode.startsWith("o_");
+      const lines = document.getElementById("gLines").checked && mode === "bloques";
+      svg.querySelector("#gNukL").innerHTML = mode === "nuk" && nsub === "ojivas" ? Object.entries(MX.nuk.tx || {}).map(([n, x]) => { const f = feats.find(q => q.properties.name === n); return f ? `<path d="${path(f) || ""}" fill="none" stroke="${x.c}" stroke-width="2.6" ${x.d ? `stroke-dasharray="${x.d}"` : ""}/>` : ""; }).join("") : "";
       svg.querySelector("#gOrgL").innerHTML = oMesh ? oMesh.map(([c, m]) => `<path d="${path(m) || ""}" fill="none" stroke="${c}" stroke-width="2.2" stroke-linejoin="round"/>`).join("") : "";
       svg.querySelectorAll("#gSub path").forEach((p, j) => p.setAttribute("d", lines ? path(subMesh[j][1]) || "" : ""));
       svg.querySelectorAll("#gBloc path").forEach((p, j) => p.setAttribute("d", lines ? path(blocMesh[j][1]) || "" : ""));
@@ -950,6 +976,16 @@
       if (mode === "bloques") {
         for (const b of ["occ", "eur", "na"]) h += `<div class="geo-lg-b"><b><i class="sw" style="background:${BL[b][1]}"></i>${BL[b][0]}</b>${Object.entries(SUB).filter(([, v]) => v[0] === b).map(([, v]) => `<span><i class="sw" style="background:${v[2]}"></i>${v[1]}</span>`).join("")}</div>`;
         h += `<p class="fnote">${esc(G.blocNote)}</p>`;
+      } else if (mode === "sol" || mode === "gasto") {
+        const M = MX[mode], r2 = v => { const e = Math.pow(10, Math.floor(Math.log10(v)) - 1); return Math.round(v / e) * e; }, st = [M.min, r2(Math.sqrt(M.min * M.max)), M.max];
+        h += `<div class="geo-ramp"><span style="background:linear-gradient(90deg,${[0, .2, .4, .6, .8, 1].map(f => logc(Math.pow(10, Math.log10(M.min) + f * (Math.log10(M.max) - Math.log10(M.min))), M.min, M.max)).join(",")})"></span><div>${st.map(v => `<em>${M.fmt(v)}</em>`).join("")}</div></div><p class="fnote">Escala logarítmica. ${M.src}</p>`;
+      } else if (mode === "nuk") {
+        h += `<div class="chips geo-nsub">${Object.entries(NSUB).map(([k, l]) => `<button type="button" class="chip${k === nsub ? " on" : ""}" data-nsub="${k}">${l}</button>`).join("")}</div>`;
+        if (nsub === "ojivas") {
+          h += `<div class="geo-ramp"><span style="background:linear-gradient(90deg,${[30, 100, 300, 1000, 3000, 6000].map(v => logc(v, 30, 6000)).join(",")})"></span><div><em>30</em><em>~400</em><em>6.000</em></div></div>`;
+          h += `<div class="geo-lg-b"><b>Borde: transparencia</b>${(MX.nuk.txLeg || []).map(([c, d, l]) => `<span><svg width="26" height="10"><line x1="1" y1="5" x2="25" y2="5" stroke="${c}" stroke-width="3" ${d ? `stroke-dasharray="${d}"` : ""}/></svg>${esc(l)}</span>`).join("")}</div>`;
+        } else h += `<div class="geo-lg-b">${Object.values(NCAT[nsub]).map(([l, c]) => `<span><i class="sw" style="background:${c}"></i>${esc(l)}</span>`).join("")}</div>`;
+        h += `<p class="fnote">${MX.nuk.src} ${MX.trSrc || ""}</p>`;
       } else if (mode.startsWith("o_")) {
         const cat = mode.slice(2);
         h += OR[cat].o.map(([id, nm, col, ms, nt]) => `<div class="geo-org${org && org !== id ? " dim" : ""}" data-org="${id}"><b><i class="sw" style="background:${col}"></i>${esc(nm)} <small>${ms.length}</small></b>${nt ? `<span>${esc(nt)}</span>` : ""}</div>`).join("");
@@ -958,6 +994,12 @@
         h += `<div class="geo-ramp"><span style="background:linear-gradient(90deg,${[0, 25, 50, 75, 100].map(ramp).join(",")})"></span><div><em>0 · bajo</em><em>100 · extremo</em></div></div><p class="fnote">${G.idx[mode].src}</p>`;
       }
       document.getElementById("gLeg").innerHTML = h;
+      if (["sol", "gasto", "nuk"].includes(mode)) {
+        const M = MX[mode], rr = Object.keys(M.v).map(n => [n, mxVal(mode, n)]).filter(x => x[1]).sort((a, b) => b[1] - a[1]).slice(0, 25);
+        document.getElementById("gRankT").textContent = M.rankT;
+        document.getElementById("gRank").innerHTML = `<table class="gp-t"><thead><tr><th>#</th><th>País</th><th>Bloque</th><th>${M.unit}</th><th></th><th>Detalle</th></tr></thead><tbody>${rr.map(([n, v], i) => `<tr data-n="${esc(n)}"><td class="num">${i + 1}</td><td>${esc(G.es[n] || n)}</td><td>${esc(SUB[subOf(n)][1])}</td><td class="num">${M.fmt(v)}</td><td class="barc"><i style="width:${Math.max(2, v / rr[0][1] * 100)}%;background:${mode === "nuk" ? logc(v, 30, 6000) : logc(v, M.min, M.max)}"></i></td><td class="rk-s">${esc(M.det ? M.det(n) : "")}</td></tr>`).join("")}</tbody></table>`;
+        return;
+      }
       const rk = G.idx[mode] ? mode : "mil";
       const rows = Object.entries(G.idx[rk].v).filter(([, v]) => v.s != null).sort((a, b) => b[1].s - a[1].s).slice(0, 25);
       const lab = rk;
@@ -973,11 +1015,24 @@
       if (hi) txt += `Su mayor riesgo es el ${G.idx[hi[0]].name.replace("Riesgo ", "")} (${lv(hi[1])}, ${hi[1]}).`;
       return `<p class="geo-note">${esc(txt)}</p>${ms.length ? `<p class="geo-mem">${ms.map(x => `<span style="border-color:${x[3]}">${esc(x[2])}</span>`).join("")}</p>` : ""}`;
     };
+    const mxInfo = n => {
+      if (!G.mx) return "";
+      const s = mxVal("sol", n), g = (MX.gasto.v || {})[n], k = (MX.nuk.v || {})[n], tr = TR[n] || {};
+      const it = [];
+      if (s) it.push(["Soldados en actividad", MX.sol.fmt(s) + ((MX.sol.v[n] || {}).r ? ` · reservistas ${MX.sol.fmt(MX.sol.v[n].r)}` : "")]);
+      if (g) it.push(["Gasto en defensa", MX.gasto.fmt(g.a) + (g.p != null ? ` · ${String(g.p).replace(".", ",")}% del PIB` : "")]);
+      if (k) it.push(["Ojivas nucleares", `${MX.nuk.fmt(k.a)}${k.dep ? ` (${MX.nuk.fmt(k.dep)} desplegadas)` : ""}`]);
+      const badge = (cat, lab) => tr[cat] && NCAT[cat][tr[cat]] ? `<span style="border-color:${NCAT[cat][tr[cat]][1]}"><b>${lab}</b> ${esc(NCAT[cat][tr[cat]][0])}</span>` : "";
+      const tx = (MX.nuk.tx || {})[n];
+      return `<div class="geo-mx">${it.map(([a, b]) => `<div><span>${a}</span><b>${esc(b)}</b></div>`).join("")}</div>
+        <div class="geo-tr">${badge("npt", "TNP")}${badge("ctbt", "CTBT")}${badge("tpnw", "TPAN")}${badge("iaea", "OIEA")}${tr.zona ? `<span style="border-color:#4f8f6a"><b>Zona libre</b> ${esc(tr.zona)}</span>` : ""}</div>
+        ${tx ? `<p class="geo-note">${esc(tx.l)}</p>` : ""}${tr.nota ? `<p class="geo-note">${esc(tr.nota)}</p>` : ""}`;
+    };
     const showInfo = i => {
       sel = i; const n = feats[i].properties.name, c = info(n), sb = SUB[subOf(n)];
       const row = k => { const v = G.idx[k].v[n] || {}; return `<div class="geo-ix"><span>${G.idx[k].name}</span><b style="color:${ramp(v.s)}">${v.s != null ? v.s : "s/d"}</b><div class="geo-bar-i"><i style="width:${v.s || 0}%;background:${ramp(v.s)}"></i></div><small>${esc(v.why || "Sin dato")}</small></div>`; };
       const conf = CONFLICTS.filter(cf => cf.roles.some(r => r.c === n && (!r.to || r.to >= META.updated))).map(cf => `<a href="#c-${cf.id}">${esc(cf.name)}</a>`);
-      document.getElementById("gInfo").innerHTML = `<h3>${esc(G.es[n] || n)}</h3><p class="geo-bl"><i class="sw" style="background:${sb[2]}"></i>${esc(BL[sb[0]][0])}${sb[1] !== BL[sb[0]][0] ? " · " + esc(sb[1]) : ""}</p>${note(n, c)}${row("mil")}${row("int")}${row("eco")}${conf.length ? `<p class="geo-conf">En el monitor: ${conf.join(", ")}</p>` : ""}`;
+      document.getElementById("gInfo").innerHTML = `<h3>${esc(G.es[n] || n)}</h3><p class="geo-bl"><i class="sw" style="background:${sb[2]}"></i>${esc(BL[sb[0]][0])}${sb[1] !== BL[sb[0]][0] ? " · " + esc(sb[1]) : ""}</p>${note(n, c)}${row("mil")}${row("int")}${row("eco")}${mxInfo(n)}${conf.length ? `<p class="geo-conf">En el monitor: ${conf.join(", ")}</p>` : ""}`;
       redraw();
     };
     // interacción
@@ -991,7 +1046,7 @@
       if (down) { const p = pt(e), k = 75 / proj.scale() * 2.2; const dx = p[0] - down.p[0], dy = p[1] - down.p[1]; if (Math.abs(dx) + Math.abs(dy) > 3) moved = true; proj.rotate([down.r[0] + dx * k, Math.max(-80, Math.min(80, down.r[1] - dy * k)), down.r[2]]); redraw(); hideTip(); return; }
       if (e.pointerType !== "mouse") return;
       const hi = hit(e); if (hi < 0) return hideTip();
-      const n = feats[hi].properties.name, v = mode === "bloques" ? SUB[subOf(n)][1] : mode.startsWith("o_") ? ((memb[n] || []).filter(x => x[0] === mode.slice(2)).map(x => x[2]).join(", ") || "Ninguno") : `${G.idx[mode].name}: ${(G.idx[mode].v[n] || {}).s ?? "s/d"}`;
+      const n = feats[hi].properties.name, v = mode === "bloques" ? SUB[subOf(n)][1] : mode.startsWith("o_") ? ((memb[n] || []).filter(x => x[0] === mode.slice(2)).map(x => x[2]).join(", ") || "Ninguno") : mode === "nuk" ? (nsub === "ojivas" ? (mxVal("nuk", n) ? MX.nuk.fmt(mxVal("nuk", n)) + " ojivas" : "Sin armas nucleares") : ((NCAT[nsub][(TR[n] || {})[nsub]] || ["Sin dato"])[0])) : (mode === "sol" || mode === "gasto") ? (mxVal(mode, n) ? MX[mode].fmt(mxVal(mode, n)) : "Sin dato") : `${G.idx[mode].name}: ${(G.idx[mode].v[n] || {}).s ?? "s/d"}`;
       showTip(e, `<b>${esc(G.es[n] || n)}</b><span class="d">${esc(v)}</span>`);
     });
     const hit = e => { const ll = proj.invert(pt(e)); if (!ll || isNaN(ll[0])) return -1; const c = proj.rotate(); if (d3.geoDistance(ll, [-c[0], -c[1]]) > Math.PI / 2) return -1; let best = -1, ba = Infinity; feats.forEach((f, i) => { if (d3.geoContains(f, ll)) { const a = d3.geoArea(f); if (a < ba) { ba = a; best = i; } } }); return best; };
@@ -1003,9 +1058,9 @@
     document.getElementById("gReset").onclick = () => { proj.scale(370).rotate([-20, -25]); redraw(); };
     document.getElementById("gLines").onchange = redraw;
     document.getElementById("gSpin").onchange = e => { spin = e.target.checked; };
-    const setMode = m => { mode = m; org = null; oMesh = orgMesh(); app.querySelectorAll("[data-mode]").forEach(x => x.classList.toggle("on", x.dataset.mode === m)); recolor(); legend(); redraw(); if (sel != null) showInfo(sel); };
+    const setMode = m => { mode = m; org = null; nsub = "ojivas"; oMesh = orgMesh(); app.querySelectorAll("[data-mode]").forEach(x => x.classList.toggle("on", x.dataset.mode === m)); recolor(); legend(); redraw(); if (sel != null) showInfo(sel); };
     app.querySelectorAll("[data-mode]").forEach(b => b.onclick = () => setMode(b.dataset.mode));
-    document.getElementById("gLeg").addEventListener("click", e => { const d = e.target.closest("[data-org]"); if (!d) return; org = org === d.dataset.org ? null : d.dataset.org; oMesh = orgMesh(); recolor(); legend(); redraw(); });
+    document.getElementById("gLeg").addEventListener("click", e => { const ns = e.target.closest("[data-nsub]"); if (ns) { nsub = ns.dataset.nsub; recolor(); legend(); redraw(); return; } const d = e.target.closest("[data-org]"); if (!d) return; org = org === d.dataset.org ? null : d.dataset.org; oMesh = orgMesh(); recolor(); legend(); redraw(); });
     document.getElementById("gRank").addEventListener("click", e => { const tr = e.target.closest("tr[data-n]"); if (!tr) return; const i = feats.findIndex(f => f.properties.name === tr.dataset.n); if (i < 0) return; const c = d3.geoCentroid(feats[i]); spin = false; document.getElementById("gSpin").checked = false; proj.rotate([-c[0], -c[1]]); showInfo(i); svg.scrollIntoView({ block: "center", behavior: "smooth" }); });
     recolor(); legend(); redraw();
     activeMap = { destroy: () => { cancelAnimationFrame(raf); } };

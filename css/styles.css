@@ -576,3 +576,13 @@ pre.tree { background: var(--surface); border: 1px solid var(--line); border-rad
 .geo-org.dim { opacity: .4; }
 .geo-mem { display: flex; flex-wrap: wrap; gap: 5px; margin: 0 0 10px; }
 .geo-mem span { font-size: 11.5px; padding: 2px 8px; border: 1px solid; border-radius: 99px; color: #ddd6cf; }
+
+.geo-nsub { margin-bottom: 4px; }
+.geo-nsub .chip { font-size: 12px; padding: 4px 10px; }
+.geo-lg-b span svg { flex: none; }
+.geo-mx { display: grid; grid-template-columns: 1fr; gap: 6px; border-top: 1px solid var(--line); padding-top: 10px; margin-top: 4px; }
+.geo-mx div { display: flex; justify-content: space-between; gap: 10px; font-size: 13px; }
+.geo-mx span { color: var(--muted); } .geo-mx b { font-weight: 600; text-align: right; }
+.geo-tr { display: flex; flex-wrap: wrap; gap: 5px; margin: 10px 0 6px; }
+.geo-tr span { font-size: 11.5px; padding: 3px 8px; border: 1px solid; border-radius: 4px; color: #ddd6cf; }
+.geo-tr b { font-weight: 700; margin-right: 3px; }
