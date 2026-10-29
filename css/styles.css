@@ -87,6 +87,10 @@ button { font: inherit; color: inherit; }
 .alert h3 { font: 600 15px/1.3 var(--f-ui); }
 .alert p { margin: 0; color: #cfc4bf; font-size: 13.5px; line-height: 1.45; }
 .alert .go { font-size: 12.5px; color: var(--accent-ink); margin-top: auto; }
+.notes-head { margin-top: 18px; }
+.notes-head h2 { color: #a9c4dc; }
+.alert.note { --lv: #5d97c9; border-color: #2f3d4a; }
+.alert.note:hover { border-color: #4d6a85; }
 
 /* ---------- pills & meters ---------- */
 .pill { display: inline-flex; align-items: center; gap: 6px; padding: 3px 9px; border-radius: 99px; font: 600 11.5px/1.3 var(--f-ui); letter-spacing: .02em; border: 1px solid var(--line-2); color: var(--text); background: var(--surface-2); white-space: nowrap; }

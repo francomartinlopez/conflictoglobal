@@ -24,6 +24,20 @@ window.ALERTS = [
     text: "Una mina hirió a tres oficiales surcoreanos en la zona desmilitarizada el 21 de septiembre. Semanas después, Pyongyang lanzó varios misiles balísticos desde el área de la capital hacia el mar del Este." }
 ];
 
+/* Notas diplomáticas: hechos de política exterior que no son conflictos armados del monitor
+   pero tienen peso regional o para Argentina. Máximo 4, la más reciente primero.
+   Campos: date, tag, title, text, countries (nombres en español), u (fuente), st (medio). */
+window.NOTES = [
+  { date: "2026-10-28", tag: "Crisis diplomática", countries: ["Brasil", "Argentina", "EE.UU.", "Ecuador"],
+    title: "Flávio Bolsonaro sale de Brasil por Argentina y se proclama \"líder legítimo\" desde Miami",
+    text: "El candidato derrotado por Lula el 25-oct tenía prohibido salir del país y los pasaportes cancelados en una causa por lavado. Cruzó a Misiones con pasaporte italiano, voló desde Puerto Iguazú vía Guayaquil y llegó a Miami. Primero se presentó como \"presidente electo legítimo\" y después cambió la palabra por \"líder\". Migraciones primero negó y luego confirmó su ingreso a la Argentina; la oposición exige explicaciones al gobierno de Milei. EE.UU. anunció que le dará visa; Lula calificó la salida de \"vergonzosa\".",
+    u: "https://www.infobae.com/america/agencias/2026/10/28/el-papel-del-gobierno-de-milei-en-la-fuga-de-flavio-bolsonaro-a-traves-de-argentina/", st: "Infobae (EFE)" },
+  { date: "2026-10-28", tag: "Cumbre", countries: ["Rusia", "África"],
+    title: "Tercera cumbre Rusia–África en Moscú",
+    text: "Del 28 al 29 de octubre, con delegaciones de 48 países y 22 jefes de Estado según el Kremlin. Moscú busca afianzar su presencia en el continente, donde su Africa Corps sostiene a las juntas del Sahel.",
+    u: "https://interfax.com/newsroom/top-stories/119688/", st: "Interfax" }
+];
+
 window.CANDIDATES = [
   { id: "pakistan-afganistan", name: "Pakistán – Afganistán", level: 4, status: "Guerra fronteriza abierta",
     center: [69.5, 33.5],

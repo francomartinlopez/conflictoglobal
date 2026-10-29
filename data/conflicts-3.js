@@ -339,7 +339,8 @@ window.CONFLICTS.push({
    "h": "Mayor ataque de pandillas contra la GSF en Croix-des-Bouquets",
    "x": "Pandillas atacan con explosivos un blindado con cuatro técnicos salvadoreños, que quedan desaparecidos; helicópteros salvadoreños también reciben fuego."
   },
-  {"d":"2026-10-27", "lat":18.54, "lon":-72.34, "t":"terrestre", "h":"El Salvador envía unos 1.000 soldados a Haití", "x":"Llegaron en vuelos con apoyo de aviones C-130 de EE.UU., después de la emboscada del 18 de octubre en la que desaparecieron cuatro salvadoreños de la GSF. No se sabe quién los comandará ni por cuánto tiempo.", "u":"https://yahoo.com/news/articles/around-1-000-soldiers-el-172815445.html", "st":"Reuters"}
+  {"d":"2026-10-27", "lat":18.54, "lon":-72.34, "t":"terrestre", "h":"El Salvador envía unos 1.000 soldados a Haití", "x":"Llegaron en vuelos con apoyo de aviones C-130 de EE.UU., después de la emboscada del 18 de octubre en la que desaparecieron cuatro salvadoreños de la GSF. No se sabe quién los comandará ni por cuánto tiempo.", "u":"https://yahoo.com/news/articles/around-1-000-soldiers-el-172815445.html", "st":"Reuters"},
+  {"d": "2026-10-28", "lat": 18.5425, "lon": -72.3386, "t": "politico", "h": "Las elecciones pasan al 18 de julio de 2027", "x": "El Consejo Electoral Provisional fijó una nueva fecha para la primera vuelta presidencial y legislativa, que estaba prevista para el 13 de diciembre, por la falta de seguridad. Haití no vota desde 2016.", "u": "https://www.infobae.com/america/agencias/2026/10/29/haiti-aplaza-de-nuevo-las-elecciones-presidenciales-y-legislativas-al-18-de-julio-de-2027/", "st": "Infobae (EFE)"}
  ],
  "timeline": [
   {
@@ -441,4 +442,4 @@ window.CONFLICTS.push({
   }
  ]
 });
-window.ALERTS.push({ id: "haiti", level: 4, tag: "Escalada", date: "2026-10-18", title: "Haití: el mayor ataque de pandillas contra la fuerza internacional", text: "Pandillas atacaron con explosivos un blindado de la Fuerza de Supresión de Pandillas en Croix-des-Bouquets: cuatro técnicos salvadoreños desaparecidos. El Consejo Electoral postergó sin fecha las elecciones del 13 de diciembre." });
+window.ALERTS.push({ id: "haiti", level: 4, tag: "Escalada", date: "2026-10-28", title: "Haití: El Salvador manda unos 1.000 soldados y las elecciones pasan a julio de 2027", text: "Tras la emboscada del 18-oct en Croix-des-Bouquets, en la que desaparecieron cuatro salvadoreños de la Fuerza de Supresión de Pandillas, Bukele envió cerca de 1.000 militares con apoyo aéreo de EE.UU. El Consejo Electoral fijó la primera vuelta para el 18 de julio de 2027." });

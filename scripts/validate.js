@@ -23,6 +23,15 @@ for (const a of W.ALERTS || []) {
   if (!(a.level >= 1 && a.level <= 5)) errs.push(`Alerta ${a.id}: nivel inválido`);
   if (!okDate(a.date)) errs.push(`Alerta ${a.id}: fecha inválida`);
 }
+const N = W.NOTES || [];
+if (N.length > 4) errs.push(`Hay ${N.length} notas diplomáticas (máximo 4)`);
+N.forEach((n, i) => {
+  const w = `Nota diplomática #${i} (${n.title})`;
+  if (!okDate(n.date)) errs.push(`${w}: fecha inválida`);
+  else if (n.date > M.updated) errs.push(`${w}: fecha posterior a la de corte`);
+  if (!n.title || !n.text || !n.tag) errs.push(`${w}: faltan título, texto o etiqueta`);
+  if (!n.u || !/^https?:\/\//.test(n.u) || !n.st) errs.push(`${w}: falta la fuente (u y st)`);
+});
 for (const c of C) {
   if (!(c.level >= 1 && c.level <= 5)) errs.push(`${c.id}: nivel inválido`);
   const seen = new Set();

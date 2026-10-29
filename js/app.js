@@ -69,7 +69,25 @@
             <p>${esc(a.text)}</p>
             <span class="go btn-go">Ver el conflicto <b>→</b></span>
           </span>
-        </a>`).join("")}</div></div>`;
+        </a>`).join("")}</div>${renderNotes()}</div>`;
+  }
+
+  // Notas diplomáticas: hechos de política exterior fuera de los conflictos del monitor.
+  function renderNotes() {
+    const notes = window.NOTES || [];
+    if (!notes.length) return "";
+    return `
+      <div class="alerts-head notes-head"><h2>Notas diplomáticas · ${notes.length}</h2><span>Política exterior con peso regional, fuera de los conflictos armados del monitor</span></div>
+      <div class="alert-grid">${notes.map(n => `
+        <a class="alert note" href="${esc(n.u)}" target="_blank" rel="noopener">
+          <span class="stripe"></span>
+          <span class="body">
+            <span class="meta"><span>${esc(n.tag)}</span><span>· ${fmt(n.date)}</span>${(n.countries || []).length ? `<span>· ${esc(n.countries.join(" · "))}</span>` : ""}</span>
+            <h3>${esc(n.title)}</h3>
+            <p>${esc(n.text)}</p>
+            <span class="go btn-go">${esc(n.st || "Fuente")} <b>↗</b></span>
+          </span>
+        </a>`).join("")}</div>`;
   }
 
   /* ---------- router ---------- */
