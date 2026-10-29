@@ -7,18 +7,18 @@
    Nivel de evidencia (lecturas alternativas): doc = documentado · ind = indicios sólidos · hip = hipótesis */
 
 window.MONITOR_META = {
-  updated: "2026-10-28",
-  updatedLabel: "28 oct 2026 · 06:00 ART",
+  updated: "2026-10-29",
+  updatedLabel: "29 oct 2026 · 06:00 ART",
   edition: "Maqueta v0.5"
 };
 
 window.ALERTS = [
-  { id: "medio-oriente", level: 5, tag: "Escalada", date: "2026-10-27",
-    title: "Medio Oriente: Teherán sin tregua, misiles sobre Riad y minas en Ormuz",
-    text: "La ronda de Teherán con Arabia Saudita, Turquía y Pakistán terminó el 26-oct sin alto el fuego ni comunicado. Horas después los hutíes volvieron a disparar misiles sobre Riad, y un petrolero se incendió tras chocar con minas al este de Ormuz, que Irán mantiene cerrado a buques sin su permiso. Washington evalúa reanudar los ataques a Irán después de las elecciones de medio término del 3 de noviembre; Israel votó el 27-oct sin mayoría clara en boca de urna." },
+  { id: "medio-oriente", level: 5, tag: "Escalada", date: "2026-10-28",
+    title: "Medio Oriente: misiles hutíes sobre Adén y un borrador catarí sobre la mesa",
+    text: "Tras la ronda de Teherán sin tregua, los hutíes atacaron el aeropuerto de Adén y siguen disparando contra Arabia Saudita; Ormuz continúa cerrado. Catar le presentó a Irán un plan de siete días con garantes, mientras EE.UU. advierte al Golfo que podría retomar los ataques después del 3 de noviembre. En Israel, el escrutinio deja a Netanyahu sin mayoría." },
   { id: "rusia-ucrania", level: 4, tag: "Ventana diplomática", date: "2026-10-27",
     title: "Rusia–Ucrania: tregua local en Oleshky y negociación trilateral en noviembre",
-    text: "Desde hoy rige un alto el fuego humanitario en Oleshky (Jersón). Rusia aceptó \"en principio\" retomar las conversaciones con Ucrania y EE.UU. después del 10 de noviembre, posiblemente en Abu Dabi. La disputa de fondo sigue siendo el Donbás." },
+    text: "Desde el 27 de octubre rige un alto el fuego humanitario en Oleshky (Jersón), aunque Rusia volvió a atacar Kiev esa misma noche. Rusia aceptó \"en principio\" retomar las conversaciones con Ucrania y EE.UU. después del 10 de noviembre, posiblemente en Abu Dabi. La disputa de fondo sigue siendo el Donbás." },
   { id: "corea", level: 3, tag: "Tensión fronteriza", date: "2026-10-12",
     title: "Península de Corea: incidente en la DMZ y nueva salva de misiles",
     text: "Una mina hirió a tres oficiales surcoreanos en la zona desmilitarizada el 21 de septiembre. Semanas después, Pyongyang lanzó varios misiles balísticos desde el área de la capital hacia el mar del Este." }
@@ -60,8 +60,8 @@ window.CONFLICTS = [
     B: { name: "Irán y el \"Eje de la Resistencia\"", desc: "Irán y sus aliados armados: Hezbolá (Líbano), Hamás y la Yihad Islámica (Gaza), los hutíes (Yemen) y milicias chiíes iraquíes." }
   },
   keyFacts: [
-    { k: "Día de guerra con Irán", v: "243", n: "desde el 28-feb-2026" },
-    { k: "Brent (26-oct)", v: "US$ 115,81", n: "Ormuz bajo control iraní" },
+    { k: "Día de guerra con Irán", v: "244", n: "desde el 28-feb-2026" },
+    { k: "Brent (28-oct)", v: "US$ 114,87", n: "Ormuz bajo control iraní (The National)" },
     { k: "Muertos en Gaza", v: "≥ 74.540", n: "Min. de Salud de Gaza, 24-oct-2026" },
     { k: "Desplazados en Líbano", v: "> 1 millón", n: "guerra desde el 2-mar-2026" }
   ],
@@ -142,7 +142,10 @@ window.CONFLICTS = [
     { d: "2026-10-26", lat: 35.70, lon: 51.40, t: "diplomacia", h: "Saudíes, turcos y pakistaníes en Teherán", x: "Reunión con Pezeshkian para evitar la reanudación de la guerra; Irán fija siete condiciones para negociar." },
     { d: "2026-10-27", lat: 24.71, lon: 46.68, t: "aereo", h: "Nueva salva hutí sobre Riad", x: "Horas después de que la ronda de Teherán terminara sin tregua, Arabia Saudita informó la intercepción de misiles balísticos sobre la capital y sobre la región oriental. Los hutíes reivindicaron objetivos en Riad, Najrán y Ras Tanura.", u: "https://www.wsbtv.com/news/world/houthis-say-2-dead/5ZXMA66CIYYI5KENJ7M4FH5FZY/", st: "AP" },
     { d: "2026-10-27", lat: 26.30, lon: 56.90, t: "naval", h: "Petrolero en llamas tras chocar con minas al este de Ormuz", x: "Según el ejército iraní, el buque había apagado su sistema de rastreo y entró en una zona restringida; no se informaron víctimas. Teherán insiste en que el estrecho sigue cerrado a buques sin su autorización.", u: "https://www.aa.com.tr/en/middle-east/iran-says-oil-tanker-catches-fire-after-hitting-naval-mine-east-of-strait-of-hormuz/4102560", st: "Anadolu" },
-    { d: "2026-10-27", lat: 31.77, lon: 35.21, t: "politico", h: "Elecciones en Israel: ningún bloque llega a 61 bancas", x: "Las encuestas de boca de urna dan al Likud como primera fuerza pero sin mayoría para Netanyahu, con el bloque de Eisenkot cerca o por delante según el canal. Los resultados oficiales se esperan para el 4 de noviembre.", u: "https://www.israelhayom.com/2026/10/27/israel-election-2026-exit-polls-full-results/", st: "Israel Hayom" }
+    { d: "2026-10-27", lat: 31.77, lon: 35.21, t: "politico", h: "Elecciones en Israel: ningún bloque llega a 61 bancas", x: "Las encuestas de boca de urna dan al Likud como primera fuerza pero sin mayoría para Netanyahu, con el bloque de Eisenkot cerca o por delante según el canal. Los resultados oficiales se esperan para el 4 de noviembre.", u: "https://www.israelhayom.com/2026/10/27/israel-election-2026-exit-polls-full-results/", st: "Israel Hayom" },
+    { d: "2026-10-28", lat: 12.83, lon: 45.03, t: "aereo", h: "Misiles hutíes contra el aeropuerto de Adén", x: "Después de pedir la evacuación, los hutíes atacaron el aeropuerto de la sede provisional del gobierno yemení y los vuelos se suspendieron; una fuente humanitaria dijo que no hubo heridos. La TV hutí atribuyó a bombardeos saudíes 14 muertos en Al Jawf (dato de parte, sin verificar).", u: "https://theprint.in/world/houthis-strike-yemens-aden-airport-after-evacuation-warning/3084304/", st: "Reuters (vía ThePrint)" },
+    { d: "2026-10-28", lat: 25.29, lon: 51.53, t: "diplomacia", h: "Catar acerca a Irán un borrador para cerrar la guerra", x: "Según Reuters, el plan fija siete días de gestos recíprocos con países garantes y Teherán debería contestar antes del fin de semana; Irán dijo que valora cualquier esfuerzo negociador. En paralelo, el WSJ informó que Washington alertó a países del Golfo sobre una posible nueva campaña después de las legislativas del 3 de noviembre.", u: "https://www.thenationalnews.com/news/mena/2026/10/28/iran-welcomes-negotiations-after-reported-qatari-mediated-draft-deal/", st: "The National" },
+    { d: "2026-10-28", lat: 31.77, lon: 35.21, t: "politico", h: "Escrutinio en Israel: 53 bancas para Netanyahu, 48 para Eisenkot", x: "Con más del 85% de los votos contados ningún bloque llega a 61; los partidos árabes suman 19 bancas, su mejor resultado. Restan los sobres dobles, entre ellos el voto militar, así que el reparto todavía puede moverse.", u: "https://www.ynetnews.com/article/hjnatbkaml", st: "Ynet" }
   ],
   timeline: [
     { d: "1916", era: "Orígenes", h: "Acuerdo Sykes–Picot", x: "Francia y Gran Bretaña se reparten las provincias árabes del Imperio otomano." },
@@ -319,7 +322,9 @@ window.CONFLICTS = [
     { d: "2026-08-19", lat: 44.87, lon: 13.85, t: "politico", h: "Croacia detiene a Volodímir Z. (Nord Stream)", x: "Buzo ucraniano que Polonia se había negado a extraditar a Alemania." },
     { d: "2026-10-21", lat: 59.94, lon: 30.31, t: "diplomacia", h: "Witkoff con Putin en San Petersburgo", x: "Rusia acepta \"en principio\" retomar la negociación después del 10-nov." },
     { d: "2026-10-27", lat: 46.62, lon: 32.72, t: "diplomacia", h: "Alto el fuego humanitario en Oleshky", x: "Primera tregua local; corredores para ayuda y evacuación." },
-    { d: "2026-10-27", lat: 50.45, lon: 30.52, t: "aereo", h: "Ataque con misiles balísticos sobre Kiev mientras rige la tregua local", x: "Dos oleadas alcanzaron el puente del Sur sobre el Dniéper, estaciones de metro y una residencia universitaria. La evacuación de Oleshky se postergó porque hay que desminar la ruta de acceso.", u: "https://kyivindependent.com/local-ceasefire-in-besieged-oleshky-begins-ukrainian-russian-officials-say/", st: "The Kyiv Independent" }
+    { d: "2026-10-27", lat: 50.45, lon: 30.52, t: "aereo", h: "Ataque con misiles balísticos sobre Kiev mientras rige la tregua local", x: "Dos oleadas alcanzaron el puente del Sur sobre el Dniéper, estaciones de metro y una residencia universitaria. La evacuación de Oleshky se postergó porque hay que desminar la ruta de acceso.", u: "https://kyivindependent.com/local-ceasefire-in-besieged-oleshky-begins-ukrainian-russian-officials-say/", st: "The Kyiv Independent" },
+    { d: "2026-10-27", lat: 0, lon: 0, nomap: true, t: "diplomacia", h: "Stubb y Støre hablan con Putin", x: "Los líderes de Finlandia y Noruega pidieron bajar los ataques contra la red energética ucraniana y repasaron la preparación de la ronda trilateral de noviembre; después le informaron a Zelensky.", u: "https://www.forbes.com/sites/katyasoldak/2026/10/28/tuesday-october-28-russias-war-on-ukraine-news-and-information-from-ukraine/", st: "Forbes" },
+    { d: "2026-10-28", lat: 50.45, lon: 30.52, t: "politico", h: "Zelensky: tres días sin atacar refinerías, sin respuesta rusa", x: "El presidente contó que Ucrania suspendió los golpes a refinerías durante las primeras 72 horas de la tregua energética anunciada por Trump, mientras Rusia siguió atacando su red, y que ya retomó las represalias.", u: "https://kyivindependent.com/ukraine-paused-attacks-on-oil-refineries-for-3-days-as-russia-continued-strikes-on-energy-infrastructure-zelensky-says/", st: "Kyiv Independent" }
   ],
   timeline: [
     { d: "882–1240", era: "Raíces", h: "Rus de Kiev", x: "Estado medieval que tanto Rusia como Ucrania reclaman como origen." },
@@ -614,7 +619,8 @@ window.CONFLICTS = [
     { d: "2025-02-27", lat: 19.43, lon: -99.13, t: "politico", h: "México envía 29 narcos a EE.UU.", x: "Incluye a Rafael Caro Quintero." },
     { d: "2026-02-22", lat: 19.94, lon: -103.76, t: "terrestre", h: "Muere \"El Mencho\" en Tapalpa", x: "Herido en el enfrentamiento, muere durante el traslado aéreo." },
     { d: "2026-02-22", lat: 20.67, lon: -103.35, t: "atentado", h: "Ola de bloqueos e incendios del CJNG", x: "Guadalajara paralizada; disturbios en al menos 16 estados." },
-    { d: "2026-02-23", lat: 19.25, lon: -103.72, t: "atentado", h: "Violencia en Michoacán y Colima", x: "Cierre de escuelas en ocho estados; más de 50 muertos según el gobierno." }
+    { d: "2026-02-23", lat: 19.25, lon: -103.72, t: "atentado", h: "Violencia en Michoacán y Colima", x: "Cierre de escuelas en ocho estados; más de 50 muertos según el gobierno." },
+    { d: "2026-10-26", lat: 25.57, lon: -108.47, t: "terrestre", h: "La Marina abate a \"El Chuy\" González, del Cártel de Guasave", x: "Jesús González Peñuelas, señalado como número dos del grupo y con recompensa de la DEA, murió tras una persecución aérea y terrestre de varias horas en el norte de Sinaloa.", u: "https://www.infobae.com/mexico/2026/10/28/en-vivo-seguridad-narcotrafico-y-crimen-en-mexico-hoy-28-de-octubre-abaten-en-sinaloa-a-chuy-gonzalez-segundo-al-mando-del-cartel-de-guasave/", st: "Infobae" }
   ],
   timeline: [
     { d: "1980s", era: "Orígenes", h: "Cártel de Guadalajara", x: "Félix Gallardo y Caro Quintero; asesinato del agente de la DEA Kiki Camarena (1985)." },
@@ -698,7 +704,8 @@ window.CONFLICTS = [
     { d: "2026-05-19", lat: 8.3, lon: -73.0, t: "atentado", h: "Masacre en Norte de Santander", x: "Atribuida por el gobierno al ELN; al día siguiente el ELN anuncia cese al fuego electoral." },
     { d: "2026-06-21", lat: 4.6, lon: -74.08, t: "politico", h: "De la Espriella gana la presidencia", x: "49,7% contra 48,7% de Cepeda." },
     { d: "2026-07-09", lat: 4.62, lon: -74.06, t: "politico", h: "Ultimátum al ELN y a las disidencias", x: "Un mes para entregarse o serán \"objetivos militares\"." },
-    { d: "2026-10-26", lat: 8.64, lon: -72.73, t: "terrestre", h: "Se entrega alias \"Flecha\", del frente 33 de las disidencias", x: "El presidente informó que el número dos de la subestructura que opera en el Catatumbo se sometió a la justicia; enfrenta cargos por terrorismo y rebelión.", u: "https://www.infobae.com/colombia/2026/10/26/alias-flecha-segundo-cabecilla-del-frente-33-de-las-disidencias-de-las-farc-se-sometio-a-la-justicia-en-el-catatumbo/", st: "Infobae" }
+    { d: "2026-10-26", lat: 8.64, lon: -72.73, t: "terrestre", h: "Se entrega alias \"Flecha\", del frente 33 de las disidencias", x: "El presidente informó que el número dos de la subestructura que opera en el Catatumbo se sometió a la justicia; enfrenta cargos por terrorismo y rebelión.", u: "https://www.infobae.com/colombia/2026/10/26/alias-flecha-segundo-cabecilla-del-frente-33-de-las-disidencias-de-las-farc-se-sometio-a-la-justicia-en-el-catatumbo/", st: "Infobae" },
+    { d: "2026-10-28", lat: 0, lon: 0, nomap: true, t: "aereo", h: "Sexto bombardeo del gobierno, contra las disidencias de Mordisco", x: "De la Espriella autorizó de madrugada la operación Bosur-Kratos; la prensa la ubica en el Chocó o en el corredor Cauca–Valle y el balance todavía no se conoce. Días antes, otro bombardeo contra el ELN en El Tambo (Cauca) dejó diez muertos según el gobierno.", u: "https://www.eltiempo.com/justicia/conflicto-y-narcotrafico/atencion-fuerzas-militares-ejecutaron-sexto-bombardeo-del-gobierno-de-de-la-espriella-fue-contra-mordisco-en-cauca-3596854", st: "El Tiempo" }
   ],
   timeline: [
     { d: "1948", era: "Orígenes", h: "Bogotazo y La Violencia", x: "Asesinato de Gaitán; guerra entre liberales y conservadores." },
@@ -779,7 +786,9 @@ window.CONFLICTS = [
     { d: "2026-01-06", lat: 10.50, lon: -66.92, t: "politico", h: "Delcy Rodríguez asume como presidenta encargada", x: "Trump dice que \"coopera\"." },
     { d: "2026-04-15", lat: 10.5, lon: -66.95, t: "diplomacia", h: "EE.UU. levanta sanciones a Delcy Rodríguez", x: "Deshielo y traspaso de la embajada en Washington (fecha aproximada).", p: "m" },
     { d: "2026-09-27", lat: 10.49, lon: -66.88, t: "diplomacia", h: "Delcy Rodríguez se reúne con Trump en EE.UU.", x: "Gira iniciada el 21-sep; se quiebra el vínculo entre Machado y Trump." },
-    { d: "2026-10-27", lat: 0, lon: 0, nomap: true, t: "naval", h: "Nuevo ataque de EE.UU. contra una lancha: cinco muertos", x: "El Comando Sur informó el golpe en el Pacífico oriental sin dar ubicación ni nacionalidades. La campaña iniciada en septiembre de 2025 suma unas 70 embarcaciones atacadas y alrededor de 240 muertos.", u: "https://infobae.com/estados-unidos/2026/10/27/el-ejercito-de-estados-unidos-bombardeo-una-lancha-en-el-pacifico-oriental-cinco-muertos", st: "Infobae" }
+    { d: "2026-10-27", lat: 0, lon: 0, nomap: true, t: "naval", h: "Nuevo ataque de EE.UU. contra una lancha: cinco muertos", x: "El Comando Sur informó el golpe en el Pacífico oriental sin dar ubicación ni nacionalidades. La campaña iniciada en septiembre de 2025 suma unas 70 embarcaciones atacadas y alrededor de 240 muertos.", u: "https://infobae.com/estados-unidos/2026/10/27/el-ejercito-de-estados-unidos-bombardeo-una-lancha-en-el-pacifico-oriental-cinco-muertos", st: "Infobae" },
+    { d: "2026-10-25", lat: 10.07, lon: -69.32, t: "politico", h: "María Corina Machado regresa a Venezuela", x: "La dirigente opositora reapareció en Barquisimeto y viajó por tierra hasta Caracas entre multitudes. Delcy Rodríguez respondió con un acto en Carabobo y una gira por los mismos estados, con la advertencia de que no permitirá que \"nadie se entrometa\".", u: "https://www.infobae.com/venezuela/2026/10/28/delcy-rodriguez-monta-su-propia-campana-ante-el-impacto-que-genero-el-regreso-de-maria-corina-machado/", st: "Infobae" },
+    { d: "2026-10-28", lat: 10.49, lon: -66.88, t: "politico", h: "Se abre la postulación de magistrados del TSJ", x: "La Asamblea Nacional inició el proceso, con votación prevista para el 11 de diciembre. La renovación del tribunal y del CNE es la condición que Washington asocia a una posible elección presidencial en 2027.", u: "https://www.infobae.com/venezuela/2026/10/28/delcy-rodriguez-monta-su-propia-campana-ante-el-impacto-que-genero-el-regreso-de-maria-corina-machado/", st: "Infobae" }
   ],
   timeline: [
     { d: "1998", era: "Chavismo", h: "Chávez gana la presidencia", x: "" },
@@ -853,7 +862,8 @@ window.CONFLICTS = [
     { d: "2026-07-06", lat: 23.12, lon: -82.37, t: "politico", h: "Nuevo apagón nacional", x: "" },
     { d: "2026-09-25", lat: 25.8, lon: -80.3, t: "politico", h: "Reporte sobre planes del Comando Sur", x: "CBS: la Reserva evalúa refuerzos para una posible acción en torno a Cuba." },
     { d: "2026-09-26", lat: 23.13, lon: -82.38, t: "diplomacia", h: "Trump: \"Cuba y nosotros haremos un acuerdo\"", x: "La Habana ofrece en la ONU relaciones comerciales con empresas de EE.UU." },
-    { d: "2026-10-27", lat: 40.75, lon: -73.97, t: "diplomacia", h: "Cruce a los gritos en la ONU por el embargo", x: "En el debate anual de la Asamblea General, el embajador estadounidense pidió rechazar la resolución cubana y chocó con el canciller Bruno Rodríguez; la votación queda para la segunda sesión.", u: "https://www.infobae.com/estados-unidos/2026/10/28/el-embajador-de-eeuu-y-el-canciller-de-cuba-protagonizaron-un-tenso-cruce-a-los-gritos-en-la-onu-por-el-embargo-economico-contra-el-regimen/", st: "Infobae" }
+    { d: "2026-10-27", lat: 40.75, lon: -73.97, t: "diplomacia", h: "Cruce a los gritos en la ONU por el embargo", x: "En el debate anual de la Asamblea General, el embajador estadounidense pidió rechazar la resolución cubana y chocó con el canciller Bruno Rodríguez; la votación queda para la segunda sesión.", u: "https://www.infobae.com/estados-unidos/2026/10/28/el-embajador-de-eeuu-y-el-canciller-de-cuba-protagonizaron-un-tenso-cruce-a-los-gritos-en-la-onu-por-el-embargo-economico-contra-el-regimen/", st: "Infobae" },
+    { d: "2026-10-28", lat: 40.75, lon: -73.97, t: "diplomacia", h: "La ONU vuelve a condenar el embargo, con menos apoyo", x: "La resolución cubana sacó 130 votos a favor, 17 en contra y 25 abstenciones, contra 165, 7 y 12 en 2025. Varios países que la respaldaban pasaron a abstenerse tras el cabildeo de Washington.", u: "https://www.infobae.com/america/agencias/2026/10/28/la-onu-aprueba-la-resolucion-contra-el-embargo-de-eeuu-a-cuba-pese-a-perder-apoyos-clave/", st: "Infobae" }
   ],
   timeline: [
     { d: "1898", era: "Orígenes", h: "Guerra hispano-estadounidense", x: "Enmienda Platt y base de Guantánamo." },

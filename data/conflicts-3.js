@@ -338,7 +338,8 @@ window.CONFLICTS.push({
    "t": "terrestre",
    "h": "Mayor ataque de pandillas contra la GSF en Croix-des-Bouquets",
    "x": "Pandillas atacan con explosivos un blindado con cuatro técnicos salvadoreños, que quedan desaparecidos; helicópteros salvadoreños también reciben fuego."
-  }
+  },
+  {"d":"2026-10-27", "lat":18.54, "lon":-72.34, "t":"terrestre", "h":"El Salvador envía unos 1.000 soldados a Haití", "x":"Llegaron en vuelos con apoyo de aviones C-130 de EE.UU., después de la emboscada del 18 de octubre en la que desaparecieron cuatro salvadoreños de la GSF. No se sabe quién los comandará ni por cuánto tiempo.", "u":"https://yahoo.com/news/articles/around-1-000-soldiers-el-172815445.html", "st":"Reuters"}
  ],
  "timeline": [
   {

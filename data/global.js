@@ -13,7 +13,7 @@ window.GLOBAL_RISK = {
     src: "DefconLevel.com (estimación OSINT, no oficial)", u: "https://www.defconlevel.com/current-level"
   },
   oil: {
-    us: { mb: 282.7, cap: 714, date: "2026-10-16", peak2026: 415.4, peakDate: "2026-03-20",
+    us: { mb: 282.6, cap: 714, date: "2026-10-23", peak2026: 415.4, peakDate: "2026-03-20",
       note: "Nivel más bajo desde 1982. Bajó 132,8 millones de barriles desde marzo por la liberación de emergencia ante el cierre de Ormuz.",
       src: "EIA, informe semanal", u: "https://www.eia.gov/dnav/pet/hist/LeafHandler.ashx?n=PET&s=WCSSTUS1&f=W" },
     iea: { pledged: 400, released: 330, date: "2026-10-16",
@@ -22,7 +22,7 @@ window.GLOBAL_RISK = {
     countries: [
       { n: "China", mb: 1492, est: true, d: "2026-T2", s: "EIA (estimación; China no publica la cifra)" },
       { n: "Japón", mb: 380, days: 176, d: "2026-07-31", s: "METI" },
-      { n: "Estados Unidos", mb: 282.7, d: "2026-10-16", s: "EIA" },
+      { n: "Estados Unidos", mb: 282.6, d: "2026-10-23", s: "EIA" },
       { n: "Alemania", mb: 140, days: 92, d: "2026-06", s: "Eurostat" },
       { n: "Francia", mb: 119, days: 88, d: "2026-06", s: "Eurostat" },
       { n: "España", mb: 99, days: 97, d: "2026-06", s: "Eurostat" },
