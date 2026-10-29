@@ -3,7 +3,7 @@
 const fs = require("fs"), path = require("path"), vm = require("vm");
 const root = path.join(__dirname, "..");
 const html = fs.readFileSync(path.join(root, "index.html"), "utf8");
-const files = [...html.matchAll(/<script src="(data\/[^"]+)"/g)].map(m => m[1]);
+const files = [...html.matchAll(/<script src="(data\/[^"?]+)/g)].map(m => m[1]);
 const ctx = { window: {} }; vm.createContext(ctx);
 const errs = [];
 for (const f of files) {

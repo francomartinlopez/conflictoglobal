@@ -59,7 +59,7 @@
   function renderAlerts() {
     const box = document.getElementById("alerts");
     box.innerHTML = `<div class="wrap alerts-in">
-      <div class="alerts-head"><h2><span class="live"></span>Alertas activas · ${ALERTS.length}</h2><span>Conflictos que entraron en una fase importante en los últimos días</span></div>
+      <div class="alerts-head"><h2><span class="live"></span>Alertas activas · ${ALERTS.length}</h2><span>Conflictos que entraron en una fase importante en los últimos días</span>${(window.NOTES || []).length ? `<a class="notes-jump" href="#notas" onclick="event.preventDefault();document.getElementById('notas').scrollIntoView({behavior:'smooth'})">Notas diplomáticas · ${window.NOTES.length} ↓</a>` : ""}</div>
       <div class="alert-grid">${ALERTS.map(a => `
         <a class="alert" href="#c-${a.id}" style="--lv:var(--lv${a.level})">
           <span class="stripe"></span>
@@ -77,7 +77,7 @@
     const notes = window.NOTES || [];
     if (!notes.length) return "";
     return `
-      <div class="alerts-head notes-head"><h2>Notas diplomáticas · ${notes.length}</h2><span>Política exterior con peso regional, fuera de los conflictos armados del monitor</span></div>
+      <div class="alerts-head notes-head" id="notas"><h2>Notas diplomáticas · ${notes.length}</h2><span>Política exterior con peso regional, fuera de los conflictos armados del monitor</span></div>
       <div class="alert-grid">${notes.map(n => `
         <a class="alert note" href="${esc(n.u)}" target="_blank" rel="noopener">
           <span class="stripe"></span>
