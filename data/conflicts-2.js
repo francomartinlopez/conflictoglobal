@@ -6,12 +6,9 @@ window.CANDIDATES = [
     why: "Coaliciones de pandillas controlan la mayor parte de Puerto Príncipe. La ONU autorizó en 2025 una Fuerza de Supresión de Pandillas para reemplazar a la misión liderada por Kenia. Relevante por la cercanía con Cuba y la presión migratoria sobre EE.UU." }
 ];
 
-window.ALERTS.push({ id: "rdc", level: 4, tag: "Nuevo frente", date: "2026-10-12",
-  title: "RD Congo: Kabila encabeza un nuevo frente rebelde desde Goma",
-  text: "El expresidente Joseph Kabila lanzó el Frente para la Refundación de la Nación, que reemplaza a la AFC/M23, mientras el acuerdo de paz firmado en Washington sigue sin cambiar el control del terreno." });
-window.ALERTS.push({ id: "pakistan-afganistan", level: 4, tag: "Combates fronterizos", date: "2026-10-12",
-  title: "Pakistán–Afganistán: choques en la Línea Durand tras el fracaso de Moscú",
-  text: "La reunión del Formato Moscú terminó sin declaración conjunta por primera vez desde 2017. Siguen los combates en Kurram (Pakistán) y Paktia (Afganistán), y Pakistán declaró el estado de emergencia en Khyber Pakhtunkhwa." });
+window.ALERTS.push({ id: "rdc", level: 4, tag: "Sanción mayor", date: "2026-10-28",
+  title: "RD Congo: EE.UU. sanciona al Ministerio de Defensa de Ruanda por su apoyo al M23",
+  text: "El Tesoro castigó también al banco Zigama, acusado de mover oro y fondos para la AFC/M23. Mientras tanto, el frente de Kabila retomó los combates en Walikale y el acuerdo de Washington sigue sin cambiar el control del terreno." });
 
 window.CONFLICTS.push(
 
@@ -165,7 +162,9 @@ window.CONFLICTS.push(
     { d: "2026-07-26", lat: 13.6, lon: 31.0, t: "terrestre", h: "El ejército recupera la ruta El Obeid–Jartum", x: "Hemedti \"suelta las riendas\" de sus combatientes." },
     { d: "2026-08-12", lat: 13.18, lon: 30.22, t: "aereo", h: "Las RSF reanudan el ataque sobre El Obeid", x: "Drones también sobre Jartum y Atbara." },
     { d: "2026-10-26", lat: 12.05, lon: 24.88, t: "aereo", h: "Bombardeos intensos del ejército sobre Nyala", x: "Ataques contra mandos y defensas antiaéreas de las RSF en la capital de Darfur del Sur; una fuente local habla de al menos 20 muertos, entre ellos civiles en un mercado nocturno.", u: "https://sudantribune.com/article/320509", st: "Sudan Tribune" },
-    { d: "2026-10-27", lat: 15.60, lon: 32.53, t: "aereo", h: "Drones de las RSF contra la red eléctrica", x: "Tras golpear seis centrales el día anterior en el este, un ataque a la subestación de Al-Markhiyat dejó sin luz a gran parte de Jartum y Al-Yazira.", u: "https://www.arabnews.pk/middle-east/sudan-rsf-drones-hit-khartoum-power-station-govt-source-3005367", st: "AFP" }
+    { d: "2026-10-27", lat: 15.60, lon: 32.53, t: "aereo", h: "Drones de las RSF contra la red eléctrica", x: "Tras golpear seis centrales el día anterior en el este, un ataque a la subestación de Al-Markhiyat dejó sin luz a gran parte de Jartum y Al-Yazira.", u: "https://www.arabnews.pk/middle-east/sudan-rsf-drones-hit-khartoum-power-station-govt-source-3005367", st: "AFP" },
+    { d: "2026-10-28", lat: 15.9, lon: 23.3, t: "aereo", h: "Drones de las RSF matan a cinco personas en Karnoi", x: "Según las salas de emergencia locales, los ataques en Darfur del Norte se repitieron dos días, junto con incursiones terrestres y robo de ganado.", u: "https://sudantribune.com/article/320612", st: "Sudan Tribune" },
+    { d: "2026-10-29", lat: 19.62, lon: 37.22, t: "diplomacia", h: "Sudán acusa a Etiopía de lanzar 162 ataques con drones desde su territorio", x: "El gobierno afirma que salieron de bases en Asosa y Bahir Dar y mataron a más de 400 civiles. No hay verificación independiente; Etiopía ya había negado apoyar a las RSF.", u: "https://allafrica.com/stories/202610300075.html", st: "Dabanga (allAfrica)" }
   ],
   timeline: [
     { d: "1956", era: "Orígenes", h: "Independencia", x: "Un Estado dominado por las élites del valle del Nilo." },
@@ -347,7 +346,8 @@ window.CONFLICTS.push(
     { d: "2026-03-02", lat: -1.95, lon: 30.06, t: "politico", h: "EE.UU. sanciona al ejército de Ruanda", x: "Por su apoyo al M23." },
     { d: "2026-08-25", lat: -1.68, lon: 29.22, t: "diplomacia", h: "Hoja de ruta para negociar", x: "Con EE.UU., Catar, Suiza, la UA y Togo.", p: "m" },
     { d: "2026-10-12", lat: -1.67, lon: 29.23, t: "politico", h: "Kabila lanza en Goma el Frente para la Refundación de la Nación", x: "El expresidente, condenado en ausencia por traición, encabeza una nueva coalición que reemplaza a la AFC/M23." },
-    { d: "2026-10-27", lat: -1.10, lon: 27.95, t: "terrestre", h: "Se reanudan los combates en Walikale", x: "El FRN atacó posiciones del ejército y de los wazalendo en Luola y la colina Tchad; también se oyeron armas pesadas en Pinga. Sin balance de víctimas.", u: "https://www.congoquotidien.com/2026/10/27/nord-kivu-reprise-combats-luola-colline-tchad/", st: "Congo Quotidien" }
+    { d: "2026-10-27", lat: -1.10, lon: 27.95, t: "terrestre", h: "Se reanudan los combates en Walikale", x: "El FRN atacó posiciones del ejército y de los wazalendo en Luola y la colina Tchad; también se oyeron armas pesadas en Pinga. Sin balance de víctimas.", u: "https://www.congoquotidien.com/2026/10/27/nord-kivu-reprise-combats-luola-colline-tchad/", st: "Congo Quotidien" },
+    { d: "2026-10-28", lat: 0, lon: 0, nomap: true, t: "diplomacia", h: "EE.UU. sanciona al Ministerio de Defensa de Ruanda y al banco Zigama", x: "El Tesoro acusa al ministerio de dirigir el despliegue de miles de soldados junto al M23 en los Kivu, y a Zigama de mover oro y decenas de millones de dólares para la AFC/M23. Kinshasa celebró la medida.", u: "https://actualite.cd/2026/10/29/rdc-sans-surprise-kinshasa-salue-les-sanctions-americaines-contre-le-ministere-rwandais", st: "Actualite.cd" }
   ],
   timeline: [
     { d: "1885–1960", era: "Orígenes", h: "Estado Libre del Congo y colonia belga", x: "" },
