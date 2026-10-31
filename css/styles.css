@@ -592,3 +592,31 @@ pre.tree { background: var(--surface); border: 1px solid var(--line); border-rad
 .geo-tr { display: flex; flex-wrap: wrap; gap: 5px; margin: 10px 0 6px; }
 .geo-tr span { font-size: 11.5px; padding: 3px 8px; border: 1px solid; border-radius: 4px; color: #ddd6cf; }
 .geo-tr b { font-weight: 700; margin-right: 3px; }
+
+/* invierno boreal */
+.wv { padding: 18px 20px; margin-bottom: 12px; border-left: 3px solid #6fa3cf; }
+.wv-head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.wv-head h3 { font: 700 17px/1.2 var(--f-display); letter-spacing: .1em; text-transform: uppercase; color: #a9cdea; margin: 0; }
+.wv-head .rk-src { margin-left: auto; }
+.wv-sum { font-size: 15px; color: #e3ddd7; margin: 10px 0 14px; max-width: 95ch; }
+.wv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+@media (max-width: 900px) { .wv-grid { grid-template-columns: 1fr; } }
+.wv h4 { font: 700 13px/1 var(--f-mono); text-transform: uppercase; letter-spacing: .08em; color: var(--faint); margin: 4px 0 10px; }
+.wv-col p { font-size: 13.5px; color: var(--muted); margin: 8px 0 0; }
+.wv-g { margin: 10px 0 4px; }
+.wv-track { position: relative; height: 14px; border-radius: 3px; background: linear-gradient(90deg, #8f1f1f 0%, #3a2b2a 33%, #2a3440 34%, #4f84b0 100%); }
+.wv-z { position: absolute; top: -4px; bottom: -4px; width: 2px; background: #fff; }
+.wv-n { position: absolute; top: -2px; bottom: -2px; width: 2px; background: rgba(255,255,255,.45); }
+.wv-dot { position: absolute; top: 50%; width: 16px; height: 16px; border-radius: 50%; background: #fff; border: 3px solid #6fa3cf; transform: translate(-50%, -50%); }
+.wv-probs { display: grid; gap: 6px; margin-top: 10px; }
+.wv-probs div { display: grid; grid-template-columns: 1fr auto; gap: 2px 8px; font-size: 13px; }
+.wv-probs div i { grid-column: 1 / -1; display: block; height: 6px; background: #c25247; border-radius: 3px; }
+.wv-probs small { font-size: 11.5px; color: var(--faint); }
+.wv-e { display: grid; grid-template-columns: 1fr auto; gap: 3px 10px; padding: 9px 0; border-top: 1px solid var(--line); }
+.wv-e span { font-size: 13px; color: var(--muted); } .wv-e b { font: 700 19px/1 var(--f-display); }
+.wv-e .rk-fill { grid-column: 1 / -1; height: 8px; margin: 3px 0; }
+.wv-e small { grid-column: 1 / -1; font-size: 11.5px; color: var(--faint); }
+.wv-ar { background: rgba(111,163,207,.08); border: 1px solid rgba(111,163,207,.3); border-radius: var(--r); padding: 10px 12px; margin: 10px 0; }
+.wv-ar b { font-size: 13px; } .wv-ar p { margin: 4px 0 0; font-size: 13px; color: #d7d1cb; }
+.wv-w { margin: 0; padding-left: 18px; font-size: 13px; color: var(--muted); }
+.wv-news { border-top: 1px solid var(--line); margin-top: 14px; padding-top: 12px; }

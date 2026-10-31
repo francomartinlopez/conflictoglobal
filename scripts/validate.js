@@ -53,6 +53,13 @@ if (!G) errs.push("Falta GLOBAL_RISK (data/global.js)");
 else {
   if (!(G.clock.seconds > 0)) errs.push("GLOBAL_RISK.clock.seconds inválido");
   if (!(G.defcon.level >= 1 && G.defcon.level <= 5)) errs.push("GLOBAL_RISK.defcon.level inválido");
+  const Wn = G.winter;
+  if (Wn) {
+    if (!(Wn.level >= 1 && Wn.level <= 5)) errs.push("GLOBAL_RISK.winter.level inválido");
+    if (!okDate(Wn.updated) || !okDate(Wn.vortex.uDate)) errs.push("GLOBAL_RISK.winter: fechas inválidas");
+    for (const n of Wn.news || []) if (!okDate(n.d) || !/^https?:/.test(n.u || "")) errs.push(`GLOBAL_RISK.winter.news: hecho sin fecha o fuente (${n.h})`);
+    if ((Wn.news || []).length > 8) errs.push("GLOBAL_RISK.winter.news: más de 8 novedades");
+  }
   if (!(G.oil.us.mb > 0 && G.oil.us.mb <= G.oil.us.cap) || !okDate(G.oil.us.date)) errs.push("GLOBAL_RISK.oil.us inválido");
 }
 for (const s of W.EVENT_SOURCES || []) if (!ids.has(s.c) || !C.find(c => c.id === s.c).events[s.i]) errs.push(`EVENT_SOURCES apunta a un evento inexistente: ${s.c} #${s.i}`);

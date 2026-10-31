@@ -658,9 +658,37 @@
           <p>${esc(U.note)}</p><p class="rk-src">${src(U.src, U.u)}</p>
           <p class="rk-iea"><b>${I.released} de ${I.pledged} M</b> barriles ya liberados por la AIE al ${fmt(I.date)}. ${esc(I.note)} <span class="rk-src">${src(I.src, I.u)}</span></p></div>
       </div>
+      ${winterPanel(G.winter)}
       <div class="panel gp rk-oil"><h3>Reservas estratégicas de petróleo por país <small>millones de barriles · días de importaciones netas que cubren</small></h3>
         <table class="gp-t"><thead><tr><th>País</th><th></th><th>M barriles</th><th>Cobertura</th><th>Fuente y fecha</th></tr></thead><tbody>${rows}</tbody></table>
         <p class="gp-note">No existe un inventario mundial homogéneo: cada país informa con otra fecha y otro criterio, y varias cifras ya incluyen lo liberado desde marzo. China no publica su reserva y la cifra es una estimación. La AIE exige a sus miembros 90 días de importaciones netas; EE.UU. es exportador neto y no aplica. ${src(O.cSrc, O.cU)}.</p></div>`;
+  }
+
+
+  /* ---------- invierno boreal: vórtice polar y energía ---------- */
+  function winterPanel(W) {
+    if (!W) return "";
+    const V = W.vortex, lnk = ([t, u]) => `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(t)} ↗</a>`;
+    const span = 45, pos = v => Math.max(0, Math.min(100, (v + 15) / span * 100));
+    const gauge = `<div class="wv-g"><div class="wv-track"><i class="wv-neg" style="width:${pos(0)}%"></i><b class="wv-z" style="left:${pos(0)}%"></b><span class="wv-dot" style="left:${pos(V.u)}%"></span></div>
+      <div class="dc-lab"><span>−15 m/s</span><span>0 · inversión de los vientos</span><span>30 m/s</span></div></div>`;
+    return `<div class="panel wv" id="invierno"><div class="wv-head"><h3>Invierno boreal: vórtice polar y energía</h3>${lvPill(W.level, W.levelTxt)}<span class="rk-src">Actualizado ${fmt(W.updated)}</span></div>
+      <p class="wv-sum">${esc(W.summary)}</p>
+      <div class="wv-grid">
+        <div class="wv-col"><h4>Vórtice polar</h4>
+          <div class="rk-row" style="min-height:0"><div><b class="rk-big">${String(V.u).replace(".", ",")} <small>m/s</small></b><span class="rk-sub">Viento a 10 hPa y 60°N · ${fmt(V.uDate)} · ${esc(V.status)}</span></div></div>
+          ${gauge}
+          <p>${esc(V.forecast)}</p>
+          <div class="wv-probs">${V.probs.map(([m, p]) => `<div><span>${esc(m)}</span><b>${p}%</b><i style="width:${p}%"></i></div>`).join("")}<small>Porcentaje de escenarios del modelo que muestran la inversión.</small></div>
+          <p>${esc(V.record)}</p><p>${esc(V.impacts)}</p>
+          <p class="rk-src">${V.src.map(lnk).join(" · ")}</p></div>
+        <div class="wv-col"><h4>Abastecimiento de energía</h4>
+          ${W.energy.map(e => `<div class="wv-e"><span>${esc(e.k)}</span><b>${esc(e.v)}</b>${e.bar ? `<div class="rk-fill"><i style="width:${e.bar}%"></i><b style="left:${e.ref}%" title="Promedio de 5 años"></b></div>` : ""}<small>${esc(e.n)} · <a href="${esc(e.u)}" target="_blank" rel="noopener">${esc(e.src)} ↗</a></small></div>`).join("")}
+          <div class="wv-ar"><b>Qué significa para la Argentina</b><p>${esc(W.argentina)}</p></div>
+          <h4>Qué mirar</h4><ul class="wv-w">${W.watch.map(x => `<li>${esc(x)}</li>`).join("")}</ul></div>
+      </div>
+      ${W.news && W.news.length ? `<div class="wv-news"><h4>Últimas novedades</h4>${W.news.map(n => `<div class="ev"><span class="dot" style="background:var(--accent)"></span><div><div class="d">${fmt(n.d)}</div><div class="t">${esc(n.h)}</div><div class="x">${esc(n.x)}</div><a class="evsrc" href="${esc(n.u)}" target="_blank" rel="noopener">${esc(n.st)} ↗</a></div></div>`).join("")}</div>` : ""}
+    </div>`;
   }
 
   function globalPanel() {
