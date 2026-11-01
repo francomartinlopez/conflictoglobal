@@ -51,16 +51,18 @@ window.GLOBAL_RISK.winter = {
     src: [["World Climate Service", "https://www.worldclimateservice.com/polar-vortex-forecast-november-2026-ssw/"], ["Severe Weather Europe", "https://www.severe-weather.eu/global-weather/polar-vortex-split-record-early-stratospheric-warming-event-november-2026-united-states-canada-europe-fa/"]]
   },
   energy: [
-    { k: "Reservas de gas de la UE", v: "74,9%", n: "26-oct-2026 · promedio de 5 años: 89,4% · el nivel más bajo para la fecha desde 2011", src: "GIE AGSI+", u: "https://agsi.gie.eu/", bar: 74.9, ref: 89.4 },
-    { k: "Gas en Europa (TTF)", v: "≈ €100/MWh", n: "28-oct-2026 · máximo desde diciembre de 2022 · empezó el año cerca de €28", src: "ICE vía TASS", u: "https://tass.com/economy/2209523" },
-    { k: "Gas en EE.UU. (Henry Hub)", v: "US$ 3,1/MMBtu", n: "16-oct-2026 · EE.UU. abastece la mayor parte del GNL que compra Europa", src: "JOGMEC vía Global LNG Hub", u: "https://globallnghub.com/?p=20853" },
-    { k: "Gas almacenado en EE.UU.", v: "3.644 Bcf", n: "16-oct-2026 · dentro del rango de 5 años", src: "EIA", u: "https://www.oilandgas360.com/?p=1062400" }
+    { k: "Reservas de gas de la UE", v: "74,9%", n: "29-oct-2026 · promedio de 5 años para la fecha: ≈ 86% · el nivel más bajo para la fecha desde 2011", src: "GIE AGSI+ vía OilPrice", u: "https://oilprice.com/Latest-Energy-News/World-News/European-Gas-Tops-101-Euros-for-First-Time-Since-2022.html", bar: 74.9, ref: 86 },
+    { k: "Gas en Europa (TTF)", v: "≈ €102/MWh", n: "30-oct-2026 · primera vez sobre €100 desde 2022 · +36% en octubre", src: "ICE vía OilPrice", u: "https://oilprice.com/Latest-Energy-News/World-News/European-Gas-Tops-101-Euros-for-First-Time-Since-2022.html" },
+    { k: "Gas en EE.UU. (Henry Hub)", v: "≈ US$ 3,0/MMBtu", n: "29-oct-2026 · futuro de diciembre en NYMEX entre 2,90 y 3,07; el de noviembre venció a 2,82 · EE.UU. abastece la mayor parte del GNL que compra Europa", src: "AGA", u: "https://www.aga.org/research-policy/resource-library/natural-gas-market-indicators-october-29-2026/" },
+    { k: "Gas almacenado en EE.UU.", v: "3.724 Bcf", n: "23-oct-2026 · +80 Bcf en la semana · 1% sobre el promedio de 5 años y 3,8% debajo de 2025", src: "EIA vía IndexBox", u: "https://www.indexbox.io/blog/eia-reports-80-bcf-weekly-build-in-lower-48-natural-gas-storage/" }
   ],
   watch: ["Si la inversión de los vientos se confirma en la primera semana de noviembre.", "Olas de frío en el este de EE.UU. y en Europa a mediados de noviembre.", "Ritmo de extracción de las reservas europeas y precio del TTF.", "Récords de demanda eléctrica y cortes."],
   news: [
+    { d: "2026-10-30", h: "El TTF supera los €101/MWh y suma 36% de alza en octubre", x: "El gas europeo llegó a cotizar cerca de €102/MWh, el nivel más alto desde 2022, con las reservas de la UE en 74,9% al 29 de octubre, muy por debajo de lo habitual para la fecha.", u: "https://oilprice.com/Latest-Energy-News/World-News/European-Gas-Tops-101-Euros-for-First-Time-Since-2022.html", st: "OilPrice" },
+    { d: "2026-10-29", h: "EE.UU. inyecta 80 Bcf y sus reservas de gas quedan sobre la media", x: "El almacenamiento llegó a 3.724 Bcf, 1% por encima del promedio de cinco años; el dato presionó a la baja los futuros del Henry Hub.", u: "https://www.indexbox.io/blog/eia-reports-80-bcf-weekly-build-in-lower-48-natural-gas-storage/", st: "IndexBox / EIA" },
     { d: "2026-10-30", h: "Europa entra al invierno con las reservas de gas más bajas en 15 años", x: "Las reservas de la UE rondan el 75%, el nivel más bajo para la fecha desde 2011, y el TTF superó los €100/MWh. Analistas advierten que un invierno frío podría llevar los precios aún más arriba.", u: "https://www.cnbc.com/2026/10/30/europe-gas-prices-winter-energy-costs.html", st: "CNBC" },
     { d: "2026-10-30", h: "Pronostican un calentamiento estratosférico récord", x: "Una meteoróloga del Servicio Meteorológico de EE.UU. dice que el vórtice ya se ve distorsionado y estirado, algo que suele pasar en pleno invierno; un investigador del MIT lo califica de inédito por lo temprano.", u: "https://www.inquirer.com/weather/polar-vortex-stratospheric-warming-philadelphia-weather-20261030.html", st: "The Philadelphia Inquirer" },
     { d: "2026-10-28", h: "El TTF supera los €100/MWh por primera vez en cuatro años", x: "El precio del día siguiente llegó a €100,85/MWh y el contrato de noviembre a €99,25/MWh.", u: "https://tass.com/economy/2209523", st: "TASS" }
   ],
-  updated: "2026-10-31"
+  updated: "2026-11-01"
 };
