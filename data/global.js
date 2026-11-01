@@ -41,13 +41,12 @@ window.GLOBAL_RISK.winter = {
   level: 4, levelTxt: "Riesgo alto",
   summary: "El vórtice polar del hemisferio norte se está debilitando a un ritmo sin precedentes para la época: los modelos anticipan una inversión de los vientos estratosféricos (un calentamiento súbito) a comienzos de noviembre, la más temprana registrada. Llega cuando Europa tiene sus reservas de gas en el nivel más bajo para esta fecha desde que hay registros, por el cierre de Ormuz. Un frío intenso en EE.UU., Europa o Asia dispararía el consumo de gas y electricidad y la competencia por el GNL.",
   vortex: {
-    u: 19.5, uDate: "2026-10-27", threshold: 0,
-    status: "Debilitándose; inversión pronosticada, todavía no observada",
-    forecast: "Inversión de los vientos a 10 hPa y 60°N prevista entre el 4 y el 10 de noviembre; el vórtice se partiría en dos núcleos.",
+    u: 15.81, uDate: "2026-10-28", threshold: 0,
+    status: "Cayendo rápido, en el borde inferior de lo registrado para la fecha; inversión pronosticada, todavía no observada",
+    forecast: "El pronóstico de la NASA (modelo GEOS, 31-oct) lleva el viento por debajo de cero el 5 de noviembre; otros modelos ubican la inversión entre el 4 y el 10 de noviembre. El vórtice se partiría en dos núcleos.",
     probs: [["ECMWF (28-oct)", 66], ["GEFS de EE.UU. (27-oct)", 74]],
     record: "El calentamiento súbito más temprano registrado desde 1958 fue el 28 de noviembre. Este lo superaría por más de tres semanas.",
     impacts: "Los efectos en superficie suelen llegar entre una y cuatro semanas después. Los primeros pronósticos muestran frío por debajo de lo normal en el centro y este de EE.UU. y en el oeste, centro y sur de Europa hacia la segunda semana de noviembre. El Súper El Niño podría atenuar el frío en EE.UU. Los modelos estacionales marcan un segundo debilitamiento, más fuerte, entre enero y febrero de 2027.",
-    nasa: { pdf: "https://ozonewatch.gsfc.nasa.gov/meteorology/figures/merra2/wind/u60n_10_2026_merra2.pdf", page: "https://ozonewatch.gsfc.nasa.gov/meteorology/wind_2026_MERRA2_NH.html" },
     oct: { mean: 18.99, src: "https://ozonewatch.gsfc.nasa.gov/meteorology/figures/merra2/wind/u60n_10_10_merra2.txt", v: [[1979,17.66],[1980,16.66],[1981,18.06],[1982,19.81],[1983,22.09],[1984,18.45],[1985,20.95],[1986,22.37],[1987,19.32],[1988,21.40],[1989,18.01],[1990,23.08],[1991,22.79],[1992,18.94],[1993,16.36],[1994,21.53],[1995,22.81],[1996,20.71],[1997,22.72],[1998,18.66],[1999,19.08],[2000,20.23],[2001,21.40],[2002,21.28],[2003,14.59],[2004,17.75],[2005,18.24],[2006,14.82],[2007,14.69],[2008,21.30],[2009,19.65],[2010,18.49],[2011,16.50],[2012,19.85],[2013,16.10],[2014,16.81],[2015,20.76],[2016,17.02],[2017,18.31],[2018,22.03],[2019,20.38],[2020,17.82],[2021,15.30],[2022,17.26],[2023,20.08],[2024,16.93],[2025,13.42]] },
     src: [["World Climate Service", "https://www.worldclimateservice.com/polar-vortex-forecast-november-2026-ssw/"], ["Severe Weather Europe", "https://www.severe-weather.eu/global-weather/polar-vortex-split-record-early-stratospheric-warming-event-november-2026-united-states-canada-europe-fa/"]]
   },
@@ -57,7 +56,6 @@ window.GLOBAL_RISK.winter = {
     { k: "Gas en EE.UU. (Henry Hub)", v: "US$ 3,1/MMBtu", n: "16-oct-2026 · EE.UU. abastece la mayor parte del GNL que compra Europa", src: "JOGMEC vía Global LNG Hub", u: "https://globallnghub.com/?p=20853" },
     { k: "Gas almacenado en EE.UU.", v: "3.644 Bcf", n: "16-oct-2026 · dentro del rango de 5 años", src: "EIA", u: "https://www.oilandgas360.com/?p=1062400" }
   ],
-  argentina: "Para la Argentina el golpe es indirecto pero real: un invierno boreal frío encarece el GNL en todo el mundo justo cuando el país todavía depende de cargamentos importados para su invierno de 2027, porque las ampliaciones de gasoductos desde Vaca Muerta no estarán listas antes. A la vez, sube el valor del gas que Vaca Muerta empezará a exportar desde 2027.",
   watch: ["Si la inversión de los vientos se confirma en la primera semana de noviembre.", "Olas de frío en el este de EE.UU. y en Europa a mediados de noviembre.", "Ritmo de extracción de las reservas europeas y precio del TTF.", "Récords de demanda eléctrica y cortes."],
   news: [
     { d: "2026-10-30", h: "Europa entra al invierno con las reservas de gas más bajas en 15 años", x: "Las reservas de la UE rondan el 75%, el nivel más bajo para la fecha desde 2011, y el TTF superó los €100/MWh. Analistas advierten que un invierno frío podría llevar los precios aún más arriba.", u: "https://www.cnbc.com/2026/10/30/europe-gas-prices-winter-energy-costs.html", st: "CNBC" },

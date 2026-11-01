@@ -684,17 +684,17 @@
           <p class="rk-src">${V.src.map(lnk).join(" · ")}</p></div>
         <div class="wv-col"><h4>Abastecimiento de energía</h4>
           ${W.energy.map(e => `<div class="wv-e"><span>${esc(e.k)}</span><b>${esc(e.v)}</b>${e.bar ? `<div class="rk-fill"><i style="width:${e.bar}%"></i><b style="left:${e.ref}%" title="Promedio de 5 años"></b></div>` : ""}<small>${esc(e.n)} · <a href="${esc(e.u)}" target="_blank" rel="noopener">${esc(e.src)} ↗</a></small></div>`).join("")}
-          <div class="wv-ar"><b>Qué significa para la Argentina</b><p>${esc(W.argentina)}</p></div>
           <h4>Qué mirar</h4><ul class="wv-w">${W.watch.map(x => `<li>${esc(x)}</li>`).join("")}</ul></div>
       </div>
       ${vortexHistory(V)}
+      ${ninoChart()}
       ${W.news && W.news.length ? `<div class="wv-news"><h4>Últimas novedades</h4>${W.news.map(n => `<div class="ev"><span class="dot" style="background:var(--accent)"></span><div><div class="d">${fmt(n.d)}</div><div class="t">${esc(n.h)}</div><div class="x">${esc(n.x)}</div><a class="evsrc" href="${esc(n.u)}" target="_blank" rel="noopener">${esc(n.st)} ↗</a></div></div>`).join("")}</div>` : ""}
     </div>`;
   }
 
 
   function vortexHistory(V) {
-    if (!V.nasa && !V.oct) return "";
+    if (!window.VORTEX && !V.oct) return "";
     let bars = "";
     if (V.oct) {
       const d = V.oct.v, W = 760, H = 190, pl = 34, pr = 8, pt = 14, pb = 24, max = 25, bw = (W - pl - pr) / d.length;
@@ -707,10 +707,61 @@
       bars += `</svg>`;
       bars = `<div class="wv-hist-b"><b>Viento medio de octubre a 10 hPa y 60°N, 1979–${d[d.length - 1][0]}</b><small>Cuanto más bajo, más débil el vórtice. En rojo, el octubre más débil de la serie (${lo[0]}: ${String(lo[1]).replace(".", ",")} m/s). El promedio de octubre de 2026 se suma cuando la NASA lo publique, a comienzos de noviembre.</small>${bars}<small><a href="${esc(V.oct.src)}" target="_blank" rel="noopener">NASA, reanálisis MERRA-2 ↗</a></small></div>`;
     }
-    const pdf = V.nasa ? `<div class="wv-hist-n"><b>La temporada actual frente a 1979–2025 (gráfico oficial de la NASA)</b><small>Línea del año en curso contra los mínimos, máximos y percentiles de todas las temporadas desde 1979, con el pronóstico del modelo GEOS de la NASA. Lo actualiza la NASA todos los días.</small>
-      <object data="${esc(V.nasa.pdf)}#view=FitH&toolbar=0" type="application/pdf" class="wv-pdf"><p class="muted">Tu navegador no muestra el gráfico acá. <a href="${esc(V.nasa.pdf)}" target="_blank" rel="noopener">Abrilo en la NASA ↗</a></p></object>
-      <small><a href="${esc(V.nasa.pdf)}" target="_blank" rel="noopener">Abrir el gráfico en pantalla completa ↗</a> · <a href="${esc(V.nasa.page)}" target="_blank" rel="noopener">NASA Ozone Watch ↗</a></small></div>` : "";
-    return `<div class="wv-hist"><h4>Cómo viene este año comparado con los anteriores</h4><div class="wv-hist-g">${pdf}${bars}</div></div>`;
+    const X = window.VORTEX; let daily = "";
+    if (X) {
+      const R = X.rows.filter(r => r[0] >= X.season + "-09-01" && r[0] <= (X.season + 1) + "-03-31");
+      const W = 960, H = 360, pl = 40, pr = 14, pt = 16, pb = 28;
+      const vals = R.flatMap(r => [r[2], r[8], r[1]]).filter(v => v != null);
+      const lo = Math.floor(Math.min(-20, ...vals) / 10) * 10, hi = Math.ceil(Math.max(...vals) / 10) * 10;
+      const xs = i => pl + i / (R.length - 1) * (W - pl - pr), ys = v => pt + (hi - v) / (hi - lo) * (H - pt - pb);
+      const band = (a, b) => R.map((r, i) => `${i ? "L" : "M"}${xs(i).toFixed(1)},${ys(r[a]).toFixed(1)}`).join("") + R.map((r, i) => [i, r]).reverse().map(([i, r]) => `L${xs(i).toFixed(1)},${ys(r[b]).toFixed(1)}`).join("") + "Z";
+      const ln = (pts) => pts.map(([i, v], k) => `${k ? "L" : "M"}${xs(i).toFixed(1)},${ys(v).toFixed(1)}`).join("");
+      let g = `<svg viewBox="0 0 ${W} ${H}" class="area-chart" role="img" aria-label="Viento a 10 hPa y 60°N: temporada actual frente a la climatología">`;
+      for (let v = lo; v <= hi; v += 10) g += `<line x1="${pl}" x2="${W - pr}" y1="${ys(v)}" y2="${ys(v)}" stroke="${v === 0 ? "#6b6f75" : "#25282b"}"/><text x="${pl - 6}" y="${ys(v) + 4}" text-anchor="end" class="ax">${v}</text>`;
+      g += `<text x="${pl + 6}" y="${ys(0) + 13}" class="ax" style="fill:#e0857b">0 = inversión de los vientos (calentamiento súbito)</text>`;
+      g += `<path d="${band(2, 8)}" fill="rgba(79,132,176,.13)"/><path d="${band(3, 7)}" fill="rgba(79,132,176,.2)"/><path d="${band(4, 6)}" fill="rgba(79,132,176,.3)"/>`;
+      g += `<path d="${ln(R.map((r, i) => [i, r[5]]))}" fill="none" stroke="#a9cdea" stroke-width="1.4" stroke-dasharray="5 3"/>`;
+      R.forEach((r, i) => { if (r[0].slice(8) === "01") g += `<line x1="${xs(i)}" x2="${xs(i)}" y1="${pt}" y2="${H - pb}" stroke="#202326"/><text x="${xs(i) + 4}" y="${H - 9}" class="ax">${MONTHS[+r[0].slice(5, 7) - 1]}</text>`; });
+      const ob = R.map((r, i) => [i, r]).filter(([, r]) => r[1] != null && r[9] === 0), fc = R.map((r, i) => [i, r]).filter(([, r]) => r[1] != null && r[9] > 0);
+      if (fc.length && ob.length) g += `<path d="${ln([[ob[ob.length - 1][0], ob[ob.length - 1][1][1]], ...fc.map(([i, r]) => [i, r[1]])])}" fill="none" stroke="#ff5a4a" stroke-width="2.6" stroke-dasharray="6 4"/>`;
+      g += `<path d="${ln(ob.map(([i, r]) => [i, r[1]]))}" fill="none" stroke="#ff5a4a" stroke-width="3.2"/>`;
+      if (ob.length) { const [i, r] = ob[ob.length - 1]; g += `<circle cx="${xs(i)}" cy="${ys(r[1])}" r="5" fill="#ff5a4a" stroke="#fff" stroke-width="1.5"/>`; }
+      g += `</svg>`;
+      const lo2 = X.lastObs, lf = X.lastFc, rev = fc.find(([, r]) => r[1] < 0);
+      daily = `<div class="wv-hist-n"><b>Viento a 10 hPa y 60°N día por día: temporada ${X.season}/${String(X.season + 1).slice(2)} frente a 1979–${X.season}</b>
+        <small>Último dato analizado: <b>${String(lo2[1]).replace(".", ",")} m/s</b> (${fmt(lo2[0])}).${rev ? ` El pronóstico de la NASA (modelo GEOS) lleva el viento por debajo de cero el ${fmt(rev[1][0])}.` : ""}</small>
+        <div class="wv-scroll">${g}</div>
+        <div class="wv-lg"><span><i style="background:#ff5a4a"></i>${X.season}/${String(X.season + 1).slice(2)} (punteado: pronóstico)</span><span><i style="background:#a9cdea"></i>media histórica</span><span><i style="background:rgba(79,132,176,.55);height:8px"></i>rango 30–70%</span><span><i style="background:rgba(79,132,176,.35);height:8px"></i>10–90%</span><span><i style="background:rgba(79,132,176,.2);height:8px"></i>mínimo–máximo</span></div>
+        <small><a href="${esc(X.u)}" target="_blank" rel="noopener">${esc(X.src)} ↗</a> · climatología ${esc(X.clim)}</small></div>`;
+    }
+    return `<div class="wv-hist"><h4>Cómo viene este año comparado con los anteriores</h4>${daily}<div class="wv-hist-g1">${bars}</div></div>`;
+  }
+
+
+  function ninoChart() {
+    const N = window.NINO; if (!N) return "";
+    const S = N.semanas, yrs = Object.keys(S).sort(), cur = yrs[yrs.length - 1];
+    const HL = { "1982": "#c9a34a", "1997": "#4fc3d9", "2015": "#b98ad0", "2023": "#5fae7a" };
+    const W = 960, H = 330, pl = 40, pr = 14, pt = 16, pb = 28, lo = -2.5, hi = 4;
+    const xs = w => pl + w / 52 * (W - pl - pr), ys = v => pt + (hi - v) / (hi - lo) * (H - pt - pb);
+    const line = a => a.map((v, i) => `${i ? "L" : "M"}${xs(i).toFixed(1)},${ys(v).toFixed(1)}`).join("");
+    let g = `<svg viewBox="0 0 ${W} ${H}" class="area-chart" role="img" aria-label="Niño-3.4 por año">`;
+    [[0.5, "El Niño"], [1.5, "fuerte"], [2, "muy fuerte"]].forEach(([v, l]) => g += `<line x1="${pl}" x2="${W - pr}" y1="${ys(v)}" y2="${ys(v)}" stroke="#3a3d42" stroke-dasharray="4 3"/><text x="${pl + 6}" y="${ys(v) - 4}" class="ax">${l} (${String(v).replace(".", ",")} °C)</text>`);
+    for (let v = -2; v <= 4; v++) g += `<text x="${pl - 6}" y="${ys(v) + 4}" text-anchor="end" class="ax">${v > 0 ? "+" : ""}${v}</text>`;
+    g += `<line x1="${pl}" x2="${W - pr}" y1="${ys(0)}" y2="${ys(0)}" stroke="#55595e"/>`;
+    MONTHS.forEach((m, i) => g += `<text x="${xs(i * 52 / 12 + 2.2)}" y="${H - 9}" text-anchor="middle" class="ax">${m}</text>`);
+    yrs.forEach(y => { if (y !== cur && !HL[y]) g += `<path d="${line(S[y])}" fill="none" stroke="#3b4148" stroke-width="1"><title>${y}</title></path>`; });
+    Object.entries(HL).forEach(([y, c]) => { if (S[y]) g += `<path d="${line(S[y])}" fill="none" stroke="${c}" stroke-width="1.8"><title>${y}</title></path>`; });
+    const fc = (N.pron.puntos || []).filter(p => String(p[0]) === cur && p[1] > S[cur].length - 1);
+    if (fc.length) { const last = S[cur].length - 1; g += `<path d="M${xs(last)},${ys(S[cur][last])}${fc.map(p => `L${xs(p[1])},${ys(p[2])}`).join("")}" fill="none" stroke="#ff5a4a" stroke-width="2.5" stroke-dasharray="5 4"/>`; }
+    g += `<path d="${line(S[cur])}" fill="none" stroke="#ff5a4a" stroke-width="3.2"/>`;
+    const L = S[cur].length - 1; g += `<circle cx="${xs(L)}" cy="${ys(S[cur][L])}" r="5" fill="#ff5a4a" stroke="#fff" stroke-width="1.5"/></svg>`;
+    const u = N.ultimo, mx = Object.entries(HL).map(([y]) => [y, Math.max(...S[y])]);
+    return `<div class="wv-hist"><h4>El Niño: este año frente a los anteriores</h4>
+      <p class="wv-nl">Anomalía de la temperatura del mar en la región Niño-3.4 del Pacífico, semana a semana, para cada año desde 1982. Último dato: <b>+${u[1].toFixed(1).replace(".", ",")} °C</b> (${fmt(u[0])}), por encima de cualquier registro de la serie. La línea punteada es el promedio de los modelos de NOAA (emitido el ${fmt(N.pron.emitido)}).</p>
+      ${g}
+      <div class="wv-lg"><span><i style="background:#ff5a4a"></i>${cur}</span>${mx.map(([y, m]) => `<span><i style="background:${HL[y]}"></i>${y} (máx. +${String(m.toFixed(1)).replace(".", ",")})</span>`).join("")}<span><i style="background:#3b4148"></i>resto de los años</span></div>
+      <p class="rk-src">${esc(N.fuente)} · <a href="${esc(N.u)}" target="_blank" rel="noopener">NOAA CPC ↗</a> · <a href="${esc(N.uData)}" target="_blank" rel="noopener">datos OISST ↗</a></p></div>`;
   }
 
   function globalPanel() {
