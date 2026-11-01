@@ -19,7 +19,7 @@ const C = W.CONFLICTS || [];
 const ids = new Set(C.map(c => c.id));
 if (C.length < 10) errs.push(`Sólo ${C.length} conflictos cargados`);
 const AL = W.ALERTS || [];
-if (AL.length > 6) errs.push(`Hay ${AL.length} alertas (máximo 6)`);
+if (AL.filter(a => !a.id).length > 8) errs.push("Hay más de 8 alertas fuera del monitor");
 if (AL.filter(a => a.id).length > 4) errs.push("Hay más de 4 alertas de conflictos del monitor");
 for (const a of AL) {
   if (a.id && !ids.has(a.id)) errs.push(`Alerta con id desconocido: ${a.id}`);

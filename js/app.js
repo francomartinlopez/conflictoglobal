@@ -59,8 +59,8 @@
   function renderAlerts() {
     const box = document.getElementById("alerts");
     box.innerHTML = `<div class="wrap alerts-in">
-      <div class="alerts-head"><h2><span class="live"></span>Alertas activas · ${ALERTS.length}</h2><span>Conflictos del monitor y crisis en el resto del mundo que entraron en una fase importante en los últimos días</span>${(window.NOTES || []).length ? `<a class="notes-jump" href="#notas" onclick="event.preventDefault();document.getElementById('notas').scrollIntoView({behavior:'smooth'})">Notas diplomáticas · ${window.NOTES.length} ↓</a>` : ""}</div>
-      <div class="alert-grid">${ALERTS.slice().sort((x, y) => y.level - x.level).map(a => a.id && byId[a.id] ? `
+      <div class="alerts-head"><h2><span class="live"></span>Alertas activas · ${ALERTS.length}</h2><span>Conflictos del monitor que entraron en una fase importante en los últimos días; debajo, crisis en el resto del mundo</span>${(window.NOTES || []).length ? `<a class="notes-jump" href="#notas" onclick="event.preventDefault();document.getElementById('notas').scrollIntoView({behavior:'smooth'})">Notas diplomáticas · ${window.NOTES.length} ↓</a>` : ""}</div>
+      <div class="alert-grid">${ALERTS.filter(a => a.id && byId[a.id]).sort((x, y) => y.level - x.level).map(a => `
         <a class="alert" href="#c-${a.id}" style="--lv:var(--lv${a.level})">
           <span class="stripe"></span>
           <span class="body">
@@ -69,17 +69,26 @@
             <p>${esc(a.text)}</p>
             <span class="go btn-go">Ver el conflicto <b>→</b></span>
           </span>
-        ` : `
+        </a>`).join("")}</div>${worldAlerts()}${renderNotes()}</div>`;
+  }
+
+  // Crisis fuera del monitor (alertas sin id): debajo de las de conflictos.
+  function worldAlerts() {
+    const w = ALERTS.filter(a => !(a.id && byId[a.id])).sort((x, y) => y.level - x.level);
+    if (!w.length) return "";
+    return `
+      <div class="alerts-head world-head"><h2>En el resto del mundo · ${w.length}</h2><span>Crisis, cambios políticos y tensiones fuera de los conflictos del monitor</span></div>
+      <div class="alert-grid">${w.map(a => `
         <a class="alert world" href="${esc(a.u)}" target="_blank" rel="noopener" style="--lv:var(--lv${a.level})">
           <span class="stripe"></span>
           <span class="body">
             <span class="meta">${lvPill(a.level, "Nivel " + a.level)}<span>${esc(a.tag)}</span><span>· ${fmt(a.date)}</span></span>
-            <span class="where">Fuera del monitor${(a.countries || []).length ? " · " + esc(a.countries.join(" · ")) : ""}</span>
+            <span class="where">${esc((a.countries || []).join(" · "))}</span>
             <h3>${esc(a.title)}</h3>
             <p>${esc(a.text)}</p>
             <span class="go btn-go">${esc(a.st || "Fuente")} <b>↗</b></span>
           </span>
-        </a>`).join("")}</div>${renderNotes()}</div>`;
+        </a>`).join("")}</div>`;
   }
 
   // Notas diplomáticas: hechos de política exterior fuera de los conflictos del monitor.

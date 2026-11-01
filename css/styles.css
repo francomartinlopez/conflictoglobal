@@ -639,3 +639,5 @@ pre.tree { background: var(--surface); border: 1px solid var(--line); border-rad
 .alerts[hidden] { display: none; }
 .alert .where { font: 500 11px/1.3 var(--f-mono); color: #a9b9c8; text-transform: uppercase; letter-spacing: .06em; }
 .alert.world { border-color: #3b3540; }
+.world-head { margin-top: 18px; }
+.world-head h2 { color: #c9b3d6; }
