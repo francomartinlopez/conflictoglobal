@@ -620,3 +620,11 @@ pre.tree { background: var(--surface); border: 1px solid var(--line); border-rad
 .wv-ar b { font-size: 13px; } .wv-ar p { margin: 4px 0 0; font-size: 13px; color: #d7d1cb; }
 .wv-w { margin: 0; padding-left: 18px; font-size: 13px; color: var(--muted); }
 .wv-news { border-top: 1px solid var(--line); margin-top: 14px; padding-top: 12px; }
+
+.wv-hist { border-top: 1px solid var(--line); margin-top: 14px; padding-top: 12px; }
+.wv-hist-g { display: grid; grid-template-columns: 1.1fr 1fr; gap: 20px; }
+@media (max-width: 900px) { .wv-hist-g { grid-template-columns: 1fr; } }
+.wv-hist-g b { display: block; font-size: 14px; margin-bottom: 3px; }
+.wv-hist-g small { display: block; font-size: 12px; color: var(--faint); margin-bottom: 6px; }
+.wv-pdf { width: 100%; height: 440px; border: 1px solid var(--line); border-radius: var(--r); background: #fff; margin: 4px 0 6px; }
+@media (max-width: 640px) { .wv-pdf { height: 300px; } }

@@ -687,8 +687,30 @@
           <div class="wv-ar"><b>Qué significa para la Argentina</b><p>${esc(W.argentina)}</p></div>
           <h4>Qué mirar</h4><ul class="wv-w">${W.watch.map(x => `<li>${esc(x)}</li>`).join("")}</ul></div>
       </div>
+      ${vortexHistory(V)}
       ${W.news && W.news.length ? `<div class="wv-news"><h4>Últimas novedades</h4>${W.news.map(n => `<div class="ev"><span class="dot" style="background:var(--accent)"></span><div><div class="d">${fmt(n.d)}</div><div class="t">${esc(n.h)}</div><div class="x">${esc(n.x)}</div><a class="evsrc" href="${esc(n.u)}" target="_blank" rel="noopener">${esc(n.st)} ↗</a></div></div>`).join("")}</div>` : ""}
     </div>`;
+  }
+
+
+  function vortexHistory(V) {
+    if (!V.nasa && !V.oct) return "";
+    let bars = "";
+    if (V.oct) {
+      const d = V.oct.v, W = 760, H = 190, pl = 34, pr = 8, pt = 14, pb = 24, max = 25, bw = (W - pl - pr) / d.length;
+      const ys = v => pt + (1 - v / max) * (H - pt - pb);
+      bars = `<svg viewBox="0 0 ${W} ${H}" class="area-chart" role="img" aria-label="Viento medio de octubre por año">`;
+      [0, 10, 20].forEach(v => bars += `<line x1="${pl}" x2="${W - pr}" y1="${ys(v)}" y2="${ys(v)}" stroke="#25282b"/><text x="${pl - 5}" y="${ys(v) + 4}" text-anchor="end" class="ax">${v}</text>`);
+      bars += `<line x1="${pl}" x2="${W - pr}" y1="${ys(V.oct.mean)}" y2="${ys(V.oct.mean)}" stroke="#a9cdea" stroke-dasharray="4 3"/><text x="${W - pr}" y="${ys(V.oct.mean) - 4}" text-anchor="end" class="ax" style="fill:#a9cdea">promedio ${String(V.oct.mean).replace(".", ",")}</text>`;
+      const lo = d.reduce((a, b) => b[1] < a[1] ? b : a);
+      d.forEach(([y, v], i) => { const x = pl + i * bw + bw * .15, yy = ys(v); bars += `<rect x="${x.toFixed(1)}" y="${yy.toFixed(1)}" width="${(bw * .7).toFixed(1)}" height="${(H - pb - yy).toFixed(1)}" rx="1.5" fill="${y === lo[0] ? "#e0584b" : "#4f84b0"}"><title>Octubre ${y}: ${String(v).replace(".", ",")} m/s</title></rect>`; if (y % 5 === 0) bars += `<text x="${x + bw * .35}" y="${H - 8}" text-anchor="middle" class="ax">${y}</text>`; });
+      bars += `</svg>`;
+      bars = `<div class="wv-hist-b"><b>Viento medio de octubre a 10 hPa y 60°N, 1979–${d[d.length - 1][0]}</b><small>Cuanto más bajo, más débil el vórtice. En rojo, el octubre más débil de la serie (${lo[0]}: ${String(lo[1]).replace(".", ",")} m/s). El promedio de octubre de 2026 se suma cuando la NASA lo publique, a comienzos de noviembre.</small>${bars}<small><a href="${esc(V.oct.src)}" target="_blank" rel="noopener">NASA, reanálisis MERRA-2 ↗</a></small></div>`;
+    }
+    const pdf = V.nasa ? `<div class="wv-hist-n"><b>La temporada actual frente a 1979–2025 (gráfico oficial de la NASA)</b><small>Línea del año en curso contra los mínimos, máximos y percentiles de todas las temporadas desde 1979, con el pronóstico del modelo GEOS de la NASA. Lo actualiza la NASA todos los días.</small>
+      <object data="${esc(V.nasa.pdf)}#view=FitH&toolbar=0" type="application/pdf" class="wv-pdf"><p class="muted">Tu navegador no muestra el gráfico acá. <a href="${esc(V.nasa.pdf)}" target="_blank" rel="noopener">Abrilo en la NASA ↗</a></p></object>
+      <small><a href="${esc(V.nasa.pdf)}" target="_blank" rel="noopener">Abrir el gráfico en pantalla completa ↗</a> · <a href="${esc(V.nasa.page)}" target="_blank" rel="noopener">NASA Ozone Watch ↗</a></small></div>` : "";
+    return `<div class="wv-hist"><h4>Cómo viene este año comparado con los anteriores</h4><div class="wv-hist-g">${pdf}${bars}</div></div>`;
   }
 
   function globalPanel() {
