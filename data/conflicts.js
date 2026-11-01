@@ -19,6 +19,16 @@ window.ALERTS = [
   { id: "rusia-ucrania", level: 4, tag: "Ventana diplomática", date: "2026-10-31",
     title: "Rusia–Ucrania: ofensiva contra la red eléctrica y evacuación de Oleshky",
     text: "Unos 280.000 hogares quedaron sin luz en Dnipropetrovsk y Kiev tras más de 300 drones en un día, y Ucrania respondió contra refinerías de Ufá. Bajo la tregua local, parte de los vecinos de Oleshky llegó a territorio ucraniano. El G20 de cancilleres terminó sin comunicado por las diferencias sobre Ucrania e Irán; el Kremlin dice que la trilateral de Abu Dabi será después del 4 de noviembre." }
+,
+  /* Crisis fuera de los conflictos del monitor (sin id: enlazan a la fuente). */
+  { level: 3, tag: "Crisis institucional", date: "2026-10-31", countries: ["Polonia", "Unión Europea"],
+    title: "Polonia: choque abierto entre Tusk y el presidente Nawrocki por el Tribunal Constitucional",
+    text: "El 30 de octubre el tribunal anunció la suspensión de su presidente, Bogdan Święczkowski, a quien el gobierno proeuropeo de Donald Tusk acusa de impedir que asuman los jueces elegidos por el Sejm. La policía cerró el acceso al edificio y hubo detenidos en las protestas. El presidente Karol Nawrocki, aliado de PiS, pegó la vuelta en pleno vuelo a Senegal, entró al tribunal con el juez suspendido y la oposición habla de golpe; Tusk descarta negociar. La Comisión Europea le pidió a Nawrocki que tome juramento a los jueces elegidos por el Parlamento. Faltan unos doce meses para las legislativas.",
+    u: "https://www.egyptindependent.com/tensions-over-polands-top-court-ignite-as-the-countrys-prime-minister-and-president-square-off/", st: "AP" },
+  { level: 2, tag: "Tensión militar", date: "2026-10-27", countries: ["India", "China"],
+    title: "India y China: varios cara a cara de tropas en Arunachal Pradesh",
+    text: "El jefe saliente de la policía fronteriza india (ITBP), Shatrujeet Kapur, reconoció que sus fuerzas siguen trabadas en varios enfrentamientos sin disparos con el ejército chino en la frontera del noreste, en la zona de Upper Subansiri. Nueva Delhi acusa a Pekín de apartarse de los patrullajes acordados y China responde que se mueve dentro de lo pactado. No hay víctimas informadas: es la mayor fricción desde Galwan (2020) y llega semanas después de la visita de Xi Jinping a Nueva Delhi.",
+    u: "https://www.aljazeera.com/news/2026/10/27/india-china-border-face-offs-test-modi-six-years-after-deadly-clash", st: "Al Jazeera" },
 ];
 
 /* Notas diplomáticas: hechos de política exterior que no son conflictos armados del monitor

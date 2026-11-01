@@ -18,8 +18,12 @@ if (!okDate(M.updated)) errs.push("MONITOR_META.updated inválido");
 const C = W.CONFLICTS || [];
 const ids = new Set(C.map(c => c.id));
 if (C.length < 10) errs.push(`Sólo ${C.length} conflictos cargados`);
-for (const a of W.ALERTS || []) {
-  if (!ids.has(a.id)) errs.push(`Alerta con id desconocido: ${a.id}`);
+const AL = W.ALERTS || [];
+if (AL.length > 6) errs.push(`Hay ${AL.length} alertas (máximo 6)`);
+if (AL.filter(a => a.id).length > 4) errs.push("Hay más de 4 alertas de conflictos del monitor");
+for (const a of AL) {
+  if (a.id && !ids.has(a.id)) errs.push(`Alerta con id desconocido: ${a.id}`);
+  if (!a.id && (!a.u || !/^https?:\/\//.test(a.u) || !a.st || !(a.countries || []).length)) errs.push(`Alerta fuera del monitor (${a.title}): faltan países o fuente (u y st)`);
   if (!(a.level >= 1 && a.level <= 5)) errs.push(`Alerta ${a.id}: nivel inválido`);
   if (!okDate(a.date)) errs.push(`Alerta ${a.id}: fecha inválida`);
 }

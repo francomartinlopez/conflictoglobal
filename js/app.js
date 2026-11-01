@@ -59,8 +59,8 @@
   function renderAlerts() {
     const box = document.getElementById("alerts");
     box.innerHTML = `<div class="wrap alerts-in">
-      <div class="alerts-head"><h2><span class="live"></span>Alertas activas · ${ALERTS.length}</h2><span>Conflictos que entraron en una fase importante en los últimos días</span>${(window.NOTES || []).length ? `<a class="notes-jump" href="#notas" onclick="event.preventDefault();document.getElementById('notas').scrollIntoView({behavior:'smooth'})">Notas diplomáticas · ${window.NOTES.length} ↓</a>` : ""}</div>
-      <div class="alert-grid">${ALERTS.map(a => `
+      <div class="alerts-head"><h2><span class="live"></span>Alertas activas · ${ALERTS.length}</h2><span>Conflictos del monitor y crisis en el resto del mundo que entraron en una fase importante en los últimos días</span>${(window.NOTES || []).length ? `<a class="notes-jump" href="#notas" onclick="event.preventDefault();document.getElementById('notas').scrollIntoView({behavior:'smooth'})">Notas diplomáticas · ${window.NOTES.length} ↓</a>` : ""}</div>
+      <div class="alert-grid">${ALERTS.slice().sort((x, y) => y.level - x.level).map(a => a.id && byId[a.id] ? `
         <a class="alert" href="#c-${a.id}" style="--lv:var(--lv${a.level})">
           <span class="stripe"></span>
           <span class="body">
@@ -68,6 +68,16 @@
             <h3>${esc(a.title)}</h3>
             <p>${esc(a.text)}</p>
             <span class="go btn-go">Ver el conflicto <b>→</b></span>
+          </span>
+        ` : `
+        <a class="alert world" href="${esc(a.u)}" target="_blank" rel="noopener" style="--lv:var(--lv${a.level})">
+          <span class="stripe"></span>
+          <span class="body">
+            <span class="meta">${lvPill(a.level, "Nivel " + a.level)}<span>${esc(a.tag)}</span><span>· ${fmt(a.date)}</span></span>
+            <span class="where">Fuera del monitor${(a.countries || []).length ? " · " + esc(a.countries.join(" · ")) : ""}</span>
+            <h3>${esc(a.title)}</h3>
+            <p>${esc(a.text)}</p>
+            <span class="go btn-go">${esc(a.st || "Fuente")} <b>↗</b></span>
           </span>
         </a>`).join("")}</div>${renderNotes()}</div>`;
   }
@@ -107,6 +117,8 @@
     else if (h === "metodologia") { renderMethod(); current = "method"; }
     else if (h === "geopolitica" && window.GEO) { renderGeo(); current = "geo"; }
     else { renderHome(); current = "home"; }
+    // Las alertas y las notas diplomáticas van sólo en la portada.
+    const al = document.getElementById("alerts"); if (al) al.hidden = current !== "home";
     if (current === "home") { window.scrollTo(0, first ? 0 : homeScroll); return; }
     const top = document.querySelector(".topbar"), off = top ? top.getBoundingClientRect().height : 0;
     window.scrollTo(0, Math.max(0, app.getBoundingClientRect().top + window.scrollY - off - 4));
