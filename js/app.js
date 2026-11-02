@@ -682,6 +682,7 @@
       </div>
       ${cyberPanel()}
       ${winterPanel(G.winter)}
+      ${ninoChart()}
       <div class="panel gp rk-oil"><h3>Reservas estratégicas de petróleo por país <small>millones de barriles · días de importaciones netas que cubren</small></h3>
         <table class="gp-t"><thead><tr><th>País</th><th></th><th>M barriles</th><th>Cobertura</th><th>Fuente y fecha</th></tr></thead><tbody>${rows}</tbody></table>
         <p class="gp-note">No existe un inventario mundial homogéneo: cada país informa con otra fecha y otro criterio, y varias cifras ya incluyen lo liberado desde marzo. China no publica su reserva y la cifra es una estimación. La AIE exige a sus miembros 90 días de importaciones netas; EE.UU. es exportador neto y no aplica. ${src(O.cSrc, O.cU)}.</p></div>`;
@@ -795,7 +796,8 @@
     const span = 45, pos = v => Math.max(0, Math.min(100, (v + 15) / span * 100));
     const gauge = `<div class="wv-g"><div class="wv-track"><i class="wv-neg" style="width:${pos(0)}%"></i><b class="wv-z" style="left:${pos(0)}%"></b><span class="wv-dot" style="left:${pos(V.u)}%"></span></div>
       <div class="dc-lab"><span>−15 m/s</span><span>0 · inversión de los vientos</span><span>30 m/s</span></div></div>`;
-    return `<div class="panel wv" id="invierno"><div class="wv-head"><h3>Invierno boreal: vórtice polar y energía</h3>${lvPill(W.level, W.levelTxt)}<span class="rk-src">Actualizado ${fmt(W.updated)}</span></div>
+    return `<div class="section-title" id="invierno"><h2>Invierno boreal: vórtice polar y energía</h2><span>Si el vórtice se debilita, el frío ártico baja a Europa, Asia y América del Norte y sube la demanda de gas y electricidad</span></div>
+      <div class="panel wv"><div class="wv-head">${lvPill(W.level, W.levelTxt)}<span class="rk-src">Actualizado ${fmt(W.updated)}</span></div>
       <p class="wv-sum">${esc(W.summary)}</p>
       <div class="wv-grid">
         <div class="wv-col"><h4>Vórtice polar</h4>
@@ -810,7 +812,6 @@
           <h4>Qué mirar</h4><ul class="wv-w">${W.watch.map(x => `<li>${esc(x)}</li>`).join("")}</ul></div>
       </div>
       ${vortexHistory(V)}
-      ${ninoChart()}
       ${W.news && W.news.length ? `<div class="wv-news"><h4>Últimas novedades</h4>${W.news.map(n => `<div class="ev"><span class="dot" style="background:var(--accent)"></span><div><div class="d">${fmt(n.d)}</div><div class="t">${esc(n.h)}</div><div class="x">${esc(n.x)}</div><a class="evsrc" href="${esc(n.u)}" target="_blank" rel="noopener">${esc(n.st)} ↗</a></div></div>`).join("")}</div>` : ""}
     </div>`;
   }
@@ -880,7 +881,8 @@
     g += `<path d="${line(S[cur])}" fill="none" stroke="#ff5a4a" stroke-width="3.2"/>`;
     const L = S[cur].length - 1; g += `<circle cx="${xs(L)}" cy="${ys(S[cur][L])}" r="5" fill="#ff5a4a" stroke="#fff" stroke-width="1.5"/></svg>`;
     const u = N.ultimo, mx = Object.entries(HL).map(([y]) => [y, Math.max(...S[y])]);
-    return `<div class="wv-hist"><h4>El Niño: este año frente a los anteriores</h4>
+    return `<div class="section-title" id="nino"><h2>El Niño</h2><span>Temperatura del Pacífico ecuatorial: este año frente a todos los registros desde 1982</span></div>
+      <div class="panel wv nino-p"><h4 class="nino-h">Anomalía semana a semana en la región Niño-3.4</h4>
       <p class="wv-nl">Anomalía de la temperatura del mar en la región Niño-3.4 del Pacífico, semana a semana, para cada año desde 1982. Último dato: <b>+${u[1].toFixed(1).replace(".", ",")} °C</b> (${fmt(u[0])}), por encima de cualquier registro de la serie. La línea punteada es el promedio de los modelos de NOAA (emitido el ${fmt(N.pron.emitido)}).</p>
       ${g}
       <div class="wv-lg"><span><i style="background:#ff5a4a"></i>${cur}</span>${mx.map(([y, m]) => `<span><i style="background:${HL[y]}"></i>${y} (máx. +${String(m.toFixed(1)).replace(".", ",")})</span>`).join("")}<span><i style="background:#3b4148"></i>resto de los años</span></div>

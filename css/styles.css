@@ -674,3 +674,12 @@ pre.tree { background: var(--surface); border: 1px solid var(--line); border-rad
 .cy-ev p { margin: 0 0 5px; font-size: 13px; line-height: 1.45; color: #cfc4bf; }
 .cy-act { color: var(--muted) !important; } .cy-chain { color: #e8d9a8 !important; }
 @media (max-width: 900px) { .cy-grid { grid-template-columns: 1fr; } .cy-side { max-height: none; } .cy-row > b { min-width: 0; width: 100%; } }
+
+/* Secciones del invierno y El Niño: títulos visibles */
+.wv h4, .nino-h { font: 700 14px/1.2 var(--f-mono); letter-spacing: .08em; color: #c9d3dc; margin: 6px 0 12px; }
+.wv-hist h4 { font: 700 16px/1.25 var(--f-ui); text-transform: none; letter-spacing: 0; color: var(--text); }
+.wv-nl, .nino-p .wv-nl { font-size: 15px; line-height: 1.5; color: #d8d2cc; margin: 0 0 10px; }
+.wv-nl b { color: #fff; }
+.nino-p .wv-lg { font-size: 13.5px; color: #cfc8c2; }
+.wv-sum { font-size: 15px; }
+.nino-p svg .ax, .wv-hist svg .ax { fill: #bdb6b0; font-size: 13px; }
