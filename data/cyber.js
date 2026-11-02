@@ -1,7 +1,7 @@
 /* Ciberataques y fallas en sistemas conectados. Lo actualiza la tarea diaria (ver CLAUDE.md, paso 7 bis).
    c: países con el nombre en inglés de data/world.js ([] = sin país, por ejemplo un exchange global).
    sec: clave de SECTORS · cause: ataque | sospecha | falla | fisico
-   actor: { t: criminal | estatal | activista | desconocido, n: nombre o atribución }
+   actor: { t: criminal | estatal | activista | desconocido, n: nombre o atribución, from: ["Country"] si una fuente atribuye el origen a un Estado }
    chain: texto si hubo efecto en cadena (un proveedor que arrastra a muchos clientes) · dq: 1 = fecha aproximada */
 window.CYBER = {
   updated: "2026-11-02",
@@ -59,7 +59,7 @@ window.CYBER = {
       x: "Publicaron datos robados de Onamae, el servicio de escritorios virtuales que usan operadores financieros. Podrían estar afectados unos 26.000 servidores de clientes.",
       chain: "Un proveedor de nube con miles de clientes.",
       u: "https://this.weekinsecurity.com/this-week-in-security-november-1-2026-edition/", st: "this week in security" },
-    { d: "2026-10-27", dq: 1, c: ["Spain"], sec: "industria", cause: "ataque", actor: { t: "estatal", n: "Hackers alineados con Rusia" },
+    { d: "2026-10-27", dq: 1, c: ["Spain"], sec: "industria", cause: "ataque", actor: { t: "estatal", n: "Hackers alineados con Rusia", from: ["Russia"] },
       h: "Sabotajes informáticos con daño físico en una veintena de países",
       x: "Hackers alineados con Rusia alteraron controles de temperatura de bodegas y hornos de crematorios, entre otros equipos, en España y otros unos 20 países, muchos de la OTAN.",
       u: "https://this.weekinsecurity.com/this-week-in-security-november-1-2026-edition/", st: "this week in security" },
@@ -79,7 +79,7 @@ window.CYBER = {
       h: "Caen más de 80 sitios de servicios públicos en Moldavia",
       x: "Robaron datos personales de unas 750.000 personas, cerca de un tercio de la población; unas dos docenas de sitios seguían fuera de línea.",
       u: "https://this.weekinsecurity.com/this-week-in-security-november-1-2026-edition/", st: "this week in security" },
-    { d: "2026-10-28", dq: 1, c: ["United Kingdom"], sec: "telecom", cause: "ataque", actor: { t: "estatal", n: "Sospecha de actores vinculados a China" },
+    { d: "2026-10-28", dq: 1, c: ["United Kingdom"], sec: "telecom", cause: "ataque", actor: { t: "estatal", n: "Sospecha de actores vinculados a China (según la empresa)", from: ["China"] },
       h: "Ataque automatizado con IA contra el registrador 123-Reg",
       x: "Extrajeron datos de contacto de clientes; la empresa dice que el ataque fue conducido con IA.",
       u: "https://this.weekinsecurity.com/this-week-in-security-november-1-2026-edition/", st: "this week in security" },
@@ -88,7 +88,7 @@ window.CYBER = {
       x: "Hackers tuvieron acceso al sistema central del fabricante chino de inversores Sungrow, desde el que se podían desconectar a la vez unas 250.000 instalaciones solares en Alemania, con riesgo para la estabilidad de la red.",
       chain: "Un fabricante controla a distancia cientos de miles de equipos.",
       u: "https://this.weekinsecurity.com/this-week-in-security-november-1-2026-edition/", st: "this week in security" },
-    { d: "2026-10-29", dq: 1, c: ["United States of America"], sec: "defensa", cause: "sospecha", actor: { t: "estatal", n: "Funcionarios de EE.UU. sospechan de Irán" },
+    { d: "2026-10-29", dq: 1, c: ["United States of America"], sec: "defensa", cause: "sospecha", actor: { t: "estatal", n: "Funcionarios de EE.UU. sospechan de Irán", from: ["Iran"] },
       h: "Investigan como ciberataque las fallas de freezers en bases militares",
       x: "Desde agosto, freezers de comisariatos de varias bases se descompusieron y se perdió comida; las autoridades lo tratan como un posible ataque.",
       u: "https://this.weekinsecurity.com/this-week-in-security-november-1-2026-edition/", st: "this week in security" },
@@ -108,10 +108,10 @@ window.CYBER = {
       h: "Déficit récord de la semana y caída de una línea en Santa Clara",
       x: "El déficit llegó a 2.004 MW, una línea de 110 kV dejó sin luz a la mayor parte de Santa Clara y hubo cortes de hasta 89 horas en Cienfuegos. Varias provincias quedaron desconectadas del sistema nacional durante la semana.",
       u: "https://www.cubaheadlines.com/articles/344392", st: "CiberCuba" },
-    { d: "2026-10-30", c: [], sec: "finanzas", cause: "ataque", actor: { t: "estatal", n: "Corea del Norte (TraderTraitor), según TRM Labs y Chainalysis; el FBI investiga sin atribuir" },
-      h: "Robo récord de US$ 6.300 millones a Binance",
-      x: "Sacaron unos US$ 6.360 millones de las billeteras del exchange en diez blockchains, la mayor parte en unos 20 minutos. Binance congeló cerca de US$ 3.000 millones y suspendió los retiros.",
-      u: "https://www.nextgov.com/cybersecurity/2026/10/fbi-involved-response-63-billion-binance-hack-linked-north-korea/416946/", st: "Nextgov" },
+    { d: "2026-10-29", c: [], sec: "finanzas", cause: "ataque", actor: { t: "estatal", n: "Corea del Norte (TraderTraitor, también llamado Lazarus o APT38), según el FBI; antes lo habían atribuido TRM Labs y Chainalysis", from: ["North Korea"] },
+      h: "Robo récord de más de US$ 6.000 millones a Binance",
+      x: "Los atacantes usaron el acceso desde la laptop de un ingeniero para pedir retiros no autorizados y sacaron unos US$ 6.360 millones de las billeteras del exchange en diez blockchains, la mayor parte en unos 20 minutos. Es el mayor robo de criptomonedas registrado. El FBI lo atribuyó a Corea del Norte y pidió a las plataformas bloquear las direcciones usadas; los congelamientos suman unos US$ 2.700 millones.",
+      u: "https://securityaffairs.com/202221/apt/fbi-blames-north-korea-for-6-billion-binance-crypto-theft.html", st: "Security Affairs (alerta del FBI)" },
     { d: "2026-10-30", c: ["Philippines"], sec: "energia", cause: "falla", actor: null,
       h: "Alerta roja en la red de las Visayas y cortes rotativos",
       x: "Con 782 MW fuera de servicio y ocho centrales con fallas en octubre, la oferta no alcanzó la demanda.",
@@ -132,7 +132,7 @@ window.CYBER = {
       h: "Apagón extendido: la eléctrica sospecha sabotaje",
       x: "Guyana Power and Light dice que sospecha con firmeza una interferencia deliberada en una línea de alta tensión; no hay confirmación policial.",
       u: "https://www.riotimesonline.com/guyana-gpl-blames-sabotage-widespread-blackout-2026/", st: "Rio Times" },
-    { d: "2026-11-02", c: ["Ukraine"], sec: "energia", cause: "fisico", actor: { t: "estatal", n: "Rusia" },
+    { d: "2026-11-02", c: ["Ukraine"], sec: "energia", cause: "fisico", actor: { t: "estatal", n: "Rusia", from: ["Russia"] },
       h: "Cortes de luz en nueve regiones por los bombardeos",
       x: "Los ataques rusos contra la red dejaron cortes en Vínnytsia, Donetsk, Dnipropetrovsk, Zaporiyia, Cherkasy, Kirovohrad, Rivne, Odesa y Járkov.",
       u: "https://sud.ua/en/news/ukraine/376498-u-deviaty-oblastiakh-novi-znestrumlennia-hrafiky-diiatymut-do-kintsia-doby-shcho-vidbuvaietsia-zi-svitlom", st: "sud.ua" },

@@ -683,3 +683,5 @@ pre.tree { background: var(--surface); border: 1px solid var(--line); border-rad
 .nino-p .wv-lg { font-size: 13.5px; color: #cfc8c2; }
 .wv-sum { font-size: 15px; }
 .nino-p svg .ax, .wv-hist svg .ax { fill: #bdb6b0; font-size: 13px; }
+.cy-off { border-top: 1px solid var(--line); margin-top: 10px; padding-top: 8px; font-size: 13px; } .cy-off p { margin: 4px 0; } .cy-off b { font: 500 11px/1 var(--f-mono); text-transform: uppercase; letter-spacing: .06em; color: var(--faint); }
+.cy-orig { color: #e8d9a8; }

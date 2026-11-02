@@ -699,7 +699,8 @@
     const C = window.CYBER, host = document.getElementById("cyber"); if (!C || !host) return;
     const SEC = Object.fromEntries(C.sectors.map(s => [s[0], s])), CAU = Object.fromEntries(C.causes.map(s => [s[0], s]));
     const es = n => (window.GEO && window.GEO.es && window.GEO.es[n]) || n;
-    const st = { days: 30, sec: new Set(), cau: new Set(), by: "cause", chain: false, sel: null };
+    const st = { days: 30, sec: new Set(), cau: new Set(), by: "cause", chain: false, sel: null, view: "afect" };
+    const where = e => st.view === "origen" ? ((e.actor && e.actor.from) || []) : e.c;
     const dnum = d => Date.parse(d + "T00:00:00Z"), ref = dnum(C.updated);
     const match = e => (!st.days || ref - dnum(e.d) <= st.days * 864e5) && (!st.sec.size || st.sec.has(e.sec)) && (!st.cau.size || st.cau.has(e.cause)) && (!st.chain || e.chain);
     const W = 960, H = 470;
@@ -707,6 +708,7 @@
     const chip = (grp, k, lab, col) => `<button type="button" class="chip cy-chip" data-g="${grp}" data-k="${k}">${col ? `<i style="background:${col}"></i>` : ""}${esc(lab)}</button>`;
     host.innerHTML = `
       <div class="cy-ctrl">
+        <div class="cy-row"><b>Ver en el mapa</b>${[["afect", "Países afectados"], ["origen", "Origen atribuido del ataque"]].map(([k, l]) => chip("view", k, l)).join("")}</div>
         <div class="cy-row"><b>Período</b>${[[7, "7 días"], [30, "30 días"], [0, "Todo"]].map(([d, l]) => chip("days", d, l)).join("")}</div>
         <div class="cy-row"><b>Causa</b>${chip("cau", "*", "Todas")}${C.causes.map(c => chip("cau", c[0], c[1], c[2])).join("")}</div>
         <div class="cy-row"><b>Sector</b>${chip("sec", "*", "Todos")}${C.sectors.map(s => chip("sec", s[0], s[1], s[2])).join("")}</div>
@@ -726,13 +728,13 @@
       <p class="gp-note">Cuenta sólo hechos publicados con fuente; los ataques que nadie denuncia no aparecen y la atribución a un Estado suele ser de empresas privadas, no oficial. La causa se reclasifica si la investigación cambia.</p>`;
     const $ = id => host.querySelector("#" + id), paths = [...host.querySelectorAll("#cyC path")];
     const ORD = { ataque: 0, fisico: 1, sospecha: 2, falla: 3 };
-    const byCountry = () => { const m = {}; for (const e of C.events) if (match(e)) for (const c of e.c) (m[c] = m[c] || []).push(e); return m; };
+    const byCountry = () => { const m = {}; for (const e of C.events) if (match(e)) for (const c of where(e)) (m[c] = m[c] || []).push(e); return m; };
     const dominant = (evs, key) => { const n = {}; evs.forEach(e => n[e[key]] = (n[e[key]] || 0) + 1); return Object.entries(n).sort((a, b) => b[1] - a[1] || (key === "cause" ? ORD[a[0]] - ORD[b[0]] : 0))[0][0]; };
     const RAMP = ["#4a3a2a", "#8a5a2e", "#c9783a", "#e0583f", "#ff6b5f"];
     const tag = (o, cls) => `<span class="cy-tag ${cls || ""}"><i style="background:${o[2]}"></i>${esc(o[1])}</span>`;
     const evHtml = e => `<div class="cy-ev"><div class="cy-evm"><span class="d">${fmt(e.d)}${e.dq ? " (aprox.)" : ""}</span>${tag(SEC[e.sec])}${tag(CAU[e.cause])}${e.c.length ? `<span class="cy-pais">${esc(e.c.map(es).join(" · "))}</span>` : `<span class="cy-pais">Sin país definido</span>`}</div>
       <h4>${esc(e.h)}</h4><p>${esc(e.x)}</p>
-      ${e.actor ? `<p class="cy-act"><b>Actor:</b> ${e.actor.t === "desconocido" ? esc(e.actor.n || "Sin identificar") : `${esc(C.actors[e.actor.t] || "")}${e.actor.n ? ` · ${esc(e.actor.n)}` : ""}`}</p>` : `<p class="cy-act"><b>Actor:</b> no aplica (falla o daño sin autor identificado)</p>`}
+      ${e.actor ? `<p class="cy-act"><b>Actor:</b> ${e.actor.from ? `<span class="cy-orig">Origen atribuido: ${esc(e.actor.from.map(es).join(", "))}</span> · ` : ""}${e.actor.t === "desconocido" ? esc(e.actor.n || "Sin identificar") : `${esc(C.actors[e.actor.t] || "")}${e.actor.n ? ` · ${esc(e.actor.n)}` : ""}`}</p>` : `<p class="cy-act"><b>Actor:</b> no aplica (falla o daño sin autor identificado)</p>`}
       ${e.chain ? `<p class="cy-chain">⛓ <b>Efecto en cadena:</b> ${esc(e.chain)}</p>` : ""}
       <a class="evsrc" href="${esc(e.u)}" target="_blank" rel="noopener">${esc(e.st)} ↗</a></div>`;
     const side = () => {
@@ -741,7 +743,7 @@
         const n = FEATURES[st.sel].properties.name, evs = (m[n] || []).slice().sort((a, b) => b.d.localeCompare(a.d));
         const cnt = (k, list) => list.map(o => [o, evs.filter(e => e[k] === o[0]).length]).filter(x => x[1]).map(([o, v]) => `<span class="cy-tag"><i style="background:${o[2]}"></i>${esc(o[1])} <b>${v}</b></span>`).join("");
         $("cySide").innerHTML = `<div class="cy-fhead"><h3>${esc(es(n))}</h3><button type="button" class="btn" id="cyClose" aria-label="Cerrar ficha">✕</button></div>
-          ${evs.length ? `<p class="muted cy-fsum">${evs.length} ${evs.length === 1 ? "hecho" : "hechos"} con los filtros elegidos${evs.some(e => e.chain) ? " · incluye efecto en cadena" : ""}</p>
+          ${evs.length ? `<p class="muted cy-fsum">${evs.length} ${evs.length === 1 ? "hecho" : "hechos"} ${st.view === "origen" ? (evs.length === 1 ? "atribuido a este país" : "atribuidos a este país") : "con los filtros elegidos"}${evs.some(e => e.chain) ? " · incluye efecto en cadena" : ""}</p>
           <div class="cy-fcnt"><b>Por causa</b>${cnt("cause", C.causes)}</div><div class="cy-fcnt"><b>Por sector</b>${cnt("sec", C.sectors)}</div>
           <div class="cy-flist">${evs.map(evHtml).join("")}</div>` : `<p class="muted">Sin hechos registrados con los filtros elegidos.</p>`}`;
         $("cyClose").onclick = () => { st.sel = null; draw(); };
@@ -750,12 +752,13 @@
         const tot = (k, list) => list.map(o => [o, evs.filter(e => e[k] === o[0]).length]).filter(x => x[1]).sort((a, b) => b[1] - a[1]).map(([o, v]) => `<span class="cy-tag"><i style="background:${o[2]}"></i>${esc(o[1])} <b>${v}</b></span>`).join("");
         $("cySide").innerHTML = `<h3>Resumen</h3><p class="cy-big"><b>${evs.length}</b> hechos · <b>${cs}</b> países</p>
           <div class="cy-fcnt"><b>Por causa</b>${tot("cause", C.causes) || "—"}</div><div class="cy-fcnt"><b>Por sector</b>${tot("sec", C.sectors) || "—"}</div>
-          <p class="muted" style="font-size:13px">Tocá un país del mapa para abrir su ficha.</p>`;
+          ${(() => { const off = evs.filter(e => !where(e).length); return off.length ? `<div class="cy-off"><b>${st.view === "origen" ? "Sin origen atribuido a un Estado" : "Sin país en el mapa"} · ${off.length}</b>${(st.view === "origen" ? off.slice(0, 0) : off).map(e => `<p>${esc(e.h)}${e.actor && e.actor.from ? ` <span class="muted">· origen atribuido: ${esc(e.actor.from.map(es).join(", "))}</span>` : ""}</p>`).join("")}${st.view === "origen" ? `<p class="muted">Son ataques sin atribución a un Estado, fallas técnicas o hechos de criminales comunes.</p>` : ""}</div>` : ""; })()}
+          <p class="muted" style="font-size:13px">${st.view === "origen" ? "El mapa muestra el Estado al que una fuente atribuye el ataque. Tocá un país para ver qué se le atribuye." : "Tocá un país del mapa para abrir su ficha."}</p>`;
       }
     };
     const draw = () => {
       host.querySelectorAll(".cy-chip").forEach(b => { const g = b.dataset.g, k = b.dataset.k;
-        b.classList.toggle("on", g === "days" ? +k === st.days : g === "by" ? k === st.by : k === "*" ? !st[g].size : st[g].has(k)); });
+        b.classList.toggle("on", g === "days" ? +k === st.days : g === "by" ? k === st.by : g === "view" ? k === st.view : k === "*" ? !st[g].size : st[g].has(k)); });
       const m = byCountry(), mx = Math.max(1, ...Object.values(m).map(v => v.length));
       paths.forEach((p, i) => { const evs = m[FEATURES[i].properties.name];
         let fill = "var(--land)", op = 1;
@@ -776,7 +779,7 @@
     };
     host.querySelector(".cy-ctrl").addEventListener("click", e => {
       const b = e.target.closest(".cy-chip"); if (!b) return; const g = b.dataset.g, k = b.dataset.k;
-      if (g === "days") st.days = +k; else if (g === "by") st.by = k;
+      if (g === "days") st.days = +k; else if (g === "by") st.by = k; else if (g === "view") { st.view = k; st.sel = null; }
       else if (k === "*") st[g].clear(); else st[g].has(k) ? st[g].delete(k) : st[g].add(k);
       draw();
     });
@@ -784,7 +787,7 @@
     const cg = $("cyC");
     cg.addEventListener("click", e => { const p = e.target.closest("path"); if (!p) return; st.sel = +p.dataset.i; draw(); if (window.innerWidth < 900) $("cySide").scrollIntoView({ behavior: "smooth", block: "start" }); });
     cg.addEventListener("mousemove", e => { const p = e.target.closest("path"); if (!p) return hideTip(); const n = FEATURES[+p.dataset.i].properties.name, evs = byCountry()[n] || [];
-      showTip(e, `<b>${esc(es(n))}</b><span class="d">${evs.length ? `${evs.length} ${evs.length === 1 ? "hecho" : "hechos"} · ${[...new Set(evs.map(x => CAU[x.cause][1]))].join(", ")}` : "Sin hechos con estos filtros"}</span>`); });
+      showTip(e, `<b>${esc(es(n))}</b><span class="d">${evs.length ? `${evs.length} ${evs.length === 1 ? "hecho" : "hechos"}${st.view === "origen" ? " atribuidos" : ""} · ${[...new Set(evs.map(x => CAU[x.cause][1]))].join(", ")}` : "Sin hechos con estos filtros"}</span>`); });
     cg.addEventListener("mouseleave", hideTip);
     draw();
   }

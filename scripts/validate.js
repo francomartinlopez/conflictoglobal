@@ -66,6 +66,7 @@ else {
     if (!Array.isArray(e.c)) errs.push(`${w}: c tiene que ser una lista de países`);
     else e.c.forEach(n => { if (!names.has(n)) errs.push(`${w}: país "${n}" no está en data/world.js`); });
     if (e.actor && !CY.actors[e.actor.t]) errs.push(`${w}: tipo de actor desconocido`);
+    if (e.actor && e.actor.from) e.actor.from.forEach(n => { if (!names.has(n)) errs.push(`${w}: origen "${n}" no está en data/world.js`); });
     if (!e.h || !e.x || !e.u || !/^https?:\/\//.test(e.u) || !e.st) errs.push(`${w}: faltan título, texto o fuente`);
   });
 }
