@@ -52,6 +52,23 @@ for (const c of C) {
     const k = e.d + "|" + e.h; if (seen.has(k)) errs.push(`${w}: duplicado`); seen.add(k);
   });
 }
+const CY = W.CYBER;
+if (!CY) errs.push("Falta CYBER (data/cyber.js)");
+else {
+  if (!okDate(CY.updated)) errs.push("CYBER.updated inválido");
+  const secs = new Set(CY.sectors.map(s => s[0])), caus = new Set(CY.causes.map(s => s[0]));
+  const names = new Set(((W.WORLD || {}).objects || { countries: { geometries: [] } }).countries.geometries.map(g => g.properties.name));
+  CY.events.forEach((e, i) => {
+    const w = `CYBER evento #${i} (${e.h})`;
+    if (!okDate(e.d)) errs.push(`${w}: fecha inválida`); else if (e.d > CY.updated) errs.push(`${w}: fecha posterior a CYBER.updated`);
+    if (!secs.has(e.sec)) errs.push(`${w}: sector desconocido ${e.sec}`);
+    if (!caus.has(e.cause)) errs.push(`${w}: causa desconocida ${e.cause}`);
+    if (!Array.isArray(e.c)) errs.push(`${w}: c tiene que ser una lista de países`);
+    else e.c.forEach(n => { if (!names.has(n)) errs.push(`${w}: país "${n}" no está en data/world.js`); });
+    if (e.actor && !CY.actors[e.actor.t]) errs.push(`${w}: tipo de actor desconocido`);
+    if (!e.h || !e.x || !e.u || !/^https?:\/\//.test(e.u) || !e.st) errs.push(`${w}: faltan título, texto o fuente`);
+  });
+}
 const G = W.GLOBAL_RISK;
 if (!G) errs.push("Falta GLOBAL_RISK (data/global.js)");
 else {

@@ -11,6 +11,7 @@ Responsable editorial: Franco Martín López.
 - `data/global.js`: indicadores de riesgo global de la portada (Reloj del Apocalipsis, DEFCON estimado, reservas estratégicas de petróleo).
 - `data/nino.js`: Niño-3.4 por año para el gráfico de El Niño (lo genera `scripts/sync_nino.py`).
 - `data/vortex.js`: viento a 10 hPa y 60°N día por día con la climatología de la NASA (lo genera `scripts/sync_vortex.py`).
+- `data/cyber.js`: ciberataques y fallas en sistemas conectados (mapa de la portada, antes del invierno boreal). Lo actualiza la tarea diaria (paso 7 bis).
 - `data/geo.js`: globo geopolítico (bloques y tres índices de riesgo por país). Se regenera a mano; la actualización diaria no lo toca.
 - `scripts/validate.js`: validador. `node scripts/validate.js --browser` además abre todas las fichas en Chromium.
 
@@ -30,12 +31,20 @@ Responsable editorial: Franco Martín López.
    El gráfico diario del vórtice (`data/vortex.js`) se regenera así: `git clone --depth 1 -b stratosphere-data https://github.com/MarcelHerber/climate-dashboard /tmp/strat` (copia diaria pública de los archivos de NASA Ozone Watch) y `python3 scripts/sync_vortex.py /tmp/strat/data/stratosphere/u60n_10_AAAA_merra2.txt`, con AAAA = año en que empezó la temporada (julio a junio). Usá su último dato analizado para `vortex.u` y `uDate`. Si el clon falla o el archivo no se actualizó, dejá `data/vortex.js` como está y anotalo en Pendientes.
    El gráfico de El Niño (`data/nino.js`) se regenera así: `git clone --depth 1 https://github.com/francomartinlopez/alertahidrica /tmp/alertahidrica` (repo público, sólo lectura) y `python3 scripts/sync_nino.py /tmp/alertahidrica/nino34.json`. Hacelo en cada actualización; si el clon falla, dejá el archivo como está.
    Además, en `data/global.js`: actualizá la reserva estratégica de EE.UU. cuando salga el informe semanal de la EIA (miércoles), con su fecha; el avance de la liberación de la AIE si hay dato nuevo; la estimación de DEFCON si DefconLevel.com la cambia (siempre marcada como no oficial); las reservas por país sólo con dato oficial nuevo. El Reloj del Apocalipsis cambia sólo cuando lo anuncia el Bulletin (en enero).
+7 bis. `data/cyber.js` (ciberataques y fallas en sistemas conectados): buscá los hechos de las últimas 24–48 horas (ataques, filtraciones, ransomware, sabotajes y apagones o caídas de servicios que no sean por el clima) y **agregá al final** de `events` los que tengan fuente seria: `{ d, dq: 1 si la fecha es aproximada, c: ["Country"], sec, cause, actor, chain, h, x, u, st }`.
+   - `c`: países con el nombre en inglés exacto de `data/world.js` (el validador lo controla); `[]` si no hay un país, como un exchange global. Un hecho que afecta a varios países lleva todos.
+   - `sec`: uno de los 15 sectores de `sectors` (energia, agua, transporte, telecom, finanzas, salud, gobierno, seguridad, defensa, industria, alimentacion, comercio, medios, educacion, espacio).
+   - `cause`: `ataque` (confirmado por la víctima, una autoridad o la investigación), `sospecha` (lo sospechan la empresa o las autoridades, sin confirmar), `falla` (técnica, sin indicios de ataque) o `fisico` (guerra, sabotaje físico, incendio). Si después se confirma o se descarta, cambiá la causa del hecho ya cargado.
+   - `actor`: `{ t: "criminal|estatal|activista|desconocido", n: "nombre y quién lo atribuye" }`, o `null` en fallas. No atribuyas a un Estado sin una fuente que lo haga y decí quién lo hace (gobierno, empresa privada).
+   - `chain`: texto breve cuando el hecho arrastra a muchos (un proveedor con cientos de clientes, un fabricante que controla equipos a distancia).
+   - Fuentes útiles: The Record, BleepingComputer, Security Affairs, Help Net Security, CISA, agencias y la prensa local. No cargues apagones causados por tormentas u olas de calor (eso va al bloque de invierno). Poné la fecha de hoy en `CYBER.updated`.
 8. `MONITOR_META.updated` = fecha de hoy (ART) y `updatedLabel` = por ejemplo `"28 oct 2026 · 06:00 ART"`. El `edition` no se cambia.
 9. Corré `node scripts/validate.js --browser`. Si falla, corregí hasta que pase. Nunca publiques con el validador en rojo.
 10. Agregá una línea en `CHANGELOG.md` (arriba de todo) con la fecha y un resumen breve de lo cambiado por conflicto y por nota diplomática.
 11. Commit en `main` con el mensaje `Actualización diaria AAAA-MM-DD` y push.
 
 ### Límites
+- No borrar hechos de `data/cyber.js` (sólo corregir su causa o actor si cambia la investigación).
 - No modificar `data/analysis*.js`, `js/`, `css/` ni `index.html` en la actualización diaria.
 - Cifras de víctimas: siempre con fuente, fecha y si es independiente o de una parte; no mezclar.
 - Ante dudas sobre un hecho grave o muy disputado, no lo cargues y anotalo en el `CHANGELOG.md` como "pendiente de verificación".

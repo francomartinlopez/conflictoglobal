@@ -166,6 +166,7 @@
       ${CANDIDATES.length ? `<div class="section-title"><h2>Candidatos a incorporar</h2><span>Propuestos para sumar al monitor; a definir</span></div>
       <div class="cand">${CANDIDATES.map(k => `<div class="c"><h4>${esc(k.name)} ${lvPill(k.level, k.status)}</h4><p>${esc(k.why)}</p></div>`).join("")}</div>` : ""}`;
     drawWorld(document.getElementById("worldmap"));
+    initCyber();
     const st = { q: "", m: "Todas", l: 0 };
     const norm = s => s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
     const apply = () => {
@@ -679,12 +680,113 @@
           <p>${esc(U.note)}</p><p class="rk-src">${src(U.src, U.u)}</p>
           <p class="rk-iea"><b>${I.released} de ${I.pledged} M</b> barriles ya liberados por la AIE al ${fmt(I.date)}. ${esc(I.note)} <span class="rk-src">${src(I.src, I.u)}</span></p></div>
       </div>
+      ${cyberPanel()}
       ${winterPanel(G.winter)}
       <div class="panel gp rk-oil"><h3>Reservas estratégicas de petróleo por país <small>millones de barriles · días de importaciones netas que cubren</small></h3>
         <table class="gp-t"><thead><tr><th>País</th><th></th><th>M barriles</th><th>Cobertura</th><th>Fuente y fecha</th></tr></thead><tbody>${rows}</tbody></table>
         <p class="gp-note">No existe un inventario mundial homogéneo: cada país informa con otra fecha y otro criterio, y varias cifras ya incluyen lo liberado desde marzo. China no publica su reserva y la cifra es una estimación. La AIE exige a sus miembros 90 días de importaciones netas; EE.UU. es exportador neto y no aplica. ${src(O.cSrc, O.cU)}.</p></div>`;
   }
 
+
+  /* ---------- ciberataques y fallas en sistemas conectados ---------- */
+  function cyberPanel() {
+    const C = window.CYBER; if (!C) return "";
+    return `<div class="section-title" id="ciber"><h2>Ciberataques y fallas en sistemas conectados</h2><span>Hechos con fuente en sistemas que dependen de redes: energía, agua, bancos, salud, gobierno y más · actualizado ${fmt(C.updated)}</span></div>
+      <div class="panel cy" id="cyber"></div>`;
+  }
+  function initCyber() {
+    const C = window.CYBER, host = document.getElementById("cyber"); if (!C || !host) return;
+    const SEC = Object.fromEntries(C.sectors.map(s => [s[0], s])), CAU = Object.fromEntries(C.causes.map(s => [s[0], s]));
+    const es = n => (window.GEO && window.GEO.es && window.GEO.es[n]) || n;
+    const st = { days: 30, sec: new Set(), cau: new Set(), by: "cause", chain: false, sel: null };
+    const dnum = d => Date.parse(d + "T00:00:00Z"), ref = dnum(C.updated);
+    const match = e => (!st.days || ref - dnum(e.d) <= st.days * 864e5) && (!st.sec.size || st.sec.has(e.sec)) && (!st.cau.size || st.cau.has(e.cause)) && (!st.chain || e.chain);
+    const W = 960, H = 470;
+    const proj = d3.geoNaturalEarth1().fitExtent([[6, 6], [W - 6, H + 40]], { type: "Sphere" }), path = d3.geoPath(proj);
+    const chip = (grp, k, lab, col) => `<button type="button" class="chip cy-chip" data-g="${grp}" data-k="${k}">${col ? `<i style="background:${col}"></i>` : ""}${esc(lab)}</button>`;
+    host.innerHTML = `
+      <div class="cy-ctrl">
+        <div class="cy-row"><b>Período</b>${[[7, "7 días"], [30, "30 días"], [0, "Todo"]].map(([d, l]) => chip("days", d, l)).join("")}</div>
+        <div class="cy-row"><b>Causa</b>${chip("cau", "*", "Todas")}${C.causes.map(c => chip("cau", c[0], c[1], c[2])).join("")}</div>
+        <div class="cy-row"><b>Sector</b>${chip("sec", "*", "Todos")}${C.sectors.map(s => chip("sec", s[0], s[1], s[2])).join("")}</div>
+        <div class="cy-row"><b>Colorear por</b>${[["cause", "Causa"], ["sector", "Sector"], ["count", "Cantidad de hechos"]].map(([k, l]) => chip("by", k, l)).join("")}
+          <label class="check cy-chk"><input type="checkbox" id="cyChain"> Sólo con efecto en cadena</label></div>
+      </div>
+      <div class="cy-grid">
+        <div class="cy-map"><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Mapa de ciberataques y fallas por país">
+          <path d="${path({ type: "Sphere" })}" fill="var(--sea)"/><path d="${path(d3.geoGraticule10())}" fill="none" stroke="#1f2225" stroke-width=".6"/>
+          <g id="cyC">${FEATURES.map((f, i) => `<path data-i="${i}" d="${path(f) || ""}" stroke="#121416" stroke-width=".5"/>`).join("")}</g>
+          <g id="cyChainL" style="pointer-events:none"></g><path id="cySel" fill="none" stroke="#fff" stroke-width="2" style="pointer-events:none"/></svg>
+          <div class="cy-leg" id="cyLeg"></div></div>
+        <div class="cy-side" id="cySide"></div>
+      </div>
+      <div class="cy-listh"><b id="cyCount"></b><span>Más recientes primero · tocá un país para ver su ficha</span></div>
+      <div class="cy-list" id="cyList"></div>
+      <p class="gp-note">Cuenta sólo hechos publicados con fuente; los ataques que nadie denuncia no aparecen y la atribución a un Estado suele ser de empresas privadas, no oficial. La causa se reclasifica si la investigación cambia.</p>`;
+    const $ = id => host.querySelector("#" + id), paths = [...host.querySelectorAll("#cyC path")];
+    const ORD = { ataque: 0, fisico: 1, sospecha: 2, falla: 3 };
+    const byCountry = () => { const m = {}; for (const e of C.events) if (match(e)) for (const c of e.c) (m[c] = m[c] || []).push(e); return m; };
+    const dominant = (evs, key) => { const n = {}; evs.forEach(e => n[e[key]] = (n[e[key]] || 0) + 1); return Object.entries(n).sort((a, b) => b[1] - a[1] || (key === "cause" ? ORD[a[0]] - ORD[b[0]] : 0))[0][0]; };
+    const RAMP = ["#4a3a2a", "#8a5a2e", "#c9783a", "#e0583f", "#ff6b5f"];
+    const tag = (o, cls) => `<span class="cy-tag ${cls || ""}"><i style="background:${o[2]}"></i>${esc(o[1])}</span>`;
+    const evHtml = e => `<div class="cy-ev"><div class="cy-evm"><span class="d">${fmt(e.d)}${e.dq ? " (aprox.)" : ""}</span>${tag(SEC[e.sec])}${tag(CAU[e.cause])}${e.c.length ? `<span class="cy-pais">${esc(e.c.map(es).join(" · "))}</span>` : `<span class="cy-pais">Sin país definido</span>`}</div>
+      <h4>${esc(e.h)}</h4><p>${esc(e.x)}</p>
+      ${e.actor ? `<p class="cy-act"><b>Actor:</b> ${e.actor.t === "desconocido" ? esc(e.actor.n || "Sin identificar") : `${esc(C.actors[e.actor.t] || "")}${e.actor.n ? ` · ${esc(e.actor.n)}` : ""}`}</p>` : `<p class="cy-act"><b>Actor:</b> no aplica (falla o daño sin autor identificado)</p>`}
+      ${e.chain ? `<p class="cy-chain">⛓ <b>Efecto en cadena:</b> ${esc(e.chain)}</p>` : ""}
+      <a class="evsrc" href="${esc(e.u)}" target="_blank" rel="noopener">${esc(e.st)} ↗</a></div>`;
+    const side = () => {
+      const m = byCountry();
+      if (st.sel != null) {
+        const n = FEATURES[st.sel].properties.name, evs = (m[n] || []).slice().sort((a, b) => b.d.localeCompare(a.d));
+        const cnt = (k, list) => list.map(o => [o, evs.filter(e => e[k] === o[0]).length]).filter(x => x[1]).map(([o, v]) => `<span class="cy-tag"><i style="background:${o[2]}"></i>${esc(o[1])} <b>${v}</b></span>`).join("");
+        $("cySide").innerHTML = `<div class="cy-fhead"><h3>${esc(es(n))}</h3><button type="button" class="btn" id="cyClose" aria-label="Cerrar ficha">✕</button></div>
+          ${evs.length ? `<p class="muted cy-fsum">${evs.length} ${evs.length === 1 ? "hecho" : "hechos"} con los filtros elegidos${evs.some(e => e.chain) ? " · incluye efecto en cadena" : ""}</p>
+          <div class="cy-fcnt"><b>Por causa</b>${cnt("cause", C.causes)}</div><div class="cy-fcnt"><b>Por sector</b>${cnt("sec", C.sectors)}</div>
+          <div class="cy-flist">${evs.map(evHtml).join("")}</div>` : `<p class="muted">Sin hechos registrados con los filtros elegidos.</p>`}`;
+        $("cyClose").onclick = () => { st.sel = null; draw(); };
+      } else {
+        const evs = C.events.filter(match), cs = Object.keys(m).length;
+        const tot = (k, list) => list.map(o => [o, evs.filter(e => e[k] === o[0]).length]).filter(x => x[1]).sort((a, b) => b[1] - a[1]).map(([o, v]) => `<span class="cy-tag"><i style="background:${o[2]}"></i>${esc(o[1])} <b>${v}</b></span>`).join("");
+        $("cySide").innerHTML = `<h3>Resumen</h3><p class="cy-big"><b>${evs.length}</b> hechos · <b>${cs}</b> países</p>
+          <div class="cy-fcnt"><b>Por causa</b>${tot("cause", C.causes) || "—"}</div><div class="cy-fcnt"><b>Por sector</b>${tot("sec", C.sectors) || "—"}</div>
+          <p class="muted" style="font-size:13px">Tocá un país del mapa para abrir su ficha.</p>`;
+      }
+    };
+    const draw = () => {
+      host.querySelectorAll(".cy-chip").forEach(b => { const g = b.dataset.g, k = b.dataset.k;
+        b.classList.toggle("on", g === "days" ? +k === st.days : g === "by" ? k === st.by : k === "*" ? !st[g].size : st[g].has(k)); });
+      const m = byCountry(), mx = Math.max(1, ...Object.values(m).map(v => v.length));
+      paths.forEach((p, i) => { const evs = m[FEATURES[i].properties.name];
+        let fill = "var(--land)", op = 1;
+        if (evs) {
+          if (st.by === "count") fill = RAMP[Math.min(RAMP.length - 1, Math.round((evs.length - 1) / Math.max(1, mx - 1) * (RAMP.length - 1)))];
+          else { fill = st.by === "cause" ? CAU[dominant(evs, "cause")][2] : SEC[dominant(evs, "sec")][2]; op = 0.55 + 0.45 * evs.length / mx; }
+        }
+        p.setAttribute("fill", fill); p.setAttribute("fill-opacity", op); p.classList.toggle("cy-on", !!evs); });
+      $("cyChainL").innerHTML = Object.entries(m).filter(([, v]) => v.some(e => e.chain)).map(([n]) => { const f = FEATURES.find(q => q.properties.name === n); return f ? `<path d="${path(f) || ""}" fill="none" stroke="#fff" stroke-width="1.2" stroke-dasharray="3 2"/>` : ""; }).join("");
+      $("cySel").setAttribute("d", st.sel != null ? path(FEATURES[st.sel]) || "" : "");
+      const items = st.by === "cause" ? C.causes : st.by === "sector" ? C.sectors.filter(s => C.events.some(e => match(e) && e.sec === s[0])) : null;
+      $("cyLeg").innerHTML = (items ? items.map(o => `<span><i style="background:${o[2]}"></i>${esc(o[1])}</span>`).join("") + `<span class="muted">Color: ${st.by === "cause" ? "la causa" : "el sector"} más frecuente del país; más intenso, más hechos</span>`
+        : `<span><i style="background:${RAMP[0]}"></i>1</span><span><i style="background:${RAMP[4]}"></i>${mx} hechos</span>`) + `<span><i class="cy-dash"></i>Efecto en cadena</span>`;
+      const evs = C.events.filter(match).sort((a, b) => b.d.localeCompare(a.d));
+      $("cyCount").textContent = `${evs.length} ${evs.length === 1 ? "hecho" : "hechos"}`;
+      $("cyList").innerHTML = evs.map(evHtml).join("") || `<p class="muted">Ningún hecho con esta combinación de filtros.</p>`;
+      side();
+    };
+    host.querySelector(".cy-ctrl").addEventListener("click", e => {
+      const b = e.target.closest(".cy-chip"); if (!b) return; const g = b.dataset.g, k = b.dataset.k;
+      if (g === "days") st.days = +k; else if (g === "by") st.by = k;
+      else if (k === "*") st[g].clear(); else st[g].has(k) ? st[g].delete(k) : st[g].add(k);
+      draw();
+    });
+    $("cyChain").addEventListener("change", e => { st.chain = e.target.checked; draw(); });
+    const cg = $("cyC");
+    cg.addEventListener("click", e => { const p = e.target.closest("path"); if (!p) return; st.sel = +p.dataset.i; draw(); if (window.innerWidth < 900) $("cySide").scrollIntoView({ behavior: "smooth", block: "start" }); });
+    cg.addEventListener("mousemove", e => { const p = e.target.closest("path"); if (!p) return hideTip(); const n = FEATURES[+p.dataset.i].properties.name, evs = byCountry()[n] || [];
+      showTip(e, `<b>${esc(es(n))}</b><span class="d">${evs.length ? `${evs.length} ${evs.length === 1 ? "hecho" : "hechos"} · ${[...new Set(evs.map(x => CAU[x.cause][1]))].join(", ")}` : "Sin hechos con estos filtros"}</span>`); });
+    cg.addEventListener("mouseleave", hideTip);
+    draw();
+  }
 
   /* ---------- invierno boreal: vórtice polar y energía ---------- */
   function winterPanel(W) {
