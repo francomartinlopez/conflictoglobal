@@ -344,7 +344,8 @@ window.CONFLICTS.push({
   {"d": "2026-10-28", "lat": 18.54, "lon": -72.34, "t": "politico", "h": "El Salvador eleva a más de 2.000 los soldados para Haití", "x": "La cancillería salvadoreña anunció el envío para buscar a los cuatro técnicos desaparecidos el 18-oct y combatir a las pandillas; no está claro si se integrarán a la GSF.", "u": "https://aljazeera.com/news/2026/10/29/el-salvador-pledges-more-than-2000-soldiers-as-haiti-delays-elections", "st": "Al Jazeera"},
   {"d": "2026-10-28", "lat": 0, "lon": 0, "nomap": true, "t": "politico", "h": "Récord de hambre: 5,94 millones de haitianos en inseguridad alimentaria aguda", "x": "El nuevo análisis internacional ubica a 1,8 millones en fase de emergencia y proyecta 6,35 millones para mediados de 2027.", "u": "https://aljazeera.com/news/2026/10/29/el-salvador-pledges-more-than-2000-soldiers-as-haiti-delays-elections", "st": "Al Jazeera"},
   {"d": "2026-10-30", "lat": 18.58, "lon": -72.27, "t": "terrestre", "h": "Tropas salvadoreñas montan una base en Tabarre y empiezan a patrullar", "x": "Con blindados y cobertura de helicópteros recorrieron el entorno del aeropuerto, Tabarre y la zona de Santo, en Croix-des-Bouquets, en busca de los cuatro militares desaparecidos desde la emboscada del 18 de octubre.", "u": "https://www.infobae.com/el-salvador/2026/10/31/militares-salvadorenos-montan-base-cerca-de-embajada-de-ee-uu-e-inician-patrullajes-en-puerto-principe-haiti/", "st": "Infobae"},
-  {"d": "2026-10-31", "lat": 18.6, "lon": -72.2, "nomap": true, "t": "politico", "h": "Bukele niega bombardeos contra civiles en Haití", "x": "Una asociación de la diáspora haitiana denunció ante Guterres ataques aéreos sobre Croix-des-Bouquets y Canaán desde el 22 de octubre. Bukele respondió que la misión no lleva bombas y que sus helicópteros, llegados el 29, todavía no hicieron ninguna misión.", "u": "https://diariolibre.com/mundo/haiti/2026/10/31/bukele-rechaza-acusaciones-de-bombardeos-contra-civiles-en-haiti/3707004", "st": "EFE vía Diario Libre"}
+  {"d": "2026-10-31", "lat": 18.6, "lon": -72.2, "nomap": true, "t": "politico", "h": "Bukele niega bombardeos contra civiles en Haití", "x": "Una asociación de la diáspora haitiana denunció ante Guterres ataques aéreos sobre Croix-des-Bouquets y Canaán desde el 22 de octubre. Bukele respondió que la misión no lleva bombas y que sus helicópteros, llegados el 29, todavía no hicieron ninguna misión.", "u": "https://diariolibre.com/mundo/haiti/2026/10/31/bukele-rechaza-acusaciones-de-bombardeos-contra-civiles-en-haiti/3707004", "st": "EFE vía Diario Libre"},
+    {"d": "2026-11-02", "lat": 18.6, "lon": -72.29, "t": "terrestre", "h": "Primera ofensiva terrestre salvadoreña contra las pandillas", "x": "Con una decena de blindados, las tropas de El Salvador avanzaron sobre Santo y Croix-des-Missions, en la llanura de Cul-de-Sac, contra Chen Mechan y 400 Mawozo, mientras la policía haitiana opera con la fuerza de la ONU. Medios haitianos hablan de al menos diez pandilleros muertos. El jefe de 400 Mawozo le pidió a Guterres una mediación.", "u": "https://www.infobae.com/el-salvador/2026/11/03/las-fuerzas-salvadorenas-lanzan-su-primera-ofensiva-terrestre-contra-pandillas-al-noreste-de-puerto-principe/", "st": "Infobae (EFE)"}
  ],
  "timeline": [
   {
@@ -446,4 +447,88 @@ window.CONFLICTS.push({
   }
  ]
 });
-window.ALERTS.push({ id: "haiti", level: 4, tag: "Escalada", date: "2026-10-31", title: "Haití: las tropas salvadoreñas montan base en Puerto Príncipe y empiezan a patrullar", text: "Más de 2.000 militares de El Salvador operan desde una base en Tabarre, con blindados y helicópteros, en busca de los cuatro soldados de la fuerza internacional desaparecidos desde la emboscada del 18-oct en Croix-des-Bouquets. Bukele negó una denuncia de bombardeos contra civiles. Las elecciones pasaron al 18 de julio de 2027 y el hambre aguda alcanza a 5,94 millones de personas." });
+window.ALERTS.push({ id: "haiti", level: 4, tag: "Escalada", date: "2026-11-02", title: "Haití: primera ofensiva terrestre de las tropas salvadoreñas", text: "Con una decena de blindados, los militares de El Salvador avanzaron el 2 de noviembre sobre Santo y Croix-des-Missions, al noreste de Puerto Príncipe, contra las pandillas Chen Mechan y 400 Mawozo; medios haitianos hablan de al menos diez pandilleros muertos. El jefe de 400 Mawozo le pidió a Guterres una mediación. Siguen desaparecidos los cuatro salvadoreños de la emboscada del 18 de octubre y las elecciones pasaron al 18 de julio de 2027." });
+
+/* Conflicto incorporado el 2026-11-03 por la actualización diaria: guerra en el norte de Etiopía */
+window.CONFLICTS.push({
+  id: "etiopia",
+  name: "Etiopía (Tigray)",
+  fullName: "Guerra en el norte de Etiopía",
+  sub: "Gobierno de Abiy Ahmed contra la alianza del TPLF y el Fano · Tigray, Afar y Amhara · ruptura con Eritrea",
+  region: "Cuerno de África",
+  status: "Guerra civil reabierta",
+  level: 4,
+  since: "2026-09-23",
+  center: [39.3, 13.0],
+  sides: {
+    A: { name: "Gobierno federal etíope", desc: "Fuerzas de Defensa Nacional (ENDF), fuerza aérea con drones, policía federal, fuerzas regionales de Amhara y la Fuerza de Paz de Tigray, formada por disidentes del TPLF." },
+    B: { name: "Alianza de Fuerzas Populares Etíopes por la Supervivencia", desc: "Coalición anunciada el 20-sep-2026 para derrocar a Abiy. La encabeza el TPLF con sus Fuerzas de Defensa de Tigray (TDF); según ACLED, a fines de septiembre sólo combatían el TPLF, el Movimiento Nacional Fano de Amhara y Ugugumo." }
+  },
+  keyFacts: [
+    { k: "Ofensiva tigriña", v: "23-sep-2026", n: "toma de los aeropuertos de Mekelle, Axum y Shire; choques desde el 1-ago (ACLED)" },
+    { k: "Mekelle", v: "En manos federales", n: "desde el 4-oct-2026, tras el repliegue del TPLF" },
+    { k: "Ataque al campo de desplazados Jaari 2 (Amhara)", v: "≥ 15 muertos", n: "30-oct-2026, fuentes del rescate citadas por Reuters" },
+    { k: "Acuerdo de paz de Pretoria (nov-2022)", v: "Roto", n: "el TPLF lo dio por muerto en jul-2026" }
+  ],
+  summary: "<p>La guerra de Tigray de 2020–2022 terminó con el acuerdo de Pretoria, firmado en noviembre de 2022, pero quedaron sin resolver los territorios disputados con Amhara, el regreso de los desplazados y el desarme de las fuerzas tigriñas. En julio de 2026 el TPLF dio el acuerdo por muerto, en agosto hubo choques cerca de la frontera con Sudán y el 20 de septiembre siete grupos armados y políticos anunciaron una alianza para derrocar al primer ministro Abiy Ahmed.</p><p>El <strong>23 de septiembre</strong> las fuerzas tigriñas tomaron los aeropuertos de Mekelle, Axum y Shire y avanzaron sobre Afar y Amhara, en lo que el TPLF llamó una \"guerra defensiva\". El gobierno respondió con drones y una contraofensiva: retomó Sekota y Alamata, y el 4 de octubre entró en Mekelle tras el repliegue del TPLF; después tomó Adigrat, Adwa y Shire. Abiy designó un consejo interino para Tigray por seis meses, pero las TDF contraatacan en el centro de la región y el Fano disputa rutas en Amhara.</p><p>El conflicto tiene dimensión regional: Etiopía rompió relaciones con Eritrea el 1 de octubre y la acusa de financiar a los rebeldes; AP informó de tropas eritreas en Adigrat. Egipto, Eritrea, Sudán y Somalia se acercaron en una cumbre en New Alamein, y Sudán acusa a Etiopía de lanzar drones contra su territorio. La OMS advierte que el sistema de salud del norte está al borde del colapso.</p>",
+  fronts: [
+    { n: "Centro y norte de Tigray", s: "Contraofensiva tigriña", l: 4, t: "Las fuerzas federales controlan las ciudades (Mekelle, Adigrat, Adwa, Shire); las TDF contraatacan en el interior." },
+    { n: "Frontera con Eritrea", s: "Tensión extrema", l: 4, t: "Relaciones rotas desde el 1-oct; Etiopía denuncia tropas eritreas en su territorio y las atacó con drones." },
+    { n: "Amhara (Fano)", s: "Combates en rutas", l: 3, t: "El Fano disputa la ruta B22 cerca de Woldia y el camino a Sekota." },
+    { n: "Afar", s: "Disputado", l: 3, t: "Los avances tigriños sobre Abala y Erebti amenazaron el corredor Semera–Yibuti, principal vía de importación del país." }
+  ],
+  nonState: [
+    { name: "TPLF / Fuerzas de Defensa de Tigray", side: "B", where: "Tigray" },
+    { name: "Movimiento Nacional Fano de Amhara", side: "B2", where: "Amhara" },
+    { name: "Ejército de Liberación Oromo", side: "B2", where: "Oromía (miembro de la alianza)" },
+    { name: "Fuerza de Paz de Tigray", side: "A2", where: "Tigray" }
+  ],
+  map: { bbox: [[34, 8.5], [43.5, 15.8]], start: "2026-08-01" },
+  roles: [
+    { c: "Ethiopia", es: "Etiopía", r: "A", from: "2026-08-01" },
+    { c: "Eritrea", es: "Eritrea", r: "B2", from: "2026-09-29", n: "Acusada por Etiopía de financiar a los rebeldes; lo niega. AP informó de tropas eritreas en Adigrat" },
+    { c: "Egypt", es: "Egipto", r: "M", from: "2026-08-01", n: "Acusado por Etiopía de respaldar a los rebeldes; lo niega" },
+    { c: "Sudan", es: "Sudán", r: "M", from: "2026-08-01", n: "Acusa a Etiopía de lanzar drones desde su territorio" },
+    { c: "Somalia", es: "Somalia", r: "M", from: "2026-08-01" },
+    { c: "Djibouti", es: "Yibuti", r: "M", from: "2026-08-01", n: "Puerto por el que entra la mayor parte de las importaciones etíopes" }
+  ],
+  events: [
+    { d: "2026-08-01", lat: 14.29, lon: 36.62, t: "terrestre", h: "Primeros choques cerca de la frontera con Sudán", x: "Según ACLED, fuerzas tigriñas y federales empezaron a enfrentarse en el oeste de Tigray, una zona disputada con Amhara.", u: "https://www.aljazeera.com/news/2026/10/2/how-the-fighting-in-ethiopia-spread-beyond-tigray-in-maps-and-charts", st: "Al Jazeera" },
+    { d: "2026-09-20", lat: 9.03, lon: 38.74, nomap: true, t: "politico", h: "Nace una alianza armada para derrocar a Abiy", x: "Siete movimientos, entre ellos el TPLF, el Fano amhara y el Ejército de Liberación Oromo, anunciaron la Alianza de Fuerzas Populares Etíopes por la Supervivencia. El gobierno acusa a Eritrea de financiarla.", u: "https://www.aljazeera.com/news/2026/9/24/fighting-widens-across-ethiopia-as-tigray-clashes-escalate", st: "Al Jazeera" },
+    { d: "2026-09-22", lat: 12.42, lon: 39.56, t: "aereo", h: "Drones federales sobre Alamata", x: "ACLED registró entre 15 y 17 ataques con drones sobre la ciudad, incluidas varias escuelas y un hospital.", u: "https://www.aljazeera.com/news/2026/10/2/how-the-fighting-in-ethiopia-spread-beyond-tigray-in-maps-and-charts", st: "Al Jazeera" },
+    { d: "2026-09-23", lat: 13.47, lon: 39.53, t: "terrestre", h: "Las fuerzas tigriñas toman los aeropuertos de Mekelle, Axum y Shire", x: "Avanzaron además sobre Afar, donde tomaron Abala, y sobre Amhara. El TPLF habló de \"guerra defensiva\" y el gobierno de \"ofensiva total\"; Ethiopian Airlines suspendió los vuelos a Tigray.", u: "https://www.aljazeera.com/news/2026/9/24/fighting-widens-across-ethiopia-as-tigray-clashes-escalate", st: "Al Jazeera" },
+    { d: "2026-09-27", lat: 12.63, lon: 39.03, t: "terrestre", h: "El gobierno retoma Sekota", x: "Las fuerzas federales recuperaron la capital de la zona de Wag Hemra, en Amhara.", u: "https://www.aljazeera.com/news/2026/10/2/how-the-fighting-in-ethiopia-spread-beyond-tigray-in-maps-and-charts", st: "Al Jazeera" },
+    { d: "2026-09-28", lat: 12.42, lon: 39.56, t: "terrestre", h: "Fuerzas progubernamentales toman Alamata", x: "Es el principal nudo de abastecimiento del sur de Tigray, a unos 120 km de Mekelle.", u: "https://www.aljazeera.com/news/2026/10/2/how-the-fighting-in-ethiopia-spread-beyond-tigray-in-maps-and-charts", st: "Al Jazeera" },
+    { d: "2026-10-01", lat: 15.34, lon: 38.93, t: "diplomacia", h: "Etiopía y Eritrea rompen relaciones", x: "Addis Abeba cerró su embajada en Asmara y expulsó a diez diplomáticos eritreos por \"actos hostiles\"; Eritrea cortó los lazos y niega apoyar a los rebeldes.", u: "https://www.aljazeera.com/news/2026/10/5/ethiopias-forces-retake-mekelle-amid-renewed-tigray-fighting", st: "Al Jazeera" },
+    { d: "2026-10-04", lat: 13.5, lon: 39.47, t: "terrestre", h: "Las fuerzas federales entran en Mekelle", x: "El TPLF confirmó que se retiró de la capital regional y que gobernará desde otro lugar; el ejército y la Fuerza de Paz de Tigray tomaron el aeropuerto y otros puntos clave.", u: "https://www.aljazeera.com/news/2026/10/5/ethiopias-forces-retake-mekelle-amid-renewed-tigray-fighting", st: "Al Jazeera" },
+    { d: "2026-10-04", lat: 30.83, lon: 28.95, nomap: true, t: "diplomacia", h: "Cumbre de Egipto, Eritrea, Sudán y Somalia en New Alamein", x: "Prometieron más cooperación y respeto a la soberanía y la integridad territorial, sin formar una alianza militar. Egipto ve como amenazas la gran represa etíope y cualquier salida de Etiopía al mar Rojo.", u: "https://www.aljazeera.com/news/2026/10/9/will-ethiopias-neighbours-intervene-as-tigray-war-escalates", st: "Al Jazeera" },
+    { d: "2026-10-08", lat: 14.1, lon: 38.28, t: "terrestre", h: "El ejército toma Shire", x: "Es la ciudad más occidental de Tigray sobre la ruta B30.", u: "https://www.criticalthreats.org/briefs/ethiopia-war-security-review/october-23-2026", st: "Critical Threats (AEI)" },
+    { d: "2026-10-09", lat: 14.28, lon: 39.46, t: "terrestre", h: "AP informa de tropas eritreas en Adigrat", x: "La agencia dio cuenta de soldados eritreos en Adigrat e Idaga Hamus, en el norte de Tigray; Asmara no lo confirmó ni lo desmintió.", u: "https://www.aljazeera.com/news/2026/10/9/will-ethiopias-neighbours-intervene-as-tigray-war-escalates", st: "Al Jazeera (AP)" },
+    { d: "2026-10-16", lat: 13.5, lon: 39.47, t: "politico", h: "Abiy designa un consejo interino para Tigray", x: "Gobernará seis meses, hasta elecciones regionales, con miembros de escisiones del TPLF.", u: "https://www.criticalthreats.org/briefs/ethiopia-war-security-review/october-23-2026", st: "Critical Threats (AEI)" },
+    { d: "2026-10-22", lat: 13.62, lon: 39.0, t: "terrestre", h: "Contraofensiva tigriña y combates en el centro de Tigray", x: "Mientras el ejército tomaba Zana y Abiy Addi, las TDF contraatacaban en el centro de la región y el Fano cortaba la ruta B22 cerca de Woldia; los rebeldes tomaron Abergele el 23.", u: "https://www.criticalthreats.org/briefs/ethiopia-war-security-review/october-23-2026", st: "Critical Threats (AEI)" },
+    { d: "2026-10-30", lat: 11.5, lon: 39.6, nomap: true, t: "aereo", h: "Drones contra un campo de desplazados en Amhara: al menos 15 muertos", x: "El ataque al campo Jaari 2 mató a varios niños, según fuentes del rescate citadas por Reuters; no se sabe quién lo hizo. Por otra parte murieron varias personas que buscaban comida en Rama, en Tigray.", u: "https://www.aljazeera.com/news/2026/11/2/violence-in-northern-ethiopia-pushing-health-system-towards-collapse-who", st: "Al Jazeera (Reuters, AP)" },
+    { d: "2026-11-02", lat: 9.03, lon: 38.74, nomap: true, t: "politico", h: "La OMS: el sistema de salud del norte, al borde del colapso", x: "Tedros Adhanom Ghebreyesus advirtió por la falta de personal, medicamentos y ambulancias y por la inseguridad que bloquea los suministros.", u: "https://www.aljazeera.com/news/2026/11/2/violence-in-northern-ethiopia-pushing-health-system-towards-collapse-who", st: "Al Jazeera" }
+  ],
+  timeline: [
+    { d: "1991", era: "Antecedentes", h: "El TPLF llega al poder", x: "Encabeza la coalición que derroca al Derg y domina la política etíope durante casi tres décadas." },
+    { d: "2018", era: "Antecedentes", h: "Abiy Ahmed, primer ministro", x: "Firma la paz con Eritrea y desplaza al TPLF del centro del poder." },
+    { d: "2020–2022", era: "Primera guerra", h: "Guerra de Tigray", x: "Fuerzas federales, eritreas y amharas contra el TPLF; cientos de miles de muertos según estimaciones." },
+    { d: "2022", era: "Primera guerra", h: "Acuerdo de Pretoria", x: "Mediado por la Unión Africana; deja pendientes los territorios disputados y el desarme." },
+    { d: "2026", era: "Segunda guerra", h: "El TPLF da por muerto el acuerdo (julio) y lanza su ofensiva (septiembre)", x: "" },
+    { d: "2026", era: "Segunda guerra", h: "Las fuerzas federales retoman Mekelle y Etiopía rompe con Eritrea (octubre)", x: "" }
+  ],
+  history: [
+    { h: "Una paz que dejó todo pendiente", b: "<p>El acuerdo de Pretoria frenó la guerra de 2020–2022 pero no resolvió el oeste de Tigray, disputado con Amhara, ni el regreso de los desplazados ni el desarme. El TPLF se partió entre la conducción de Debretsion Gebremichael y los sectores que se acercaron a Abiy, como Getachew Reda, hoy asesor del primer ministro.</p>" },
+    { h: "El mar Rojo de fondo", b: "<p>Abiy reclama una salida al mar para Etiopía, que perdió la costa con la independencia de Eritrea en 1993, y Asmara lo lee como una amenaza sobre el puerto de Assab. Egipto, enfrentado con Addis Abeba por la gran represa del Nilo, se acercó a Eritrea, Sudán y Somalia. Por eso la guerra en Tigray puede volverse un conflicto entre Estados.</p>" }
+  ],
+  alt: [
+    { lvl: "doc", h: "El papel de Eritrea", x: "Etiopía acusa a Eritrea de financiar a la alianza rebelde y AP informó de tropas eritreas en Tigray; Asmara niega apoyar a los rebeldes y no confirmó la presencia de sus soldados." }
+  ],
+  sources: [
+    { t: "Al Jazeera — Fighting widens across Ethiopia as Tigray clashes escalate (24-sep-2026)", u: "https://www.aljazeera.com/news/2026/9/24/fighting-widens-across-ethiopia-as-tigray-clashes-escalate" },
+    { t: "Al Jazeera — How the fighting in Ethiopia spread beyond Tigray (2-oct-2026)", u: "https://www.aljazeera.com/news/2026/10/2/how-the-fighting-in-ethiopia-spread-beyond-tigray-in-maps-and-charts" },
+    { t: "Al Jazeera — Ethiopia's forces retake Mekelle (5-oct-2026)", u: "https://www.aljazeera.com/news/2026/10/5/ethiopias-forces-retake-mekelle-amid-renewed-tigray-fighting" },
+    { t: "Critical Threats — Ethiopia War Security Review (23-oct-2026)", u: "https://www.criticalthreats.org/briefs/ethiopia-war-security-review/october-23-2026" },
+    { t: "Al Jazeera — WHO: violence pushing health system towards collapse (2-nov-2026)", u: "https://www.aljazeera.com/news/2026/11/2/violence-in-northern-ethiopia-pushing-health-system-towards-collapse-who" }
+  ]
+});

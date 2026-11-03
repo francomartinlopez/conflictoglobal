@@ -4,7 +4,7 @@
    actor: { t: criminal | estatal | activista | desconocido, n: nombre o atribución, from: ["Country"] si una fuente atribuye el origen a un Estado }
    chain: texto si hubo efecto en cadena (un proveedor que arrastra a muchos clientes) · dq: 1 = fecha aproximada */
 window.CYBER = {
-  updated: "2026-11-02",
+  updated: "2026-11-03",
   sectors: [
     ["energia", "Energía", "#e0a93a"],
     ["agua", "Agua", "#4fb3d9"],
@@ -139,6 +139,10 @@ window.CYBER = {
     { d: "2026-11-02", c: ["Spain"], sec: "energia", cause: "falla", actor: null,
       h: "Apagón total en La Palma (Canarias)",
       x: "Un \"cero energético\" dejó sin luz a 50.508 suministros durante casi cuatro horas, tras la caída de la única línea de transporte de la isla en plena tormenta eléctrica. La causa se investiga.",
-      u: "https://elcierredigital.com/sucesos/la-palma-vuelve-sufrir-apagon-general-mas-50000-afectados-red-electrica-bajo-sospecha", st: "El Cierre Digital" }
+      u: "https://elcierredigital.com/sucesos/la-palma-vuelve-sufrir-apagon-general-mas-50000-afectados-red-electrica-bajo-sospecha", st: "El Cierre Digital" },
+    {"d": "2026-11-01", "c": ["Ukraine"], "sec": "seguridad", "cause": "ataque", "actor": {"t": "desconocido", "n": "Se lo adjudicó Hitcore Corp, un grupo hasta ahora desconocido; el gobierno ucraniano culpa a Rusia y Zelensky dijo que su inteligencia rastreó el ataque hasta allí", "from": ["Russia"]}, "h": "Falsas alertas nucleares y químicas en la app de alerta aérea de Ucrania", "x": "La app Air Alert envió en la noche del domingo avisos falsos de radiación, amenaza química, combates callejeros y un posible ataque con el misil Oreshnik. La Fuerza Aérea dijo que la app había sido comprometida por el enemigo; el sistema nacional de sirenas siguió funcionando.", "chain": "La app, de Ajax Systems y con apoyo del Ministerio de Transformación Digital, tiene unos 6,6 millones de usuarios activos; sus desarrolladores cortaron las notificaciones y la restablecieron de a poco.", "u": "https://therecord.media/ukraine-hackers-russia-alert-system", "st": "The Record"},
+    {"d": "2026-11-02", "c": ["Russia"], "sec": "seguridad", "cause": "ataque", "actor": {"t": "estatal", "n": "Ucrania: lo reivindicó el grupo DC8044, con base en Kiev, y Zelensky confirmó que fue una respuesta ucraniana", "from": ["Ukraine"]}, "h": "Represalia: falsas alertas de drones y de ataque nuclear en la app de emergencias rusa", "x": "El Ministerio de Situaciones de Emergencia de Rusia reconoció un ciberataque \"masivo\" contra su app, que difundió avisos falsos de drones y de un lanzamiento nuclear; dijo que su sistema principal de alerta no fue afectado.", "u": "https://www.kyivpost.com/post/88950", "st": "Kyiv Post"},
+    {"d": "2026-11-01", "dq": 1, "c": [], "sec": "finanzas", "cause": "ataque", "actor": {"t": "desconocido", "n": "Sin identificar"}, "h": "Polymarket suspende las operaciones tras un robo a usuarios", "x": "La plataforma de apuestas sobre predicciones frenó el trading después de que un script malicioso vaciara billeteras de usuarios; se rastrearon unos US$ 2,5 millones hacia una billetera del atacante y la empresa prometió compensar a los afectados.", "chain": "Los atacantes comprometieron un servicio de un proveedor externo para distribuir el código malicioso.", "u": "https://www.bleepingcomputer.com/news/security/polymarket-halts-trading-after-crypto-draining-script-breach-25m-traced/", "st": "BleepingComputer"},
+    {"d": "2026-11-02", "c": ["Brazil"], "sec": "finanzas", "cause": "ataque", "actor": {"t": "desconocido", "n": "Sin identificar"}, "h": "Ciberataque al Mercado Bitcoin, el mayor exchange de Brasil", "x": "La empresa, con unos 4,5 millones de clientes, suspendió depósitos y retiros tras un incidente de ciberseguridad. Firmas de análisis de blockchain calculan que salieron más de US$ 46 millones; Tether congeló unos US$ 4,5 millones. La compañía dice que sus clientes no perdieron fondos, algo que varios expertos discuten.", "u": "https://therecord.media/mercado-bitcoin-brazil-cryptocurrency-heist", "st": "The Record"}
   ]
 };
