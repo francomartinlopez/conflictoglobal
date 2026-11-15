@@ -67,5 +67,5 @@ window.GLOBAL_RISK.winter = {
     { d: "2026-11-12", h: "Europa vacía sus reservas de gas a casi el triple del ritmo normal", x: "Las extracciones netas se multiplicaron casi por seis en la semana del 10 de noviembre por el frío y la poca generación eólica, y el GNL que sale por Ormuz cayó al 52% del ritmo de antes de la guerra.", u: "https://www.energyflux.news/burn-now-pay-later/", st: "Energy Flux" },
     { d: "2026-11-12", h: "El vórtice cae a 1,2 m/s y la inversión ya está en el pronóstico de corto plazo", x: "El último dato analizado de la NASA (9 de noviembre) marca 1,22 m/s, contra una media de 28,4 para la fecha; la corrida del modelo GEOS da −0,6 m/s el 10, −3,1 el 11 y −2,2 el 12. Polar Vortex Earth calcula 0 m/s el 10.", u: "https://ozonewatch.gsfc.nasa.gov/meteorology/figures/merra2/wind/u60n_10_2026_merra2.txt", st: "NASA Ozone Watch" }
   ],
-  updated: "2026-11-14"
+  updated: "2026-11-15"
 };
