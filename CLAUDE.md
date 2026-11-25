@@ -17,7 +17,7 @@ Responsable editorial: Franco Martín López.
 - `data/vortex.js`: viento a 10 hPa y 60°N día por día con la climatología de la NASA (lo genera `scripts/sync_vortex.py`).
 - `data/cyber.js`: ciberataques y fallas en sistemas conectados (mapa de la portada, antes del invierno boreal). Lo actualiza la tarea diaria (paso 7 bis).
 - `data/geo.js`: globo geopolítico (bloques y tres índices de riesgo por país). Se regenera a mano; la actualización diaria no lo toca.
-- `datos-informe.json` (raíz): archivo de datos para la web de informes de Plexum (formato «Datos que cada web publica» v1.2, apartado 10 «Conflicto Global»). Lo genera `scripts/build_informe.js` a partir de los datos del sitio (paso 8 bis); no se edita a mano y no cambia nada visible del sitio.
+- `datos-informe.json` (raíz): archivo de datos para la web de informes de Plexum (formato «Datos que cada web publica» v1.3, apartado 10 «Conflicto Global»). Lo genera `scripts/build_informe.js` a partir de los datos del sitio (paso 8 bis); no se edita a mano y no cambia nada visible del sitio.
 - `scripts/validate.js`: validador. `node scripts/validate.js --browser` además abre todas las fichas en Chromium.
 
 ## Actualización diaria (tarea programada)
@@ -45,7 +45,7 @@ Responsable editorial: Franco Martín López.
    - Fuentes útiles: The Record, BleepingComputer, Security Affairs, Help Net Security, CISA, agencias y la prensa local. No cargues apagones causados por tormentas u olas de calor (eso va al bloque de invierno). Poné la fecha de hoy en `CYBER.updated`.
 7 ter. **Frente de Ucrania** (`data/front-ua.js`), todos los días: `git clone --depth 1 https://github.com/cyterat/deepstate-map-data /tmp/dsm` y `python3 scripts/sync_front_ua.py /tmp/dsm/data`. El script suma los días nuevos (superficie ocupada en km²) y una trama semanal del mapa. Si la superficie cambió mucho en un día (más de 300 km²), revisalo antes de publicar: puede ser una corrección del mapa de DeepState y no un avance real. Usá la cifra nueva para el `keyFacts` de territorio ocupado de rusia-ucrania (con fecha y "DeepStateMap" en `n`). Si el clon falla, dejá el archivo como está y anotalo en Pendientes.
 8. `MONITOR_META.updated` = fecha de hoy (ART) y `updatedLabel` = por ejemplo `"28 oct 2026 · 06:00 ART"`. El `edition` no se cambia.
-8 bis. Corré `node scripts/build_informe.js` para regenerar `datos-informe.json` (indicadores de la portada: conflictos monitoreados, activos y en nivel 5, y riesgo por región; novedades «conflicto» con el impacto económico de los últimos 90 días). Si un ítem «otros» de `data/economy.js` es impacto en materias primas o energía, llevá `rub` (rubros) y `sub` (subrubros); sin `rub` no sale en el archivo.
+8 bis. Corré `node scripts/build_informe.js` para regenerar `datos-informe.json` (indicadores de la portada: conflictos monitoreados, activos y en nivel 5, y riesgo por región, con serie de fin de mes y grupos por región; novedades «conflicto» con el impacto económico de los últimos 90 días). Si un ítem «otros» de `data/economy.js` es impacto en materias primas o energía, llevá `rub` (rubros) y `sub` (subrubros); sin `rub` no sale en el archivo.
 9. Corré `node scripts/validate.js --browser`. Si falla, corregí hasta que pase. Nunca publiques con el validador en rojo.
 10. Agregá una línea en `CHANGELOG.md` (arriba de todo) con la fecha y un resumen breve de lo cambiado por conflicto y por nota diplomática.
 11. Commit en `main` con el mensaje `Actualización diaria AAAA-MM-DD` y push.

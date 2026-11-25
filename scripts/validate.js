@@ -78,6 +78,7 @@ if (EC) {
       niv: ["mundo", "país", "nacional", "provincia", "localidad"],
       tipo: ["norma", "inversión", "empresa en crisis", "licitación", "conflicto", "elección", "encuesta", "medida comercial", "clima", "otro"] };
     if (D.web !== "Conflicto Global") errs.push("datos-informe.json: web debe ser «Conflicto Global»");
+    if (D.version !== "1.3") errs.push("datos-informe.json: version debe ser 1.3");
     if (!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}[-+]\d{2}:\d{2}$/.test(D.generado || "")) errs.push("datos-informe.json: generado sin fecha y zona horaria");
     else if (D.generado.slice(0, 10) < M.updated) errs.push("datos-informe.json desactualizado: correr node scripts/build_informe.js");
     const comun = (o, w) => {
@@ -93,6 +94,22 @@ if (EC) {
       if (!/^[a-z0-9-]+$/.test(i.id) || seen.has(i.id)) errs.push(`${w}: id inválido o repetido`); seen.add(i.id);
       if (i.valor === "" || i.valor === null || i.valor === undefined || !okDate(i.fecha_dato)) errs.push(`${w}: valor o fecha_dato inválidos`);
       comun(i, w);
+      if (!["tasa", "nivel", "estado"].includes(i.tipo_valor)) errs.push(`${w}: tipo_valor inválido`);
+      if (!["diaria", "semanal", "mensual", "trimestral", "semestral", "anual"].includes(i.frecuencia)) errs.push(`${w}: frecuencia inválida`);
+      if (!Array.isArray(i.comparar) || i.comparar.some(x => !["mensual", "interanual"].includes(x))) errs.push(`${w}: comparar inválido`);
+      if (i.serie) {
+        const s = i.serie;
+        if (!s.length || s.some((p, k) => !okDate(p.fecha) || typeof p.valor !== "number" || (k && p.fecha <= s[k - 1].fecha))) errs.push(`${w}: serie desordenada o con valores no numéricos`);
+        else if (s[s.length - 1].valor !== i.valor || s[s.length - 1].fecha !== i.fecha_dato) errs.push(`${w}: el último valor de la serie no coincide con el publicado`);
+        if (s.length > 25) errs.push(`${w}: serie de más de 25 puntos`);
+      }
+      if (i.grupo) {
+        const g = i.grupo;
+        if (!g.id || !g.nombre || !g.clave || !["provincia", "rubro", "pais", "otro"].includes(g.dimension)) errs.push(`${w}: grupo incompleto`);
+        const m = (D.indicadores || []).filter(x => x.grupo && x.grupo.id === g.id);
+        if (m.length < 3) errs.push(`${w}: el grupo ${g.id} tiene menos de 3 miembros`);
+        if (m.some(x => x.grupo.nombre !== g.nombre || x.unidad !== i.unidad || x.fecha_dato !== i.fecha_dato)) errs.push(`${w}: el grupo ${g.id} mezcla nombre, unidad o fecha`);
+      }
     }
     for (const n of D.novedades || []) {
       const w = "informe novedad " + n.id;

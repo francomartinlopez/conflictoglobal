@@ -50,8 +50,64 @@ function exposicion(rub, k) {
 const generado = nowART();
 const hoy = generado.slice(0, 10);
 const corte = META.updated || hoy;
-let prev = {};
-try { for (const i of JSON.parse(fs.readFileSync(OUT, "utf8")).indicadores || []) prev[i.id] = i; } catch (e) { /* primera vez */ }
+let prevFile = {};
+try { prevFile = JSON.parse(fs.readFileSync(OUT, "utf8")); } catch (e) { /* primera vez */ }
+const prev = Object.fromEntries((prevFile.indicadores || []).map(i => [i.id, i]));
+const regiones = [...new Set(Object.values(MACRO))];
+
+// Valores de los indicadores para un conjunto de conflictos (se usa también con versiones viejas del repositorio).
+function valores(CS) {
+  const v = {
+    "conflictos-monitoreados": CS.length,
+    "conflictos-activos": CS.filter(c => c.level >= 4).length,
+    "conflictos-nivel-5": CS.filter(c => c.level === 5).length
+  };
+  for (const r of regiones) {
+    const cs = CS.filter(c => MACRO[c.id] === r);
+    v["riesgo-region-" + slug(r)] = cs.length ? Math.max(...cs.map(c => c.level)) : null;
+    v["conflictos-region-" + slug(r)] = cs.length || null;
+  }
+  return v;
+}
+
+// Historia (v1.3): un valor por fin de mes. Se arrastra en el propio datos-informe.json; si no está,
+// se reconstruye una vez desde la historia de git (lo que el sitio mostraba al cierre de cada mes).
+function finDeMes(y, m) { return new Date(Date.UTC(y, m, 0)).toISOString().slice(0, 10); }
+function historiaGit() {
+  const { execSync } = require("child_process"), vm = require("vm");
+  const out = {};
+  try {
+    const first = execSync("git log --reverse --format=%ad --date=short", { cwd: ROOT }).toString().split("\n")[0];
+    let [y, m] = first.split("-").map(Number);
+    for (;;) {
+      const fin = finDeMes(y, m);
+      if (fin >= hoy.slice(0, 8) + "01") break; // sólo meses ya cerrados
+      const h = execSync(`git log -1 --before="${fin}T23:59:59-03:00" --format=%H`, { cwd: ROOT }).toString().trim();
+      if (h) {
+        const ctx = { window: {} }; vm.createContext(ctx);
+        for (const f of ["conflicts", "conflicts-2", "conflicts-3"]) {
+          try { vm.runInContext(execSync(`git show ${h}:data/${f}.js`, { cwd: ROOT, stdio: ["ignore", "pipe", "ignore"] }).toString(), ctx); } catch (e) { /* el archivo no existía */ }
+        }
+        if ((ctx.window.CONFLICTS || []).length) out[fin] = valores(ctx.window.CONFLICTS);
+      }
+      m++; if (m > 12) { m = 1; y++; }
+    }
+  } catch (e) { /* sin git: queda la historia guardada */ }
+  return out;
+}
+let GIT = null;
+function serie(id, valor) {
+  let pts = ((prev[id] || {}).serie || []).slice();
+  if (!pts.length) {
+    GIT = GIT || historiaGit();
+    for (const [f, v] of Object.entries(GIT)) if (typeof v[id] === "number") pts.push({ fecha: f, valor: v[id] });
+  }
+  pts = pts.filter(p => p.fecha < corte);
+  pts.push({ fecha: corte, valor });
+  const porMes = {};
+  for (const p of pts.sort((a, b) => a.fecha.localeCompare(b.fecha))) porMes[p.fecha.slice(0, 7)] = p; // el último de cada mes
+  return Object.values(porMes).slice(-25);
+}
 
 const indicadores = [];
 const faltantes = [];
@@ -61,26 +117,31 @@ function ind(id, nombre, valor, unidad, extra = {}) {
     return;
   }
   const o = { id, nombre, valor, unidad, fecha_dato: corte, fuente_original: "Conflicto Global (Monitor de Conflictos), elaboración propia con agencias, ISW, ACLED y ONU", eje: EJE,
-    alcance: { nivel: "mundo", provincia: "", localidad: "", pais: "" }, rubros: [], subrubros: [], exposicion: [], url: SITE + "#inicio", ...extra };
+    alcance: { nivel: "mundo", provincia: "", localidad: "", pais: "" }, rubros: [], subrubros: [], exposicion: [], url: SITE + "#inicio",
+    tipo_valor: "nivel", frecuencia: "diaria", ...extra };
   const p = prev[id];
   if (p && p.fecha_dato === corte && p.variacion) o.variacion = p.variacion;
   else if (p && p.fecha_dato < corte && typeof p.valor === "number" && typeof valor === "number" && p.valor !== valor) o.variacion = { valor: valor - p.valor, unidad: unidad, contra: "actualización del " + p.fecha_dato };
-  // orden de claves como en la especificación
-  indicadores.push({ id: o.id, nombre: o.nombre, valor: o.valor, unidad: o.unidad, ...(o.variacion ? { variacion: o.variacion } : {}), fecha_dato: o.fecha_dato, fuente_original: o.fuente_original, eje: o.eje, alcance: o.alcance, rubros: o.rubros, subrubros: o.subrubros, exposicion: o.exposicion, url: o.url });
+  const s = serie(id, valor);
+  // mensual sólo si hay cierre del mes anterior; interanual cuando haya un año de historia
+  const comparar = [];
+  if (o.tipo_valor === "nivel" && s.length >= 2) comparar.push("mensual");
+  if (o.tipo_valor === "nivel" && s.length >= 13) comparar.push("interanual");
+  indicadores.push({ id: o.id, nombre: o.nombre, valor: o.valor, unidad: o.unidad, ...(o.variacion ? { variacion: o.variacion } : {}), fecha_dato: o.fecha_dato, fuente_original: o.fuente_original, eje: o.eje, alcance: o.alcance, rubros: o.rubros, subrubros: o.subrubros, exposicion: o.exposicion, url: o.url,
+    tipo_valor: o.tipo_valor, frecuencia: o.frecuencia, comparar, serie: s, ...(o.grupo ? { grupo: o.grupo } : {}) });
 }
 
 // Indicadores que muestra la portada.
-ind("conflictos-monitoreados", "Conflictos monitoreados", CONFLICTS.length, "conflictos");
-ind("conflictos-activos", "Conflictos activos (nivel 4 o 5 de 5)", CONFLICTS.filter(c => c.level >= 4).length, "conflictos");
-ind("conflictos-nivel-5", "Conflictos en nivel máximo (5 de 5)", CONFLICTS.filter(c => c.level === 5).length, "conflictos");
-// Riesgo por región: el nivel más alto entre los conflictos de cada región del filtro del sitio.
-const regiones = [...new Set(Object.values(MACRO))];
+const V = valores(CONFLICTS);
+ind("conflictos-monitoreados", "Conflictos monitoreados", V["conflictos-monitoreados"], "conflictos");
+ind("conflictos-activos", "Conflictos activos (nivel 4 o 5 de 5)", V["conflictos-activos"], "conflictos");
+ind("conflictos-nivel-5", "Conflictos en nivel máximo (5 de 5)", V["conflictos-nivel-5"], "conflictos");
+// Por región del filtro del sitio: nivel más alto y cantidad de conflictos (grupos para gráficos de barras).
 for (const r of regiones) {
-  const cs = CONFLICTS.filter(c => MACRO[c.id] === r);
-  const max = cs.length ? Math.max(...cs.map(c => c.level)) : null;
-  ind("riesgo-region-" + slug(r), "Nivel de riesgo más alto · " + r + " (1 a 5)", max, "nivel (1 a 5)",
-    {});
-  ind("conflictos-region-" + slug(r), "Conflictos monitoreados · " + r, cs.length || null, "conflictos", {});
+  ind("riesgo-region-" + slug(r), "Nivel de riesgo más alto · " + r + " (1 a 5)", V["riesgo-region-" + slug(r)], "nivel (1 a 5)",
+    { tipo_valor: "estado", grupo: { id: "riesgo-por-region", nombre: "Nivel de riesgo más alto por región (1 a 5)", dimension: "otro", clave: r } });
+  ind("conflictos-region-" + slug(r), "Conflictos monitoreados · " + r, V["conflictos-region-" + slug(r)], "conflictos",
+    { grupo: { id: "conflictos-por-region", nombre: "Conflictos monitoreados por región", dimension: "otro", clave: r } });
 }
 
 // Novedades «conflicto»: impacto en rutas, energía o materias primas (últimos 90 días).
@@ -113,6 +174,6 @@ for (const c of CONFLICTS) {
 }
 novedades.sort((a, b) => b.fecha_dato.localeCompare(a.fecha_dato) || a.id.localeCompare(b.id));
 
-const out = { web: "Conflicto Global", version: "1.0", generado, indicadores, novedades, agenda: [], faltantes };
+const out = { web: "Conflicto Global", version: "1.3", generado, indicadores, novedades, agenda: [], faltantes };
 fs.writeFileSync(OUT, JSON.stringify(out, null, 2) + "\n");
 console.log(`datos-informe.json: ${indicadores.length} indicadores, ${novedades.length} novedades, ${faltantes.length} faltantes`);
