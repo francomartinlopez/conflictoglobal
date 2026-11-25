@@ -52,6 +52,20 @@ for (const c of C) {
     const k = e.d + "|" + e.h; if (seen.has(k)) errs.push(`${w}: duplicado`); seen.add(k);
   });
 }
+const EC = W.ECONOMY;
+if (EC) {
+  if (!okDate(EC.updated)) errs.push("ECONOMY.updated inválido");
+  const ks = new Set(["petroleo", "gas", "fletes", "rutas", "sanciones", "otros"]);
+  for (const [id, E] of Object.entries(EC.items || {})) {
+    if (!ids.has(id)) errs.push(`ECONOMY: conflicto desconocido ${id}`);
+    (E.items || []).forEach((i, n) => {
+      const w = `ECONOMY ${id} #${n} (${i.h})`;
+      if (!ks.has(i.k)) errs.push(`${w}: categoría desconocida ${i.k}`);
+      if (!okDate(i.d)) errs.push(`${w}: fecha inválida`);
+      if (!i.h || !i.x || !i.u || !/^https?:\/\//.test(i.u) || !i.st) errs.push(`${w}: faltan título, texto o fuente`);
+    });
+  }
+}
 const CY = W.CYBER;
 if (!CY) errs.push("Falta CYBER (data/cyber.js)");
 else {
@@ -85,6 +99,13 @@ else {
   if (!(G.oil.us.mb > 0 && G.oil.us.mb <= G.oil.us.cap) || !okDate(G.oil.us.date)) errs.push("GLOBAL_RISK.oil.us inválido");
 }
 for (const s of W.EVENT_SOURCES || []) if (!ids.has(s.c) || !C.find(c => c.id === s.c).events[s.i]) errs.push(`EVENT_SOURCES apunta a un evento inexistente: ${s.c} #${s.i}`);
+{ const has = new Set((W.EVENT_SOURCES || []).map(s => s.c + ":" + s.i));
+  for (const c of C) (c.events || []).forEach((e, i) => { if (!e.u && !has.has(c.id + ":" + i)) errs.push(`${c.id} hecho #${i} (${e.h}): sin fuente (ni u ni EVENT_SOURCES)`); }); }
+{ const F = W.FRONT_UA;
+  if (F) { let prev = "";
+    for (const [d, a] of F.daily) { if (!okDate(d) || d <= prev || !(a > 0)) { errs.push(`FRONT_UA.daily: dato inválido o fuera de orden en ${d}`); break; } prev = d; }
+    if (F.last !== F.daily[F.daily.length - 1][0]) errs.push("FRONT_UA.last no coincide con el último dato diario");
+    if (F.frames[F.frames.length - 1].d > F.last) errs.push("FRONT_UA: hay una trama posterior a last"); } }
 
 async function browser() {
   const http = require("http"), { chromium } = require("playwright");

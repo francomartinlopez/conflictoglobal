@@ -261,6 +261,7 @@
         ${c.id === "rusia-ucrania" ? `<button type="button" data-go="sec-frente">Frente</button>` : ""}
         ${c.id === "medio-oriente" && window.HIST_IL ? `<button type="button" data-go="sec-territorio">Territorio 1882–hoy</button>` : ""}
         ${(window.CONTROL || {})[c.id] ? `<button type="button" data-go="sec-control">Control territorial</button>` : ""}
+        ${(window.ECONOMY || {}).items && window.ECONOMY.items[c.id] ? `<button type="button" data-go="sec-eco">Impacto económico</button>` : ""}
         <button type="button" data-go="sec-bajas">Víctimas y daños</button>
         <button type="button" data-go="sec-crono">Cronología</button>
         <button type="button" data-go="sec-historia">Historia y análisis</button>
@@ -301,6 +302,11 @@
       ${(window.CONTROL || {})[c.id] ? `<section class="block" id="sec-control">
         <h2>Control territorial <small>Inicio del conflicto frente a hoy, por estado o región</small></h2>
         <div id="ctrlmod">${controlHTML(c)}</div>
+      </section>` : ""}
+
+      ${(window.ECONOMY || {}).items && window.ECONOMY.items[c.id] ? `<section class="block" id="sec-eco">
+        <h2>Impacto económico <small>Petróleo, gas, fletes, rutas y sanciones · revisado ${fmt(window.ECONOMY.updated)}</small></h2>
+        ${ecoHTML(c)}
       </section>` : ""}
 
       <section class="block" id="sec-bajas">
@@ -688,6 +694,20 @@
         <p class="gp-note">No existe un inventario mundial homogéneo: cada país informa con otra fecha y otro criterio, y varias cifras ya incluyen lo liberado desde marzo. China no publica su reserva y la cifra es una estimación. La AIE exige a sus miembros 90 días de importaciones netas; EE.UU. es exportador neto y no aplica. ${src(O.cSrc, O.cU)}.</p></div>`;
   }
 
+
+  /* ---------- impacto económico por conflicto ---------- */
+  const ECO_K = [["petroleo", "Petróleo", "#c9a34a"], ["gas", "Gas", "#4fb3d9"], ["fletes", "Fletes y seguros", "#8a9bd8"], ["rutas", "Rutas y pasos", "#5fae7a"], ["sanciones", "Sanciones y aranceles", "#d9604f"], ["otros", "Otros", "#a3a0c8"]];
+  function ecoHTML(c) {
+    const E = window.ECONOMY.items[c.id];
+    const groups = ECO_K.map(([k, lab, col]) => [lab, col, E.items.filter(i => i.k === k)]).filter(g => g[2].length);
+    return `<div class="panel eco">
+      ${E.resumen ? `<p class="eco-sum">${esc(E.resumen)}</p>` : ""}
+      <div class="eco-grid">${groups.map(([lab, col, its]) => `<div class="eco-g" style="--c:${col}"><h4>${esc(lab)}</h4>${its.map(i => `<div class="eco-i">
+        <div class="eco-top"><span class="eco-h">${esc(i.h)}</span>${i.v ? `<b class="eco-v">${esc(i.v)}</b>` : ""}</div>
+        <p>${esc(i.x)}</p><a class="evsrc" href="${esc(i.u)}" target="_blank" rel="noopener">${esc(i.st)} · ${fmt(i.d)} ↗</a></div>`).join("")}</div>`).join("")}</div>
+      ${ECO_K.filter(([k]) => !E.items.some(i => i.k === k)).length ? `<p class="muted eco-none">Sin impacto relevante registrado en: ${ECO_K.filter(([k]) => !E.items.some(i => i.k === k)).map(x => x[1].toLowerCase()).join(", ")}.</p>` : ""}
+    </div>`;
+  }
 
   /* ---------- ciberataques y fallas en sistemas conectados ---------- */
   function cyberPanel() {

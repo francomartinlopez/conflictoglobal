@@ -7,7 +7,11 @@ Responsable editorial: Franco Martín López.
 - `data/conflicts.js`: `MONITOR_META` (fecha de corte), `ALERTS` y `NOTES` (bloque superior: alertas de conflictos y notas diplomáticas) y los 8 conflictos originales. `conflicts-2.js` y `conflicts-3.js` también suman alertas con `window.ALERTS.push(...)`: al contar el máximo, contalas todas.
 - `data/conflicts-2.js` y `data/conflicts-3.js`: el resto de los conflictos (`window.CONFLICTS.push(...)`).
 - `data/analysis.js` y `data/analysis-2.js`: **capa editorial** (tesis, historia, lecturas alternativas). **No la toca la actualización automática.**
-- `data/toll.js` (víctimas y daños), `data/series.js` (series y `HEADLINE` del panel global), `data/control.js`, `data/front-ua.js`, `data/extra.js` (`EVENT_SOURCES` por índice y `OVERLAYS`).
+- `data/toll.js` (víctimas y daños) y `data/series.js` (series y `HEADLINE` del panel global).
+- `data/front-ua.js`: superficie ocupada por Rusia en Ucrania día por día y tramas semanales del mapa del frente (DeepStateMap). Lo genera `scripts/sync_front_ua.py` **todos los días** (paso 7 ter).
+- `data/control.js`: control territorial por estado o región (Sudán, Myanmar) y la incursión en Kursk. Se revisa **una vez por semana** (paso 12).
+- `data/extra.js`: `EVENT_SOURCES` (fuentes de hechos viejos por índice) y `OVERLAYS` (capas dibujadas sobre el mapa de un conflicto). Se revisa **una vez por semana** (paso 12).
+- `data/economy.js`: impacto económico de cada conflicto (petróleo, gas, fletes, rutas y sanciones). Se revisa **una vez por semana** (paso 12).
 - `data/global.js`: indicadores de riesgo global de la portada (Reloj del Apocalipsis, DEFCON estimado, reservas estratégicas de petróleo).
 - `data/nino.js`: Niño-3.4 por año para el gráfico de El Niño (lo genera `scripts/sync_nino.py`).
 - `data/vortex.js`: viento a 10 hPa y 60°N día por día con la climatología de la NASA (lo genera `scripts/sync_vortex.py`).
@@ -38,13 +42,20 @@ Responsable editorial: Franco Martín López.
    - `actor`: `{ t: "criminal|estatal|activista|desconocido", n: "nombre y quién lo atribuye", from: ["Country"] }`, o `null` en fallas. `from` (nombre en inglés de `data/world.js`) va sólo cuando una fuente atribuye el origen a un Estado: alimenta la vista "Origen atribuido" del mapa. Si un gobierno confirma una atribución que antes era de empresas privadas, actualizá `n` y la fuente. No atribuyas a un Estado sin una fuente que lo haga y decí quién lo hace (gobierno, empresa privada).
    - `chain`: texto breve cuando el hecho arrastra a muchos (un proveedor con cientos de clientes, un fabricante que controla equipos a distancia).
    - Fuentes útiles: The Record, BleepingComputer, Security Affairs, Help Net Security, CISA, agencias y la prensa local. No cargues apagones causados por tormentas u olas de calor (eso va al bloque de invierno). Poné la fecha de hoy en `CYBER.updated`.
+7 ter. **Frente de Ucrania** (`data/front-ua.js`), todos los días: `git clone --depth 1 https://github.com/cyterat/deepstate-map-data /tmp/dsm` y `python3 scripts/sync_front_ua.py /tmp/dsm/data`. El script suma los días nuevos (superficie ocupada en km²) y una trama semanal del mapa. Si la superficie cambió mucho en un día (más de 300 km²), revisalo antes de publicar: puede ser una corrección del mapa de DeepState y no un avance real. Usá la cifra nueva para el `keyFacts` de territorio ocupado de rusia-ucrania (con fecha y "DeepStateMap" en `n`). Si el clon falla, dejá el archivo como está y anotalo en Pendientes.
 8. `MONITOR_META.updated` = fecha de hoy (ART) y `updatedLabel` = por ejemplo `"28 oct 2026 · 06:00 ART"`. El `edition` no se cambia.
 9. Corré `node scripts/validate.js --browser`. Si falla, corregí hasta que pase. Nunca publiques con el validador en rojo.
 10. Agregá una línea en `CHANGELOG.md` (arriba de todo) con la fecha y un resumen breve de lo cambiado por conflicto y por nota diplomática.
 11. Commit en `main` con el mensaje `Actualización diaria AAAA-MM-DD` y push.
 
+## Revisión semanal (los lunes, además de la actualización diaria)
+12. **Control territorial** (`data/control.js`): para Sudán y Myanmar, buscá qué ciudades o estados cambiaron de manos en la última semana (Sudans Post, Sudan War Monitor, ISP-Myanmar, The Irrawaddy, Myanmar Now, Reuters, AP, AFP, ACLED). En `units`, actualizá `now` (con los mismos valores que ya se usan) y `note` (con la fecha del cambio) y cambiá `url` por la fuente nueva. En `cities`, **agregá al final** de `events` el cambio `{ d, to, x, url }`. Si un mapa de control más nuevo reemplaza al citado, sumalo a `sources`. Los ataques con drones que no cambian quién controla un lugar no cuentan.
+13. **Capas y fuentes** (`data/extra.js`): revisá que cada `OVERLAYS` siga describiendo la situación (por ejemplo, la zona ocupada por Israel en el sur del Líbano). Si sigue vigente, actualizá `checked`, `checkedSrc` y `checkedUrl`. Si cambió la extensión, corregí el nombre y, si hay un mapa con fuente, el polígono. Si quedó algún hecho sin `u` ni entrada en `EVENT_SOURCES`, buscale la fuente y sumala al final de `EVENT_SOURCES` con su índice `{ c, i, u, t }`. El validador avisa si falta alguna.
+14. **Impacto económico** (`data/economy.js`): para cada conflicto, actualizá las cifras de `items` (petróleo, gas, fletes, rutas, sanciones, otros) con datos de las últimas semanas: Brent y WTI, TTF, tránsitos por Ormuz, el mar Rojo y Suez (IMF PortWatch, Suez Canal Authority, Lloyd's List), fletes y seguros de guerra (Drewry WCI, Freightos FBX), sanciones nuevas (OFAC, Consejo de la UE, ONU) y aranceles. Cada ítem: `{ k, h, v, x, d, u, st }`, con fecha del dato y fuente. Reemplazá el ítem cuando haya una cifra más nueva sobre lo mismo; sumá ítems si aparece un impacto nuevo y sacá los que ya no apliquen. Actualizá `resumen` si cambió el panorama y poné la fecha en `ECONOMY.updated`. Si se sumó un conflicto nuevo al monitor, cargale su bloque.
+15. En el `CHANGELOG.md` y en el mail, anotá en una sección "Revisión semanal" qué cambió en control, capas e impacto económico.
+
 ### Límites
 - No borrar hechos de `data/cyber.js` (sólo corregir su causa o actor si cambia la investigación).
-- No modificar `data/analysis*.js`, `js/`, `css/` ni `index.html` en la actualización diaria.
+- No modificar `data/analysis*.js`, `js/`, `css/` ni `index.html` en la actualización diaria ni en la semanal.
 - Cifras de víctimas: siempre con fuente, fecha y si es independiente o de una parte; no mezclar.
 - Ante dudas sobre un hecho grave o muy disputado, no lo cargues y anotalo en el `CHANGELOG.md` como "pendiente de verificación".
