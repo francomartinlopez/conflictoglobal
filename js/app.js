@@ -13,7 +13,7 @@
   const EV_LABEL = { aereo: "Ataque aéreo, misiles o drones", terrestre: "Combate terrestre", naval: "Acción naval", atentado: "Atentado o masacre", diplomacia: "Diplomacia / tregua", politico: "Hecho político" };
   const LV_LABEL = { 5: "Guerra abierta / escalada", 4: "Conflicto activo", 3: "Tensión elevada", 2: "Latente", 1: "Vigilancia" };
   const MACROS = ["América", "Europa", "Medio Oriente", "Asia", "África"];
-  const MACRO = { "medio-oriente": "Medio Oriente", "rusia-ucrania": "Europa", corea: "Asia", taiwan: "Asia", mexico: "América", colombia: "América", venezuela: "América", cuba: "América", haiti: "América", "pakistan-afganistan": "Asia", "india-pakistan": "Asia", myanmar: "Asia", sudan: "África", sahel: "África", rdc: "África" };
+  const MACRO = { "medio-oriente": "Medio Oriente", "rusia-ucrania": "Europa", corea: "Asia", taiwan: "Asia", mexico: "América", colombia: "América", venezuela: "América", cuba: "América", haiti: "América", "pakistan-afganistan": "Asia", "india-pakistan": "Asia", myanmar: "Asia", sudan: "África", sahel: "África", rdc: "África", etiopia: "África" };
   const cssVar = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
 
   /* ---------- world geometry ---------- */

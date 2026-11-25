@@ -1,0 +1,1459 @@
+{
+  "web": "Conflicto Global",
+  "version": "1.0",
+  "generado": "2026-11-25T10:54:53-03:00",
+  "indicadores": [
+    {
+      "id": "conflictos-monitoreados",
+      "nombre": "Conflictos monitoreados",
+      "valor": 16,
+      "unidad": "conflictos",
+      "fecha_dato": "2026-11-25",
+      "fuente_original": "Conflicto Global (Monitor de Conflictos), elaboración propia con agencias, ISW, ACLED y ONU",
+      "eje": "Política internacional",
+      "alcance": {
+        "nivel": "mundo",
+        "provincia": "",
+        "localidad": "",
+        "pais": ""
+      },
+      "rubros": [],
+      "subrubros": [],
+      "exposicion": [],
+      "url": "https://francomartinlopez.github.io/conflictoglobal/#inicio"
+    },
+    {
+      "id": "conflictos-activos",
+      "nombre": "Conflictos activos (nivel 4 o 5 de 5)",
+      "valor": 11,
+      "unidad": "conflictos",
+      "fecha_dato": "2026-11-25",
+      "fuente_original": "Conflicto Global (Monitor de Conflictos), elaboración propia con agencias, ISW, ACLED y ONU",
+      "eje": "Política internacional",
+      "alcance": {
+        "nivel": "mundo",
+        "provincia": "",
+        "localidad": "",
+        "pais": ""
+      },
+      "rubros": [],
+      "subrubros": [],
+      "exposicion": [],
+      "url": "https://francomartinlopez.github.io/conflictoglobal/#inicio"
+    },
+    {
+      "id": "conflictos-nivel-5",
+      "nombre": "Conflictos en nivel máximo (5 de 5)",
+      "valor": 2,
+      "unidad": "conflictos",
+      "fecha_dato": "2026-11-25",
+      "fuente_original": "Conflicto Global (Monitor de Conflictos), elaboración propia con agencias, ISW, ACLED y ONU",
+      "eje": "Política internacional",
+      "alcance": {
+        "nivel": "mundo",
+        "provincia": "",
+        "localidad": "",
+        "pais": ""
+      },
+      "rubros": [],
+      "subrubros": [],
+      "exposicion": [],
+      "url": "https://francomartinlopez.github.io/conflictoglobal/#inicio"
+    },
+    {
+      "id": "riesgo-region-medio-oriente",
+      "nombre": "Nivel de riesgo más alto · Medio Oriente (1 a 5)",
+      "valor": 5,
+      "unidad": "nivel (1 a 5)",
+      "fecha_dato": "2026-11-25",
+      "fuente_original": "Conflicto Global (Monitor de Conflictos), elaboración propia con agencias, ISW, ACLED y ONU",
+      "eje": "Política internacional",
+      "alcance": {
+        "nivel": "mundo",
+        "provincia": "",
+        "localidad": "",
+        "pais": ""
+      },
+      "rubros": [],
+      "subrubros": [],
+      "exposicion": [],
+      "url": "https://francomartinlopez.github.io/conflictoglobal/#inicio"
+    },
+    {
+      "id": "conflictos-region-medio-oriente",
+      "nombre": "Conflictos monitoreados · Medio Oriente",
+      "valor": 1,
+      "unidad": "conflictos",
+      "fecha_dato": "2026-11-25",
+      "fuente_original": "Conflicto Global (Monitor de Conflictos), elaboración propia con agencias, ISW, ACLED y ONU",
+      "eje": "Política internacional",
+      "alcance": {
+        "nivel": "mundo",
+        "provincia": "",
+        "localidad": "",
+        "pais": ""
+      },
+      "rubros": [],
+      "subrubros": [],
+      "exposicion": [],
+      "url": "https://francomartinlopez.github.io/conflictoglobal/#inicio"
+    },
+    {
+      "id": "riesgo-region-europa",
+      "nombre": "Nivel de riesgo más alto · Europa (1 a 5)",
+      "valor": 4,
+      "unidad": "nivel (1 a 5)",
+      "fecha_dato": "2026-11-25",
+      "fuente_original": "Conflicto Global (Monitor de Conflictos), elaboración propia con agencias, ISW, ACLED y ONU",
+      "eje": "Política internacional",
+      "alcance": {
+        "nivel": "mundo",
+        "provincia": "",
+        "localidad": "",
+        "pais": ""
+      },
+      "rubros": [],
+      "subrubros": [],
+      "exposicion": [],
+      "url": "https://francomartinlopez.github.io/conflictoglobal/#inicio"
+    },
+    {
+      "id": "conflictos-region-europa",
+      "nombre": "Conflictos monitoreados · Europa",
+      "valor": 1,
+      "unidad": "conflictos",
+      "fecha_dato": "2026-11-25",
+      "fuente_original": "Conflicto Global (Monitor de Conflictos), elaboración propia con agencias, ISW, ACLED y ONU",
+      "eje": "Política internacional",
+      "alcance": {
+        "nivel": "mundo",
+        "provincia": "",
+        "localidad": "",
+        "pais": ""
+      },
+      "rubros": [],
+      "subrubros": [],
+      "exposicion": [],
+      "url": "https://francomartinlopez.github.io/conflictoglobal/#inicio"
+    },
+    {
+      "id": "riesgo-region-asia",
+      "nombre": "Nivel de riesgo más alto · Asia (1 a 5)",
+      "valor": 4,
+      "unidad": "nivel (1 a 5)",
+      "fecha_dato": "2026-11-25",
+      "fuente_original": "Conflicto Global (Monitor de Conflictos), elaboración propia con agencias, ISW, ACLED y ONU",
+      "eje": "Política internacional",
+      "alcance": {
+        "nivel": "mundo",
+        "provincia": "",
+        "localidad": "",
+        "pais": ""
+      },
+      "rubros": [],
+      "subrubros": [],
+      "exposicion": [],
+      "url": "https://francomartinlopez.github.io/conflictoglobal/#inicio"
+    },
+    {
+      "id": "conflictos-region-asia",
+      "nombre": "Conflictos monitoreados · Asia",
+      "valor": 5,
+      "unidad": "conflictos",
+      "fecha_dato": "2026-11-25",
+      "fuente_original": "Conflicto Global (Monitor de Conflictos), elaboración propia con agencias, ISW, ACLED y ONU",
+      "eje": "Política internacional",
+      "alcance": {
+        "nivel": "mundo",
+        "provincia": "",
+        "localidad": "",
+        "pais": ""
+      },
+      "rubros": [],
+      "subrubros": [],
+      "exposicion": [],
+      "url": "https://francomartinlopez.github.io/conflictoglobal/#inicio"
+    },
+    {
+      "id": "riesgo-region-america",
+      "nombre": "Nivel de riesgo más alto · América (1 a 5)",
+      "valor": 4,
+      "unidad": "nivel (1 a 5)",
+      "fecha_dato": "2026-11-25",
+      "fuente_original": "Conflicto Global (Monitor de Conflictos), elaboración propia con agencias, ISW, ACLED y ONU",
+      "eje": "Política internacional",
+      "alcance": {
+        "nivel": "mundo",
+        "provincia": "",
+        "localidad": "",
+        "pais": ""
+      },
+      "rubros": [],
+      "subrubros": [],
+      "exposicion": [],
+      "url": "https://francomartinlopez.github.io/conflictoglobal/#inicio"
+    },
+    {
+      "id": "conflictos-region-america",
+      "nombre": "Conflictos monitoreados · América",
+      "valor": 5,
+      "unidad": "conflictos",
+      "fecha_dato": "2026-11-25",
+      "fuente_original": "Conflicto Global (Monitor de Conflictos), elaboración propia con agencias, ISW, ACLED y ONU",
+      "eje": "Política internacional",
+      "alcance": {
+        "nivel": "mundo",
+        "provincia": "",
+        "localidad": "",
+        "pais": ""
+      },
+      "rubros": [],
+      "subrubros": [],
+      "exposicion": [],
+      "url": "https://francomartinlopez.github.io/conflictoglobal/#inicio"
+    },
+    {
+      "id": "riesgo-region-africa",
+      "nombre": "Nivel de riesgo más alto · África (1 a 5)",
+      "valor": 5,
+      "unidad": "nivel (1 a 5)",
+      "fecha_dato": "2026-11-25",
+      "fuente_original": "Conflicto Global (Monitor de Conflictos), elaboración propia con agencias, ISW, ACLED y ONU",
+      "eje": "Política internacional",
+      "alcance": {
+        "nivel": "mundo",
+        "provincia": "",
+        "localidad": "",
+        "pais": ""
+      },
+      "rubros": [],
+      "subrubros": [],
+      "exposicion": [],
+      "url": "https://francomartinlopez.github.io/conflictoglobal/#inicio"
+    },
+    {
+      "id": "conflictos-region-africa",
+      "nombre": "Conflictos monitoreados · África",
+      "valor": 4,
+      "unidad": "conflictos",
+      "fecha_dato": "2026-11-25",
+      "fuente_original": "Conflicto Global (Monitor de Conflictos), elaboración propia con agencias, ISW, ACLED y ONU",
+      "eje": "Política internacional",
+      "alcance": {
+        "nivel": "mundo",
+        "provincia": "",
+        "localidad": "",
+        "pais": ""
+      },
+      "rubros": [],
+      "subrubros": [],
+      "exposicion": [],
+      "url": "https://francomartinlopez.github.io/conflictoglobal/#inicio"
+    }
+  ],
+  "novedades": [
+    {
+      "id": "2026-11-25-medio-oriente-gas-europeo-caro-con-depositos-bajos",
+      "fecha_dato": "2026-11-25",
+      "titulo": "Medio Oriente: Gas europeo caro con depósitos bajos",
+      "resumen": "Medio Oriente, riesgo nivel 5 de 5 (Guerra abierta). Gas europeo caro con depósitos bajos: TTF ~€88/MWh. El gas europeo cerró en torno a €88/MWh el 25 de noviembre, después de tocar €96 el 23.",
+      "tipo": "conflicto",
+      "eje": "Política internacional",
+      "alcance": {
+        "nivel": "país",
+        "provincia": "",
+        "localidad": "",
+        "pais": "Irán, Israel, Líbano, Yemen"
+      },
+      "rubros": [
+        "Energía"
+      ],
+      "subrubros": [
+        "gas"
+      ],
+      "exposicion": [
+        "Energía intensiva"
+      ],
+      "url": "https://tradingeconomics.com/commodity/eu-natural-gas/news/601857"
+    },
+    {
+      "id": "2026-11-24-medio-oriente-brent-por-debajo-de-us-90",
+      "fecha_dato": "2026-11-24",
+      "titulo": "Medio Oriente: Brent por debajo de US$ 90",
+      "resumen": "Medio Oriente, riesgo nivel 5 de 5 (Guerra abierta). Brent por debajo de US$ 90: Brent ~US$ 89.",
+      "tipo": "conflicto",
+      "eje": "Política internacional",
+      "alcance": {
+        "nivel": "país",
+        "provincia": "",
+        "localidad": "",
+        "pais": "Irán, Israel, Líbano, Yemen"
+      },
+      "rubros": [
+        "Energía"
+      ],
+      "subrubros": [
+        "petróleo"
+      ],
+      "exposicion": [
+        "Energía intensiva"
+      ],
+      "url": "https://tradingeconomics.com/commodity/brent-crude-oil/news/599740"
+    },
+    {
+      "id": "2026-11-24-rdc-nueva-suspension-de-exportacion-de-cobalto",
+      "fecha_dato": "2026-11-24",
+      "titulo": "RD Congo – Ruanda: Nueva suspensión de exportación de cobalto",
+      "resumen": "RD Congo – Ruanda, riesgo nivel 4 de 5 (Conflicto armado · acuerdos sin cumplir). Nueva suspensión de exportación de cobalto: Desde el 30-11-2026. La ARECOMS suspende las exportaciones por tiempo indefinido, con revisión a los cuatro meses, por la caída del precio.",
+      "tipo": "conflicto",
+      "eje": "Política internacional",
+      "alcance": {
+        "nivel": "país",
+        "provincia": "",
+        "localidad": "",
+        "pais": "República Democrática del Congo"
+      },
+      "rubros": [
+        "Minería"
+      ],
+      "subrubros": [
+        "cobalto"
+      ],
+      "exposicion": [
+        "Exporta"
+      ],
+      "url": "https://miningmx.com/2026-11-24-congo-to-reimpose-ban-on-cobalt-exports/"
+    },
+    {
+      "id": "2026-11-19-india-pakistan-espacios-aereos-cerrados-de-ambos-lados",
+      "fecha_dato": "2026-11-19",
+      "titulo": "India – Pakistán: Espacios aéreos cerrados de ambos lados",
+      "resumen": "India – Pakistán, riesgo nivel 3 de 5 (Latente · riesgo nuclear). Espacios aéreos cerrados de ambos lados: Veto hasta el 24-dic-2026. Pakistán volvió a extender por un mes, hasta el 24 de diciembre de 2026, el cierre de su espacio aéreo a todo avión indio, civil o militar.",
+      "tipo": "conflicto",
+      "eje": "Política internacional",
+      "alcance": {
+        "nivel": "país",
+        "provincia": "",
+        "localidad": "",
+        "pais": "India, Pakistán"
+      },
+      "rubros": [
+        "Comercio y servicios"
+      ],
+      "subrubros": [
+        "rutas marítimas y terrestres"
+      ],
+      "exposicion": [
+        "Exporta",
+        "Importa insumos"
+      ],
+      "url": "https://www.deccanchronicle.com/nation/pakistan-extends-ban-on-indian-aircraft-using-its-airspace-till-dec-24-2005893"
+    },
+    {
+      "id": "2026-11-19-medio-oriente-contenedores-cuarta-baja-semanal-seguida",
+      "fecha_dato": "2026-11-19",
+      "titulo": "Medio Oriente: Contenedores: cuarta baja semanal seguida",
+      "resumen": "Medio Oriente, riesgo nivel 5 de 5 (Guerra abierta). Contenedores: cuarta baja semanal seguida: WCI US$ 4.176/FEU. El índice mundial de Drewry bajó 3% en la semana, a US$ 4.176 por contenedor de 40 pies, aunque sigue 126% por encima de un año atrás.",
+      "tipo": "conflicto",
+      "eje": "Política internacional",
+      "alcance": {
+        "nivel": "país",
+        "provincia": "",
+        "localidad": "",
+        "pais": "Irán, Israel, Líbano, Yemen"
+      },
+      "rubros": [
+        "Comercio y servicios"
+      ],
+      "subrubros": [
+        "fletes y seguros"
+      ],
+      "exposicion": [
+        "Exporta",
+        "Importa insumos"
+      ],
+      "url": "https://www.shipuniverse.com/?p=28340"
+    },
+    {
+      "id": "2026-11-19-medio-oriente-ormuz-el-flujo-de-crudo-vuelve-a-caer",
+      "fecha_dato": "2026-11-19",
+      "titulo": "Medio Oriente: Ormuz: el flujo de crudo vuelve a caer",
+      "resumen": "Medio Oriente, riesgo nivel 5 de 5 (Guerra abierta). Ormuz: el flujo de crudo vuelve a caer: 9,5 mb/d. Según datos de Kpler, entre el 10 y el 19 de noviembre cruzaron Ormuz unos 9,5 mb/d de crudo en promedio, contra 12,2 mb/d en octubre, por los nuevos ataques a petroleros.",
+      "tipo": "conflicto",
+      "eje": "Política internacional",
+      "alcance": {
+        "nivel": "país",
+        "provincia": "",
+        "localidad": "",
+        "pais": "Irán, Israel, Líbano, Yemen"
+      },
+      "rubros": [
+        "Comercio y servicios"
+      ],
+      "subrubros": [
+        "rutas marítimas y terrestres"
+      ],
+      "exposicion": [
+        "Exporta",
+        "Importa insumos"
+      ],
+      "url": "https://tradingeconomics.com/commodity/brent-crude-oil/news/599740"
+    },
+    {
+      "id": "2026-11-18-haiti-pandillas-bloquean-los-accesos-a-la-capital",
+      "fecha_dato": "2026-11-18",
+      "titulo": "Haití: Pandillas bloquean los accesos a la capital",
+      "resumen": "Haití, riesgo nivel 4 de 5 (Colapso estatal · guerra de pandillas). Pandillas bloquean los accesos a la capital: 2–3 días para negociar el paso. Las rutas principales hacia Puerto Príncipe están bloqueadas y la ayuda tarda días en conseguir acceso.",
+      "tipo": "conflicto",
+      "eje": "Política internacional",
+      "alcance": {
+        "nivel": "país",
+        "provincia": "",
+        "localidad": "",
+        "pais": "Haití"
+      },
+      "rubros": [
+        "Comercio y servicios"
+      ],
+      "subrubros": [
+        "rutas marítimas y terrestres"
+      ],
+      "exposicion": [
+        "Exporta",
+        "Importa insumos"
+      ],
+      "url": "https://www.timeslive.co.za/news/world/2026-11-18-haitis-gang-violence-blocks-aid-as-child-malnutrition-worsens/"
+    },
+    {
+      "id": "2026-11-18-rdc-la-onu-sanciona-al-frn",
+      "fecha_dato": "2026-11-18",
+      "titulo": "RD Congo – Ruanda: La ONU sanciona al FRN",
+      "resumen": "RD Congo – Ruanda, riesgo nivel 4 de 5 (Conflicto armado · acuerdos sin cumplir). La ONU sanciona al FRN: 11-11-2026. El Consejo de Seguridad sumó a su lista de sanciones al FRN, sucesor del M23/AFC desde mediados de octubre, y el Reino Unido hizo lo mismo al día siguiente.",
+      "tipo": "conflicto",
+      "eje": "Política internacional",
+      "alcance": {
+        "nivel": "país",
+        "provincia": "",
+        "localidad": "",
+        "pais": "República Democrática del Congo"
+      },
+      "rubros": [
+        "Comercio y servicios"
+      ],
+      "subrubros": [],
+      "exposicion": [
+        "Exporta",
+        "Importa insumos"
+      ],
+      "url": "https://www.criticalthreats.org/briefs/congo-war-security-review"
+    },
+    {
+      "id": "2026-11-18-rusia-ucrania-drones-recortan-45-la-refinacion-afectada",
+      "fecha_dato": "2026-11-18",
+      "titulo": "Rusia – Ucrania: Drones recortan 45% la refinación afectada",
+      "resumen": "Rusia – Ucrania, riesgo nivel 4 de 5 (Guerra abierta · negociación en curso). Drones recortan 45% la refinación afectada: −45% de procesamiento. Según fuentes de la industria citadas por Reuters, desde fines de octubre los ataques ucranianos redujeron 45% el crudo procesado por las refinerías alcanzadas: 15 de las 35 grandes refinerías rusas están dañadas o paradas.",
+      "tipo": "conflicto",
+      "eje": "Política internacional",
+      "alcance": {
+        "nivel": "país",
+        "provincia": "",
+        "localidad": "",
+        "pais": "Rusia, Ucrania"
+      },
+      "rubros": [
+        "Energía"
+      ],
+      "subrubros": [
+        "petróleo"
+      ],
+      "exposicion": [
+        "Energía intensiva"
+      ],
+      "url": "https://www.timeslive.co.za/news/world/2026-11-18-ukraine-drone-strikes-wiped-out-45-of-russias-oil-refining-in-november/"
+    },
+    {
+      "id": "2026-11-16-colombia-gasoducto-con-venezuela",
+      "fecha_dato": "2026-11-16",
+      "titulo": "Colombia: Gasoducto con Venezuela",
+      "resumen": "Colombia, riesgo nivel 4 de 5 (Conflicto armado interno). Gasoducto con Venezuela: 50 Mpcd desde mediados de 2027. Colombia prevé volver a importar gas del occidente venezolano por el gasoducto binacional, con 50 millones de pies cúbicos diarios al inicio, un efecto indirecto del cambio político en Venezuela.",
+      "tipo": "conflicto",
+      "eje": "Política internacional",
+      "alcance": {
+        "nivel": "país",
+        "provincia": "",
+        "localidad": "",
+        "pais": "Colombia"
+      },
+      "rubros": [
+        "Energía"
+      ],
+      "subrubros": [
+        "gas"
+      ],
+      "exposicion": [
+        "Energía intensiva"
+      ],
+      "url": "https://www.hklaw.com/-/media/files/insights/publications/2026/11/venezuela-update/11_en_hk.pdf"
+    },
+    {
+      "id": "2026-11-16-sahel-combustible-a-bamako-solo-con-escolta",
+      "fecha_dato": "2026-11-16",
+      "titulo": "Sahel central: Combustible a Bamako sólo con escolta",
+      "resumen": "Sahel central, riesgo nivel 4 de 5 (Insurgencia en expansión). Combustible a Bamako sólo con escolta: 1.505 cisternas (1–16 nov). Llegaron dos convoyes militares, de 665 y 840 cisternas, el 7 y el 16 de noviembre.",
+      "tipo": "conflicto",
+      "eje": "Política internacional",
+      "alcance": {
+        "nivel": "país",
+        "provincia": "",
+        "localidad": "",
+        "pais": "Malí, Burkina Faso, Níger"
+      },
+      "rubros": [
+        "Comercio y servicios"
+      ],
+      "subrubros": [
+        "rutas marítimas y terrestres"
+      ],
+      "exposicion": [
+        "Exporta",
+        "Importa insumos"
+      ],
+      "url": "https://beninwebtv.bj/mali-840-nouvelles-citernes-bamako-1505-novembre-2026/"
+    },
+    {
+      "id": "2026-11-16-venezuela-produccion-oficial-en-alza",
+      "fecha_dato": "2026-11-16",
+      "titulo": "Venezuela: Producción oficial en alza",
+      "resumen": "Venezuela, riesgo nivel 2 de 5 (Post-intervención · transición tutelada). Producción oficial en alza: 1,244 M b/d (octubre). Según el dato oficial, la primera semana de noviembre promedió 1,251 M b/d, 8,5% más que un año antes.",
+      "tipo": "conflicto",
+      "eje": "Política internacional",
+      "alcance": {
+        "nivel": "país",
+        "provincia": "",
+        "localidad": "",
+        "pais": "Venezuela"
+      },
+      "rubros": [
+        "Energía"
+      ],
+      "subrubros": [
+        "petróleo"
+      ],
+      "exposicion": [
+        "Energía intensiva"
+      ],
+      "url": "https://www.hklaw.com/-/media/files/insights/publications/2026/11/venezuela-update/11_en_hk.pdf"
+    },
+    {
+      "id": "2026-11-14-mexico-amenaza-de-duplicar-aranceles",
+      "fecha_dato": "2026-11-14",
+      "titulo": "México: Amenaza de duplicar aranceles",
+      "resumen": "México, riesgo nivel 4 de 5 (Conflicto armado interno). Amenaza de duplicar aranceles: x2 sobre acero, aluminio y vehículos. El 12 de noviembre Trump condicionó los aranceles a que México frene una caravana de más de 1.000 migrantes salida de Tapachula.",
+      "tipo": "conflicto",
+      "eje": "Política internacional",
+      "alcance": {
+        "nivel": "país",
+        "provincia": "",
+        "localidad": "",
+        "pais": "México"
+      },
+      "rubros": [
+        "Industria"
+      ],
+      "subrubros": [
+        "siderurgia",
+        "automotriz"
+      ],
+      "exposicion": [
+        "Exporta",
+        "Importa insumos"
+      ],
+      "url": "https://mexiconewsdaily.com/news/trump-tariff-sheinbaum-china-trip-mexico-week-in-review/"
+    },
+    {
+      "id": "2026-11-13-taiwan-mas-de-100-buques-chinos-alrededor-de-la-isla",
+      "fecha_dato": "2026-11-13",
+      "titulo": "China – Taiwán y mares de Asia: Más de 100 buques chinos alrededor de la isla",
+      "resumen": "China – Taiwán y mares de Asia, riesgo nivel 2 de 5 (Latente · coerción en zona gris). Más de 100 buques chinos alrededor de la isla: >100 buques. A comienzos de noviembre China desplegó sin aviso más de 100 buques de la marina y la guardia costera en el Pacífico occidental y alrededor de Taiwán.",
+      "tipo": "conflicto",
+      "eje": "Política internacional",
+      "alcance": {
+        "nivel": "país",
+        "provincia": "",
+        "localidad": "",
+        "pais": "Taiwán"
+      },
+      "rubros": [
+        "Comercio y servicios"
+      ],
+      "subrubros": [
+        "rutas marítimas y terrestres"
+      ],
+      "exposicion": [
+        "Exporta",
+        "Importa insumos"
+      ],
+      "url": "https://www.ibtimes.com/china-unannounced-naval-deployment-taiwan-blockade-3809720"
+    },
+    {
+      "id": "2026-11-12-pakistan-afganistan-afganistan-desvia-su-comercio-por-iran",
+      "fecha_dato": "2026-11-12",
+      "titulo": "Pakistán – Afganistán: Afganistán desvía su comercio por Irán",
+      "resumen": "Pakistán – Afganistán, riesgo nivel 4 de 5 (Guerra fronteriza abierta). Afganistán desvía su comercio por Irán: US$ 13.900 M (2025). Pese a los cierres, el comercio total de Afganistán llegó a casi US$ 13.900 millones en 2025, sostenido por el puerto iraní de Chabahar y las rutas por Uzbekistán, Turkmenistán y Tayikistán.",
+      "tipo": "conflicto",
+      "eje": "Política internacional",
+      "alcance": {
+        "nivel": "país",
+        "provincia": "",
+        "localidad": "",
+        "pais": "Pakistán, Afganistán"
+      },
+      "rubros": [
+        "Comercio y servicios"
+      ],
+      "subrubros": [
+        "rutas marítimas y terrestres"
+      ],
+      "exposicion": [
+        "Exporta",
+        "Importa insumos"
+      ],
+      "url": "https://thefridaytimes.com/12-Nov-2026/pakistan-losing-afghanistan-s-trade-gateway-central-asia"
+    },
+    {
+      "id": "2026-11-12-pakistan-afganistan-exportaciones-paquistanies-a-afganistan-69",
+      "fecha_dato": "2026-11-12",
+      "titulo": "Pakistán – Afganistán: Exportaciones paquistaníes a Afganistán: −69%",
+      "resumen": "Pakistán – Afganistán, riesgo nivel 4 de 5 (Guerra fronteriza abierta). Exportaciones paquistaníes a Afganistán: −69%: US$ 244 M. Según el Banco Central de Pakistán, las exportaciones a Afganistán cayeron a unos US$ 244 millones en el año fiscal 2025-26, contra US$ 784 millones el año anterior.",
+      "tipo": "conflicto",
+      "eje": "Política internacional",
+      "alcance": {
+        "nivel": "país",
+        "provincia": "",
+        "localidad": "",
+        "pais": "Pakistán, Afganistán"
+      },
+      "rubros": [
+        "Comercio y servicios"
+      ],
+      "subrubros": [],
+      "exposicion": [
+        "Exporta",
+        "Importa insumos"
+      ],
+      "url": "https://thefridaytimes.com/12-Nov-2026/pakistan-losing-afghanistan-s-trade-gateway-central-asia"
+    },
+    {
+      "id": "2026-11-12-rusia-ucrania-la-ue-apunta-a-refinerias-y-flota-en-la-sombra",
+      "fecha_dato": "2026-11-12",
+      "titulo": "Rusia – Ucrania: La UE apunta a refinerías y flota en la sombra",
+      "resumen": "Rusia – Ucrania, riesgo nivel 4 de 5 (Guerra abierta · negociación en curso). La UE apunta a refinerías y flota en la sombra: +690 buques listados. La UE preparó nuevas sanciones contra refinerías rusas y la red de la flota en la sombra, que ya suma más de 690 buques sin acceso a puertos y servicios europeos.",
+      "tipo": "conflicto",
+      "eje": "Política internacional",
+      "alcance": {
+        "nivel": "país",
+        "provincia": "",
+        "localidad": "",
+        "pais": "Rusia, Ucrania"
+      },
+      "rubros": [
+        "Energía"
+      ],
+      "subrubros": [
+        "petróleo"
+      ],
+      "exposicion": [
+        "Energía intensiva",
+        "Exporta",
+        "Importa insumos"
+      ],
+      "url": "https://www.eurointegration.com.ua/eng/news/2026/11/12/7249837/"
+    },
+    {
+      "id": "2026-11-11-rusia-ucrania-exportaciones-de-crudo-ruso-caen-37",
+      "fecha_dato": "2026-11-11",
+      "titulo": "Rusia – Ucrania: Exportaciones de crudo ruso caen 37%",
+      "resumen": "Rusia – Ucrania, riesgo nivel 4 de 5 (Guerra abierta · negociación en curso). Exportaciones de crudo ruso caen 37%: 2,79 mb/d (−36,6%). En octubre Rusia exportó 2,79 mb/d de crudo, 36,6% menos que en septiembre, sobre todo porque India compró 67% menos;",
+      "tipo": "conflicto",
+      "eje": "Política internacional",
+      "alcance": {
+        "nivel": "país",
+        "provincia": "",
+        "localidad": "",
+        "pais": "Rusia, Ucrania"
+      },
+      "rubros": [
+        "Energía"
+      ],
+      "subrubros": [
+        "petróleo"
+      ],
+      "exposicion": [
+        "Energía intensiva"
+      ],
+      "url": "https://www.spglobal.com/energy/en/news-research/latest-news/refined-products/111126-russian-october-crude-exports-fall-366-on-month-despite-us-sanctions-waiver"
+    },
+    {
+      "id": "2026-11-10-medio-oriente-bloqueo-naval-iran-casi-sin-exportar",
+      "fecha_dato": "2026-11-10",
+      "titulo": "Medio Oriente: Bloqueo naval: Irán casi sin exportar",
+      "resumen": "Medio Oriente, riesgo nivel 5 de 5 (Guerra abierta). Bloqueo naval: Irán casi sin exportar: ~16.000 b/d. Desde que EE.UU. reimpuso el bloqueo naval el 14 de julio, las exportaciones iraníes casi desaparecieron: según el seguimiento de UANI, en octubre fueron unos 15.800 b/d, en un único cargamento de GLP.",
+      "tipo": "conflicto",
+      "eje": "Política internacional",
+      "alcance": {
+        "nivel": "país",
+        "provincia": "",
+        "localidad": "",
+        "pais": "Irán, Israel, Líbano, Yemen"
+      },
+      "rubros": [
+        "Energía"
+      ],
+      "subrubros": [
+        "petróleo"
+      ],
+      "exposicion": [
+        "Energía intensiva",
+        "Exporta",
+        "Importa insumos"
+      ],
+      "url": "https://www.seatrade-maritime.com/tankers/iran-oil-and-gas-exports-nearly-zero-malaysia-eopl-reserves-dry-up"
+    },
+    {
+      "id": "2026-11-10-sudan-cargas-por-las-terminales-del-mar-rojo",
+      "fecha_dato": "2026-11-10",
+      "titulo": "Sudán: Cargas por las terminales del mar Rojo",
+      "resumen": "Sudán, riesgo nivel 5 de 5 (Guerra civil). Cargas por las terminales del mar Rojo: ~155.000 b/d (octubre). El seguimiento de buques registró 4,8 M de barriles cargados en octubre entre crudo sudanés y sursudanés.",
+      "tipo": "conflicto",
+      "eje": "Política internacional",
+      "alcance": {
+        "nivel": "país",
+        "provincia": "",
+        "localidad": "",
+        "pais": "Sudán"
+      },
+      "rubros": [
+        "Energía"
+      ],
+      "subrubros": [
+        "petróleo"
+      ],
+      "exposicion": [
+        "Energía intensiva"
+      ],
+      "url": "https://oilprice.com/Energy/Crude-Oil/South-Sudan-Courts-Oil-Investors-as-Sudans-Warring-Forces-Take-Their-Share.html"
+    },
+    {
+      "id": "2026-11-10-sudan-la-rsf-cobra-parte-del-transito",
+      "fecha_dato": "2026-11-10",
+      "titulo": "Sudán: La RSF cobra parte del tránsito",
+      "resumen": "Sudán, riesgo nivel 5 de 5 (Guerra civil). La RSF cobra parte del tránsito: US$ 4 de cada US$ 11 por barril. Según fuentes del sector, Juba le paga a la RSF una parte de la tarifa por el tramo del oleoducto que controla, y el resto va al gobierno alineado con el ejército.",
+      "tipo": "conflicto",
+      "eje": "Política internacional",
+      "alcance": {
+        "nivel": "país",
+        "provincia": "",
+        "localidad": "",
+        "pais": "Sudán"
+      },
+      "rubros": [
+        "Comercio y servicios"
+      ],
+      "subrubros": [
+        "rutas marítimas y terrestres"
+      ],
+      "exposicion": [
+        "Exporta",
+        "Importa insumos"
+      ],
+      "url": "https://oilprice.com/Energy/Crude-Oil/South-Sudan-Courts-Oil-Investors-as-Sudans-Warring-Forces-Take-Their-Share.html"
+    },
+    {
+      "id": "2026-11-09-medio-oriente-seguro-de-guerra-en-el-golfo-5-9-del-casco",
+      "fecha_dato": "2026-11-09",
+      "titulo": "Medio Oriente: Seguro de guerra en el Golfo: 5–9% del casco",
+      "resumen": "Medio Oriente, riesgo nivel 5 de 5 (Guerra abierta). Seguro de guerra en el Golfo: 5–9% del casco: 5–9% del valor del casco. Según brokers citados por Lloyd's List, la prima de guerra para cruzar el Golfo bajó a entre 7% y 9% del valor del casco, con algunas pólizas al 5%.",
+      "tipo": "conflicto",
+      "eje": "Política internacional",
+      "alcance": {
+        "nivel": "país",
+        "provincia": "",
+        "localidad": "",
+        "pais": "Irán, Israel, Líbano, Yemen"
+      },
+      "rubros": [
+        "Comercio y servicios"
+      ],
+      "subrubros": [
+        "fletes y seguros"
+      ],
+      "exposicion": [
+        "Exporta",
+        "Importa insumos"
+      ],
+      "url": "https://www.insurancebusinessmag.com/au/news/marine/black-sea-war-cover-now-costs-more-than-wwii-atlantic-convoys-did--so-why-isnt-the-gulf-596551.aspx"
+    },
+    {
+      "id": "2026-11-09-rusia-ucrania-seguro-de-guerra-record-en-el-mar-negro",
+      "fecha_dato": "2026-11-09",
+      "titulo": "Rusia – Ucrania: Seguro de guerra récord en el mar Negro",
+      "resumen": "Rusia – Ucrania, riesgo nivel 4 de 5 (Guerra abierta · negociación en curso). Seguro de guerra récord en el mar Negro: hasta 20% del casco. Según Lloyd's List, la prima de guerra para buques vinculados a Ucrania llegó a hasta 20% del valor del casco, contra cerca de 1% por escala en enero.",
+      "tipo": "conflicto",
+      "eje": "Política internacional",
+      "alcance": {
+        "nivel": "país",
+        "provincia": "",
+        "localidad": "",
+        "pais": "Rusia, Ucrania"
+      },
+      "rubros": [
+        "Comercio y servicios"
+      ],
+      "subrubros": [
+        "fletes y seguros"
+      ],
+      "exposicion": [
+        "Exporta",
+        "Importa insumos"
+      ],
+      "url": "https://www.insurancebusinessmag.com/au/news/marine/black-sea-war-cover-now-costs-more-than-wwii-atlantic-convoys-did--so-why-isnt-the-gulf-596551.aspx"
+    },
+    {
+      "id": "2026-11-09-taiwan-exportaciones-record-por-los-chips-de-ia",
+      "fecha_dato": "2026-11-09",
+      "titulo": "China – Taiwán y mares de Asia: Exportaciones récord por los chips de IA",
+      "resumen": "China – Taiwán y mares de Asia, riesgo nivel 2 de 5 (Latente · coerción en zona gris). Exportaciones récord por los chips de IA: US$ 96.760 M (+58,9%). En octubre Taiwán exportó un récord de US$ 96.760 millones, 58,9% más que un año antes;",
+      "tipo": "conflicto",
+      "eje": "Política internacional",
+      "alcance": {
+        "nivel": "país",
+        "provincia": "",
+        "localidad": "",
+        "pais": "Taiwán"
+      },
+      "rubros": [
+        "Industria"
+      ],
+      "subrubros": [
+        "semiconductores"
+      ],
+      "exposicion": [],
+      "url": "https://focustaiwan.tw/business/202611090020"
+    },
+    {
+      "id": "2026-11-06-cuba-ofac-sanciona-la-red-naviera-petrolera",
+      "fecha_dato": "2026-11-06",
+      "titulo": "Cuba: OFAC sanciona la red naviera petrolera",
+      "resumen": "Cuba, riesgo nivel 2 de 5 (Latente · coerción económica). OFAC sanciona la red naviera petrolera: 8 entidades, 2 personas y 5 tanqueros. El 5 de noviembre EE.UU. sancionó a ocho entidades y dos personas, entre ellas las navieras Petromarca, Internacional Marítima, Caroil y Tentacool, y declaró bloqueados cinco tanqueros que llevan crudo o derivados a Cuba.",
+      "tipo": "conflicto",
+      "eje": "Política internacional",
+      "alcance": {
+        "nivel": "país",
+        "provincia": "",
+        "localidad": "",
+        "pais": "Cuba"
+      },
+      "rubros": [
+        "Energía"
+      ],
+      "subrubros": [
+        "combustibles"
+      ],
+      "exposicion": [
+        "Energía intensiva",
+        "Exporta",
+        "Importa insumos"
+      ],
+      "url": "https://gcaptain.com/u-s-targets-cubas-oil-tanker-fleet-in-new-sanctions-crackdown/"
+    },
+    {
+      "id": "2026-11-06-rusia-ucrania-bloqueo-de-puertos-ucranianos",
+      "fecha_dato": "2026-11-06",
+      "titulo": "Rusia – Ucrania: Bloqueo de puertos ucranianos",
+      "resumen": "Rusia – Ucrania, riesgo nivel 4 de 5 (Guerra abierta · negociación en curso). Bloqueo de puertos ucranianos: −US$ 6.600 M. El Banco Nacional de Ucrania calcula que el bloqueo marítimo y los ataques a puertos restarán US$ 6.600 millones a la balanza comercial del segundo semestre de 2026, US$ 4.600 millones de ellos en exportaciones agrícolas.",
+      "tipo": "conflicto",
+      "eje": "Política internacional",
+      "alcance": {
+        "nivel": "país",
+        "provincia": "",
+        "localidad": "",
+        "pais": "Rusia, Ucrania"
+      },
+      "rubros": [
+        "Comercio y servicios"
+      ],
+      "subrubros": [
+        "rutas marítimas y terrestres"
+      ],
+      "exposicion": [
+        "Exporta",
+        "Importa insumos"
+      ],
+      "url": "https://www.pravda.com.ua/eng/news/2026/11/06/8061593/"
+    },
+    {
+      "id": "2026-11-03-rusia-ucrania-granos-del-mar-negro-bajo-fuego",
+      "fecha_dato": "2026-11-03",
+      "titulo": "Rusia – Ucrania: Granos del mar Negro bajo fuego",
+      "resumen": "Rusia – Ucrania, riesgo nivel 4 de 5 (Guerra abierta · negociación en curso). Granos del mar Negro bajo fuego: Trigo Chicago US$ 6,03/bu. Los ataques rusos paralizaron Odesa y Ucrania podría sacar solo la mitad de su cosecha.",
+      "tipo": "conflicto",
+      "eje": "Política internacional",
+      "alcance": {
+        "nivel": "país",
+        "provincia": "",
+        "localidad": "",
+        "pais": "Rusia, Ucrania"
+      },
+      "rubros": [
+        "Agro"
+      ],
+      "subrubros": [
+        "granos"
+      ],
+      "exposicion": [
+        "Exporta"
+      ],
+      "url": "https://www.aljazeera.com/news/2026/11/3/disruptions-of-black-sea-grain-exports-spike-global-prices"
+    },
+    {
+      "id": "2026-11-03-venezuela-exportaciones-estables-en-octubre",
+      "fecha_dato": "2026-11-03",
+      "titulo": "Venezuela: Exportaciones estables en octubre",
+      "resumen": "Venezuela, riesgo nivel 2 de 5 (Post-intervención · transición tutelada). Exportaciones estables en octubre: 1,08 M b/d. Fue 0,5% menos que en septiembre pero 21% más que un año antes.",
+      "tipo": "conflicto",
+      "eje": "Política internacional",
+      "alcance": {
+        "nivel": "país",
+        "provincia": "",
+        "localidad": "",
+        "pais": "Venezuela"
+      },
+      "rubros": [
+        "Energía"
+      ],
+      "subrubros": [
+        "petróleo"
+      ],
+      "exposicion": [
+        "Energía intensiva"
+      ],
+      "url": "https://boereport.com/2026/11/03/venezuelas-oil-exports-unchanged-amid-stagnant-output-high-freight-rates-data-shows/amp/"
+    },
+    {
+      "id": "2026-11-03-venezuela-fletes-caros-frenan-las-ventas",
+      "fecha_dato": "2026-11-03",
+      "titulo": "Venezuela: Fletes caros frenan las ventas",
+      "resumen": "Venezuela, riesgo nivel 2 de 5 (Post-intervención · transición tutelada). Fletes caros frenan las ventas: ~4 M barriles acumulados. La baja de los envíos a EE.UU. se explica por fletes altos, mantenimiento de refinerías y la resistencia de PDVSA a dar más descuentos;",
+      "tipo": "conflicto",
+      "eje": "Política internacional",
+      "alcance": {
+        "nivel": "país",
+        "provincia": "",
+        "localidad": "",
+        "pais": "Venezuela"
+      },
+      "rubros": [
+        "Comercio y servicios"
+      ],
+      "subrubros": [
+        "fletes y seguros"
+      ],
+      "exposicion": [
+        "Exporta",
+        "Importa insumos"
+      ],
+      "url": "https://www.oilmonster.com/article/venezuelas-oil-exports-unchanged-amid-stagnant-output-and-high-freight-rates/8757"
+    },
+    {
+      "id": "2026-11-02-cuba-se-retira-otra-central-flotante-turca",
+      "fecha_dato": "2026-11-02",
+      "titulo": "Cuba: Se retira otra central flotante turca",
+      "resumen": "Cuba, riesgo nivel 2 de 5 (Latente · coerción económica). Se retira otra central flotante turca: −63 MW. La barcaza Erol Bey de Karpowership dejó La Habana el 2 de noviembre, según confirmó EFE, y queda sólo una de las ocho que llegaron a operar.",
+      "tipo": "conflicto",
+      "eje": "Política internacional",
+      "alcance": {
+        "nivel": "país",
+        "provincia": "",
+        "localidad": "",
+        "pais": "Cuba"
+      },
+      "rubros": [
+        "Energía"
+      ],
+      "subrubros": [
+        "electricidad"
+      ],
+      "exposicion": [
+        "Energía intensiva"
+      ],
+      "url": "https://diariodecuba.com/cuba/1793708162_69680.html"
+    },
+    {
+      "id": "2026-11-02-myanmar-china-reabre-pasos-en-zonas-rebeldes",
+      "fecha_dato": "2026-11-02",
+      "titulo": "Myanmar: China reabre pasos en zonas rebeldes",
+      "resumen": "Myanmar, riesgo nivel 4 de 5 (Guerra civil). China reabre pasos en zonas rebeldes: Kyin San Kyawt (Muse). Por el paso de Muse, en manos de la Alianza de la Hermandad, vuelven a entrar bienes que estaban restringidos.",
+      "tipo": "conflicto",
+      "eje": "Política internacional",
+      "alcance": {
+        "nivel": "país",
+        "provincia": "",
+        "localidad": "",
+        "pais": "Myanmar"
+      },
+      "rubros": [
+        "Comercio y servicios"
+      ],
+      "subrubros": [
+        "rutas marítimas y terrestres"
+      ],
+      "exposicion": [
+        "Exporta",
+        "Importa insumos"
+      ],
+      "url": "https://www.irrawaddy.com/news/burma/china-reopens-trade-through-border-crossings-controlled-by-armed-groups.html"
+    },
+    {
+      "id": "2026-10-31-medio-oriente-exportaciones-del-golfo-26-bajo-la-preguerra",
+      "fecha_dato": "2026-10-31",
+      "titulo": "Medio Oriente: Exportaciones del Golfo, 26% bajo la preguerra",
+      "resumen": "Medio Oriente, riesgo nivel 5 de 5 (Guerra abierta). Exportaciones del Golfo, 26% bajo la preguerra: 18,4 mb/d (−26%). Según la AIE, en octubre los países del Golfo (sin Omán) exportaron 18,4 mb/d de crudo y derivados, 26% menos que antes de la guerra.",
+      "tipo": "conflicto",
+      "eje": "Política internacional",
+      "alcance": {
+        "nivel": "país",
+        "provincia": "",
+        "localidad": "",
+        "pais": "Irán, Israel, Líbano, Yemen"
+      },
+      "rubros": [
+        "Energía"
+      ],
+      "subrubros": [
+        "petróleo"
+      ],
+      "exposicion": [
+        "Energía intensiva"
+      ],
+      "url": "https://iea.org/reports/oil-market-report-november-2026"
+    },
+    {
+      "id": "2026-10-31-medio-oriente-suez-se-recupera-pero-sigue-34-abajo",
+      "fecha_dato": "2026-10-31",
+      "titulo": "Medio Oriente: Suez se recupera, pero sigue 34% abajo",
+      "resumen": "Medio Oriente, riesgo nivel 5 de 5 (Guerra abierta). Suez se recupera, pero sigue 34% abajo: 1.338 buques en octubre (−34%). En octubre cruzaron Suez 1.338 buques, 63% más que un año antes pero 34% menos que el promedio previo a la crisis de los hutíes (2.009 por mes en 2023).",
+      "tipo": "conflicto",
+      "eje": "Política internacional",
+      "alcance": {
+        "nivel": "país",
+        "provincia": "",
+        "localidad": "",
+        "pais": "Irán, Israel, Líbano, Yemen"
+      },
+      "rubros": [
+        "Comercio y servicios"
+      ],
+      "subrubros": [
+        "rutas marítimas y terrestres"
+      ],
+      "exposicion": [
+        "Exporta",
+        "Importa insumos"
+      ],
+      "url": "https://www.lloydslistintelligence.com/resources/blog/red-sea-brief---12-november-2026"
+    },
+    {
+      "id": "2026-10-30-cuba-aeropuertos-sin-combustible-para-aviones",
+      "fecha_dato": "2026-10-30",
+      "titulo": "Cuba: Aeropuertos sin combustible para aviones",
+      "resumen": "Cuba, riesgo nivel 2 de 5 (Latente · coerción económica). Aeropuertos sin combustible para aviones: Sin Jet A-1 hasta el 1-dic. Cuba renovó el 30 de octubre los avisos que declaran sin combustible de aviación a todos sus aeropuertos principales hasta el 1 de diciembre.",
+      "tipo": "conflicto",
+      "eje": "Política internacional",
+      "alcance": {
+        "nivel": "país",
+        "provincia": "",
+        "localidad": "",
+        "pais": "Cuba"
+      },
+      "rubros": [
+        "Comercio y servicios"
+      ],
+      "subrubros": [
+        "rutas marítimas y terrestres"
+      ],
+      "exposicion": [
+        "Exporta",
+        "Importa insumos"
+      ],
+      "url": "https://www.latintimes.com/cuba-extends-jet-fuel-blackout-major-airports-601338"
+    },
+    {
+      "id": "2026-10-29-medio-oriente-qatar-extiende-la-fuerza-mayor-del-gnl",
+      "fecha_dato": "2026-10-29",
+      "titulo": "Medio Oriente: Qatar extiende la fuerza mayor del GNL",
+      "resumen": "Medio Oriente, riesgo nivel 5 de 5 (Guerra abierta). Qatar extiende la fuerza mayor del GNL: −17% de la capacidad qatarí. QatarEnergy extendió hasta fin de diciembre la fuerza mayor sobre sus envíos de GNL.",
+      "tipo": "conflicto",
+      "eje": "Política internacional",
+      "alcance": {
+        "nivel": "país",
+        "provincia": "",
+        "localidad": "",
+        "pais": "Irán, Israel, Líbano, Yemen"
+      },
+      "rubros": [
+        "Energía"
+      ],
+      "subrubros": [
+        "gas"
+      ],
+      "exposicion": [
+        "Energía intensiva"
+      ],
+      "url": "https://www.thenationalnews.com/business/2026/10/29/qatarenergy-turns-to-us-lng-with-woodside-deal-as-hormuz-force-majeure-drags-on/"
+    },
+    {
+      "id": "2026-10-20-corea-comercio-con-china-en-maximo-pospandemia",
+      "fecha_dato": "2026-10-20",
+      "titulo": "Península de Corea: Comercio con China en máximo pospandemia",
+      "resumen": "Península de Corea, riesgo nivel 3 de 5 (Latente · tensión militar elevada). Comercio con China en máximo pospandemia: US$ 2.270 M (ene–sep 2026). Según la aduana china, el comercio con Corea del Norte llegó a US$ 2.270 millones en los primeros nueve meses de 2026, el nivel más alto desde los cierres por la covid.",
+      "tipo": "conflicto",
+      "eje": "Política internacional",
+      "alcance": {
+        "nivel": "país",
+        "provincia": "",
+        "localidad": "",
+        "pais": "Corea del Norte"
+      },
+      "rubros": [
+        "Comercio y servicios"
+      ],
+      "subrubros": [],
+      "exposicion": [
+        "Exporta",
+        "Importa insumos"
+      ],
+      "url": "https://www.koreajoongangdaily.com/korea/north-koreachina-trade-reaches-postcovid-high-as-new-border-bridge-opens/12929448"
+    },
+    {
+      "id": "2026-10-16-rusia-ucrania-ee-uu-suspende-castigos-a-compradores",
+      "fecha_dato": "2026-10-16",
+      "titulo": "Rusia – Ucrania: EE.UU. suspende castigos a compradores",
+      "resumen": "Rusia – Ucrania, riesgo nivel 4 de 5 (Guerra abierta · negociación en curso). EE.UU. suspende castigos a compradores: Exención del 16 de octubre. Trump suspendió los aranceles y restricciones que iban a castigar a quienes compran crudo ruso.",
+      "tipo": "conflicto",
+      "eje": "Política internacional",
+      "alcance": {
+        "nivel": "país",
+        "provincia": "",
+        "localidad": "",
+        "pais": "Rusia, Ucrania"
+      },
+      "rubros": [
+        "Energía"
+      ],
+      "subrubros": [
+        "petróleo"
+      ],
+      "exposicion": [
+        "Energía intensiva",
+        "Exporta",
+        "Importa insumos"
+      ],
+      "url": "https://www.spglobal.com/energy/en/news-research/latest-news/refined-products/111126-russian-october-crude-exports-fall-366-on-month-despite-us-sanctions-waiver"
+    },
+    {
+      "id": "2026-10-14-colombia-arancel-adicional-de-12-5-de-ee-uu",
+      "fecha_dato": "2026-10-14",
+      "titulo": "Colombia: Arancel adicional de 12,5% de EE.UU.",
+      "resumen": "Colombia, riesgo nivel 4 de 5 (Conflicto armado interno). Arancel adicional de 12,5% de EE.UU.: 12,5% sobre ~30% de lo exportado a EE.UU.. La USTR lo impuso el 23 de julio de 2026 alegando que Colombia no prohíbe en la práctica las importaciones hechas con trabajo forzoso.",
+      "tipo": "conflicto",
+      "eje": "Política internacional",
+      "alcance": {
+        "nivel": "país",
+        "provincia": "",
+        "localidad": "",
+        "pais": "Colombia"
+      },
+      "rubros": [
+        "Agro",
+        "Industria"
+      ],
+      "subrubros": [
+        "flores",
+        "confecciones"
+      ],
+      "exposicion": [
+        "Exporta",
+        "Importa insumos"
+      ],
+      "url": "https://www.larepublica.co/economia/mas-de-8-000-articulos-quedarian-exentos-del-arancel-de-12-5-de-ee-uu-4502269"
+    },
+    {
+      "id": "2026-10-14-etiopia-disputa-por-assab-y-el-mar-rojo",
+      "fecha_dato": "2026-10-14",
+      "titulo": "Etiopía (Tigray): Disputa por Assab y el mar Rojo",
+      "resumen": "Etiopía (Tigray), riesgo nivel 4 de 5 (Guerra civil reabierta). Disputa por Assab y el mar Rojo: Riesgo de escalada. Etiopía reclama una salida al mar y Eritrea la acusa de querer quedarse con el puerto de Assab.",
+      "tipo": "conflicto",
+      "eje": "Política internacional",
+      "alcance": {
+        "nivel": "país",
+        "provincia": "",
+        "localidad": "",
+        "pais": "Etiopía"
+      },
+      "rubros": [
+        "Comercio y servicios"
+      ],
+      "subrubros": [
+        "rutas marítimas y terrestres"
+      ],
+      "exposicion": [
+        "Exporta",
+        "Importa insumos"
+      ],
+      "url": "https://nationalsecuritynews.com/2026/10/ethiopia-and-eritrea-perilously-close-to-war-amid-red-sea-tensions/"
+    },
+    {
+      "id": "2026-10-12-colombia-trump-evalua-retirar-el-arancel",
+      "fecha_dato": "2026-10-12",
+      "titulo": "Colombia: Trump evalúa retirar el arancel",
+      "resumen": "Colombia, riesgo nivel 4 de 5 (Conflicto armado interno). Trump evalúa retirar el arancel: Sin decisión formal. Trump dijo que podría levantarlo por su relación con De la Espriella, que asumió en agosto.",
+      "tipo": "conflicto",
+      "eje": "Política internacional",
+      "alcance": {
+        "nivel": "país",
+        "provincia": "",
+        "localidad": "",
+        "pais": "Colombia"
+      },
+      "rubros": [
+        "Agro",
+        "Industria"
+      ],
+      "subrubros": [],
+      "exposicion": [
+        "Exporta",
+        "Importa insumos"
+      ],
+      "url": "https://www.portafolio.co/negocios/comercio/atencion-trump-sugiere-que-podria-desmontar-aranceles-a-productos-colombianos-504341"
+    },
+    {
+      "id": "2026-10-06-sudan-oro-oficial-record-y-contrabando",
+      "fecha_dato": "2026-10-06",
+      "titulo": "Sudán: Oro oficial récord y contrabando",
+      "resumen": "Sudán, riesgo nivel 5 de 5 (Guerra civil). Oro oficial récord y contrabando: US$ 2.292 M (ene–sep 2026). La empresa estatal de minería informó exportaciones de oro por US$ 2.292 millones en los primeros nueve meses, más que los US$ 1.536 millones de todo 2025.",
+      "tipo": "conflicto",
+      "eje": "Política internacional",
+      "alcance": {
+        "nivel": "país",
+        "provincia": "",
+        "localidad": "",
+        "pais": "Sudán"
+      },
+      "rubros": [
+        "Minería"
+      ],
+      "subrubros": [
+        "oro"
+      ],
+      "exposicion": [
+        "Exporta"
+      ],
+      "url": "https://sudantribune.com/?p=319691"
+    },
+    {
+      "id": "2026-09-30-venezuela-ofac-amplia-licencias-generales",
+      "fecha_dato": "2026-09-30",
+      "titulo": "Venezuela: OFAC amplía licencias generales",
+      "resumen": "Venezuela, riesgo nivel 2 de 5 (Post-intervención · transición tutelada). OFAC amplía licencias generales: Actualización de fines de septiembre. Las licencias permiten el comercio petrolero y petroquímico, los servicios para el sector y negociar contratos sujetos a autorización.",
+      "tipo": "conflicto",
+      "eje": "Política internacional",
+      "alcance": {
+        "nivel": "país",
+        "provincia": "",
+        "localidad": "",
+        "pais": "Venezuela"
+      },
+      "rubros": [
+        "Energía"
+      ],
+      "subrubros": [
+        "petróleo"
+      ],
+      "exposicion": [
+        "Energía intensiva",
+        "Exporta",
+        "Importa insumos"
+      ],
+      "url": "https://www.hklaw.com/-/media/files/insights/publications/2026/11/venezuela-update/11_en_hk.pdf"
+    },
+    {
+      "id": "2026-09-28-etiopia-dependencia-del-corredor-a-yibuti",
+      "fecha_dato": "2026-09-28",
+      "titulo": "Etiopía (Tigray): Dependencia del corredor a Yibuti",
+      "resumen": "Etiopía (Tigray), riesgo nivel 4 de 5 (Guerra civil reabierta). Dependencia del corredor a Yibuti: 96,7% de la carga. La ruta norte cruza Afar, donde avanzaron fuerzas tigriñas a fines de septiembre, y por ahí entra la mayor parte del combustible.",
+      "tipo": "conflicto",
+      "eje": "Política internacional",
+      "alcance": {
+        "nivel": "país",
+        "provincia": "",
+        "localidad": "",
+        "pais": "Etiopía"
+      },
+      "rubros": [
+        "Comercio y servicios"
+      ],
+      "subrubros": [
+        "rutas marítimas y terrestres"
+      ],
+      "exposicion": [
+        "Exporta",
+        "Importa insumos"
+      ],
+      "url": "https://english.ahram.org.eg/News/577700.aspx"
+    },
+    {
+      "id": "2026-09-22-myanmar-el-tungsteno-hacia-china-se-duplica",
+      "fecha_dato": "2026-09-22",
+      "titulo": "Myanmar: El tungsteno hacia China se duplica",
+      "resumen": "Myanmar, riesgo nivel 4 de 5 (Guerra civil). El tungsteno hacia China se duplica: 6.191 t (ene–jul, +97%). Grupos armados controlan gran parte de las zonas mineras del este, como el distrito de estaño y tungsteno de Karenni y el complejo de Man Maw (Wa).",
+      "tipo": "conflicto",
+      "eje": "Política internacional",
+      "alcance": {
+        "nivel": "país",
+        "provincia": "",
+        "localidad": "",
+        "pais": "Myanmar"
+      },
+      "rubros": [
+        "Minería"
+      ],
+      "subrubros": [
+        "tungsteno"
+      ],
+      "exposicion": [
+        "Exporta"
+      ],
+      "url": "https://www.fastmarkets.com/insights/from-burmese-mines-to-chinese-smelters-how-myanmar-rejoined-chinas-critical-minerals-supply-chain/"
+    },
+    {
+      "id": "2026-09-18-cuba-brecha-de-crudo-sin-cubrir",
+      "fecha_dato": "2026-09-18",
+      "titulo": "Cuba: Brecha de crudo sin cubrir",
+      "resumen": "Cuba, riesgo nivel 2 de 5 (Latente · coerción económica). Brecha de crudo sin cubrir: Necesita >100.000 b/d; produce ~40.000. El resto hay que importarlo, pero desde enero EE.UU. amenaza con aranceles a cualquier país que le venda combustible a Cuba.",
+      "tipo": "conflicto",
+      "eje": "Política internacional",
+      "alcance": {
+        "nivel": "país",
+        "provincia": "",
+        "localidad": "",
+        "pais": "Cuba"
+      },
+      "rubros": [
+        "Energía"
+      ],
+      "subrubros": [
+        "petróleo"
+      ],
+      "exposicion": [
+        "Energía intensiva"
+      ],
+      "url": "https://planoinformativo.com/1170137/cuba-sufre-un-nuevo-apagon-nacional-el-octavo-en-lo-que-va-de-2026"
+    },
+    {
+      "id": "2026-09-18-cuba-octavo-apagon-nacional-del-ano",
+      "fecha_dato": "2026-09-18",
+      "titulo": "Cuba: Octavo apagón nacional del año",
+      "resumen": "Cuba, riesgo nivel 2 de 5 (Latente · coerción económica). Octavo apagón nacional del año: 8 colapsos totales en 2026. El colapso del 18 de septiembre dejó sin luz a más de nueve millones de personas, según el Ministerio de Energía y Minas.",
+      "tipo": "conflicto",
+      "eje": "Política internacional",
+      "alcance": {
+        "nivel": "país",
+        "provincia": "",
+        "localidad": "",
+        "pais": "Cuba"
+      },
+      "rubros": [
+        "Energía"
+      ],
+      "subrubros": [
+        "electricidad"
+      ],
+      "exposicion": [
+        "Energía intensiva"
+      ],
+      "url": "https://planoinformativo.com/1170137/cuba-sufre-un-nuevo-apagon-nacional-el-octavo-en-lo-que-va-de-2026"
+    },
+    {
+      "id": "2026-09-02-corea-corea-del-norte-crece-pese-a-las-sanciones",
+      "fecha_dato": "2026-09-02",
+      "titulo": "Península de Corea: Corea del Norte crece pese a las sanciones",
+      "resumen": "Península de Corea, riesgo nivel 3 de 5 (Latente · tensión militar elevada). Corea del Norte crece pese a las sanciones: PBI +3,5% (2025). Según el Banco de Corea, la economía norcoreana creció 3,5% en 2025, su tercer año seguido por encima de 3%.",
+      "tipo": "conflicto",
+      "eje": "Política internacional",
+      "alcance": {
+        "nivel": "país",
+        "provincia": "",
+        "localidad": "",
+        "pais": "Corea del Norte"
+      },
+      "rubros": [
+        "Comercio y servicios"
+      ],
+      "subrubros": [],
+      "exposicion": [
+        "Exporta",
+        "Importa insumos"
+      ],
+      "url": "https://keia.org/analysis/arms-sales-to-russia-and-trade-with-china-drive-north-koreas-economic-recovery/"
+    },
+    {
+      "id": "2026-09-01-india-pakistan-aguas-del-indo-tratado-en-suspenso",
+      "fecha_dato": "2026-09-01",
+      "titulo": "India – Pakistán: Aguas del Indo: tratado en suspenso",
+      "resumen": "India – Pakistán, riesgo nivel 3 de 5 (Latente · riesgo nuclear). Aguas del Indo: tratado en suspenso: Fallo a favor de Pakistán. La Corte Permanente de Arbitraje resolvió que el Tratado de Aguas del Indo sigue vigente, pero India rechazó el fallo y lo mantiene suspendido desde abril de 2025.",
+      "tipo": "conflicto",
+      "eje": "Política internacional",
+      "alcance": {
+        "nivel": "país",
+        "provincia": "",
+        "localidad": "",
+        "pais": "India, Pakistán"
+      },
+      "rubros": [
+        "Agro"
+      ],
+      "subrubros": [
+        "riego"
+      ],
+      "exposicion": [
+        "Exporta"
+      ],
+      "url": "https://www.aljazeera.com/news/2026/9/1/pakistan-wins-indus-waters-battle-at-the-hague-but-india-threat-remains"
+    },
+    {
+      "id": "2026-08-31-pakistan-afganistan-perdidas-de-los-exportadores",
+      "fecha_dato": "2026-08-31",
+      "titulo": "Pakistán – Afganistán: Pérdidas de los exportadores",
+      "resumen": "Pakistán – Afganistán, riesgo nivel 4 de 5 (Guerra fronteriza abierta). Pérdidas de los exportadores: ~US$ 1.000 M. La Cámara de Comercio Pakistán-Afganistán estima que los exportadores paquistaníes perdieron cerca de US$ 1.000 millones en diez meses de cierre.",
+      "tipo": "conflicto",
+      "eje": "Política internacional",
+      "alcance": {
+        "nivel": "país",
+        "provincia": "",
+        "localidad": "",
+        "pais": "Pakistán, Afganistán"
+      },
+      "rubros": [
+        "Comercio y servicios"
+      ],
+      "subrubros": [],
+      "exposicion": [
+        "Exporta",
+        "Importa insumos"
+      ],
+      "url": "https://www.dawn.com/news/2026228"
+    }
+  ],
+  "agenda": [],
+  "faltantes": []
+}

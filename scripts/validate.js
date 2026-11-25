@@ -66,6 +66,44 @@ if (EC) {
     });
   }
 }
+// datos-informe.json (web de informes de Plexum, formato v1.2)
+{
+  const P = path.join(__dirname, "..", "datos-informe.json");
+  let D = null;
+  try { D = JSON.parse(fs.readFileSync(P, "utf8")); } catch (e) { errs.push("datos-informe.json falta o no es JSON válido: " + e.message); }
+  if (D) {
+    const L = { eje: ["Economía nacional", "Política nacional", "Economía internacional", "Política internacional", "Clima y riesgo productivo", "Región y rubro"],
+      rub: ["Industria", "Agro", "Minería", "Energía", "Construcción", "Comercio y servicios"],
+      exp: ["Exporta", "Importa insumos", "Deuda en dólares", "Energía intensiva", "Mano de obra intensiva", "Vende al Estado", "Vende a minería y energía"],
+      niv: ["mundo", "país", "nacional", "provincia", "localidad"],
+      tipo: ["norma", "inversión", "empresa en crisis", "licitación", "conflicto", "elección", "encuesta", "medida comercial", "clima", "otro"] };
+    if (D.web !== "Conflicto Global") errs.push("datos-informe.json: web debe ser «Conflicto Global»");
+    if (!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}[-+]\d{2}:\d{2}$/.test(D.generado || "")) errs.push("datos-informe.json: generado sin fecha y zona horaria");
+    else if (D.generado.slice(0, 10) < M.updated) errs.push("datos-informe.json desactualizado: correr node scripts/build_informe.js");
+    const comun = (o, w) => {
+      if (!L.eje.includes(o.eje)) errs.push(`${w}: eje inválido`);
+      if (!o.alcance || !L.niv.includes(o.alcance.nivel)) errs.push(`${w}: alcance.nivel inválido`);
+      if ((o.rubros || []).some(r => !L.rub.includes(r))) errs.push(`${w}: rubro inválido`);
+      if ((o.exposicion || []).some(r => !L.exp.includes(r))) errs.push(`${w}: exposición inválida`);
+      if (!/^https?:\/\//.test(o.url || "")) errs.push(`${w}: falta url`);
+    };
+    const seen = new Set();
+    for (const i of D.indicadores || []) {
+      const w = "informe indicador " + i.id;
+      if (!/^[a-z0-9-]+$/.test(i.id) || seen.has(i.id)) errs.push(`${w}: id inválido o repetido`); seen.add(i.id);
+      if (i.valor === "" || i.valor === null || i.valor === undefined || !okDate(i.fecha_dato)) errs.push(`${w}: valor o fecha_dato inválidos`);
+      comun(i, w);
+    }
+    for (const n of D.novedades || []) {
+      const w = "informe novedad " + n.id;
+      if (seen.has(n.id)) errs.push(`${w}: id repetido`); seen.add(n.id);
+      if (!okDate(n.fecha_dato) || (Date.parse(D.generado.slice(0, 10)) - Date.parse(n.fecha_dato)) / 864e5 > 90) errs.push(`${w}: fecha_dato inválida o de más de 90 días`);
+      if (!L.tipo.includes(n.tipo)) errs.push(`${w}: tipo inválido`);
+      if (!n.titulo || !n.resumen || n.resumen.trim().split(/\s+/).length > 60) errs.push(`${w}: falta título o el resumen pasa de 60 palabras`);
+      comun(n, w);
+    }
+  }
+}
 const CY = W.CYBER;
 if (!CY) errs.push("Falta CYBER (data/cyber.js)");
 else {
