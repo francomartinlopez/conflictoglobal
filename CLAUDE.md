@@ -10,8 +10,8 @@ Responsable editorial: Franco Martín López.
 - `data/toll.js` (víctimas y daños) y `data/series.js` (series y `HEADLINE` del panel global).
 - `data/front-ua.js`: superficie ocupada por Rusia en Ucrania día por día y tramas semanales del mapa del frente (DeepStateMap). Lo genera `scripts/sync_front_ua.py` **todos los días** (paso 7 ter).
 - `data/control.js`: control territorial por estado o región (Sudán, Myanmar) y la incursión en Kursk. Se revisa **una vez por semana** (paso 12).
-- `data/extra.js`: `EVENT_SOURCES` (fuentes de hechos viejos por índice) y `OVERLAYS` (capas dibujadas sobre el mapa de un conflicto). Se revisa **una vez por semana** (paso 12).
-- `data/economy.js`: impacto económico de cada conflicto (petróleo, gas, fletes, rutas y sanciones). Se revisa **una vez por semana** (paso 12).
+- `data/extra.js`: `EVENT_SOURCES` (fuentes de hechos viejos por índice) y `OVERLAYS` (capas dibujadas sobre el mapa de un conflicto). Se revisa **una vez por semana** (paso 13).
+- `data/economy.js`: impacto económico de cada conflicto (petróleo, gas, fletes, rutas y sanciones). Se revisa **una vez por semana** (paso 14).
 - `data/global.js`: indicadores de riesgo global de la portada (Reloj del Apocalipsis, DEFCON estimado, reservas estratégicas de petróleo).
 - `data/nino.js`: Niño-3.4 por año para el gráfico de El Niño (lo genera `scripts/sync_nino.py`).
 - `data/vortex.js`: viento a 10 hPa y 60°N día por día con la climatología de la NASA (lo genera `scripts/sync_vortex.py`).
